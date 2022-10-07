@@ -1,0 +1,23 @@
+﻿@inherits ViInputBase<string>
+
+<textarea
+	class="form-control @CssClass"
+	rows="@Rows"
+	placeholder="@Placeholder" @attributes="@AdditionalAttributes"
+	disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
+	@bind-value="@Value" @bind-value:event="oninput">
+</textarea>
+
+<!-- TODO: validation, after bind event, ... -->
+@code {
+
+	[Parameter]
+	public int Rows { get; set; } = 6;
+
+	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out string result, [NotNullWhen(false)] out string? validationErrorMessage)
+	{
+		result = value ?? string.Empty;
+		validationErrorMessage = null;
+		return true;
+	}
+}

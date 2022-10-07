@@ -1,0 +1,17 @@
+﻿@inherits ViComponentBase
+
+<span class="navbar-text @CssClass" @attributes="AdditionalAttributes">
+	@ChildContent
+	@Text
+</span>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+}

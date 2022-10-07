@@ -1,0 +1,85 @@
+﻿@inherits ViComponentBase
+
+<nav class="navbar navbar-expand-lg @BsColorConverter.ToBgColor(Color) @ToPlacement(Placement) @CssClass" @attributes="AdditionalAttributes">
+	<div class="container-fluid">
+		@Brand
+		@if (Toggler != null)
+		{
+			<CascadingValue Value="@Id" IsFixed="true" Name="NavBarId">
+				@Toggler
+			</CascadingValue>
+		}
+		@if (Start != null)
+		{
+			<div class="collapse navbar-collapse" id="Id">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					@Start
+				</ul>
+			</div>
+		}
+		End
+	</div>
+</nav>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	//TODO: correct way to use Start and End
+	//TODO: ViNavSearch
+	//TODO: navbar-dark, nav-scrollable
+
+	/*
+	 * <div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Vizor.Demo</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="doc/vizor/input/button" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Button
+            </NavLink>
+        </div>
+    </nav>
+</div>
+	 */
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public NavbarPlacement Placement { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? Brand { get; set; }
+
+	[Parameter]
+	public RenderFragment? Toggler { get; set; }
+
+	[Parameter]
+	public RenderFragment? Start { get; set; }
+
+	[Parameter]
+	public RenderFragment? End { get; set; }
+
+	public static string? ToPlacement(NavbarPlacement placement)
+	{
+		return placement switch
+		{
+			NavbarPlacement.FixedTop => "fixed-top",
+			NavbarPlacement.FixedBottom => "fixed-bottom",
+			NavbarPlacement.StickyTop => "sticky-top",
+			NavbarPlacement.StickyBottom => "sticky-bottom",
+			_ => null
+		};
+	}
+}

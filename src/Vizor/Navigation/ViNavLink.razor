@@ -1,0 +1,48 @@
+﻿@inherits ViComponentBase
+
+<li class="nav-item">
+	@if (IsActive)
+	{
+		<a class="nav-link active @CssClass" aria-current="page" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled">
+			@ChildContent
+			@Text
+		</a>
+	}
+	else
+	{
+		<a class="nav-link @CssClass" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled">
+			@ChildContent
+			@Text
+		</a>
+	}
+</li>
+
+
+@code {
+
+	//TODO: onclick support
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Link { get; set; } = default!;
+
+	[Parameter]
+	public bool IsActive { get; set; }
+
+	[Parameter]
+	public bool IsDisabled { get; set; }
+
+	//TODO: see --> automatically add active if the current URL matches
+	/*
+		* <NavLink class="nav-link" href="doc/vizor/input/button" Match="NavLinkMatch.All">
+			<span class="oi oi-home" aria-hidden="true"></span> Button
+		</NavLink>
+	*/
+}

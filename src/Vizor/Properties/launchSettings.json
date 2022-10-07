@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Vizor": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:22457;http://localhost:22458"
+    }
+  }
+}

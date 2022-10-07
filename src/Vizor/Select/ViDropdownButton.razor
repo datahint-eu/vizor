@@ -1,0 +1,37 @@
+﻿@inherits ViComponentBase
+
+<div class="btn-group dropup @CssClass">
+	<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		@ChildContent
+	</button>
+	<ul class="dropdown-menu">
+		<!-- TODO: Dropdown menu links -->
+	</ul>
+</div>
+
+
+@code {
+
+	//TODO: implement Text, Color, ...
+
+	// see https://getbootstrap.com/docs/5.2/components/dropdowns/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	//TODO: implement
+
+	[Parameter]
+	public DropdownPlacement Placement { get; set; }
+
+	public static string? ToPlacement(DropdownPlacement placement)
+	{
+		return placement switch
+		{
+			DropdownPlacement.Dropup => "dropup",
+			DropdownPlacement.Dropend => "dropend",
+			DropdownPlacement.Dropstart => "dropstart",
+			_ => null
+		};
+	}
+}

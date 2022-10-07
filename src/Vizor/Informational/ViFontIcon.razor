@@ -1,0 +1,11 @@
+﻿@inherits ViComponentBase
+
+<i class="@Icon @CssClass" @attributes="@AdditionalAttributes" />
+
+@code {
+
+	[Parameter, EditorRequired]
+	public string Icon { get; set; } = default!;
+
+	//TODO: aligning
+}

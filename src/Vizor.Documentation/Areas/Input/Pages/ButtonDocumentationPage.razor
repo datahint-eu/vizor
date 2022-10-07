@@ -1,0 +1,61 @@
+﻿@page "/doc/vizor/input/button"
+
+<ViPage>
+	<ViPageHeader>Button</ViPageHeader>
+	<ViPageBody>
+
+		<ViCard>
+			<Header><ViCardTitle>Color</ViCardTitle></Header>
+			<Body>
+				<ViButton Color="@ThemeColor.Primary" Text="Primary" />
+				<ViButton Color="@ThemeColor.Secondary" Text="Secondary" />
+				<ViButton Color="@ThemeColor.Success" Text="Success" />
+				<ViButton Color="@ThemeColor.Danger" Text="Danger" />
+				<ViButton Color="@ThemeColor.Warning" Text="Warning" />
+				<ViButton Color="@ThemeColor.Info" Text="Info" />
+				<ViButton Color="@ThemeColor.Light" Text="Light" />
+				<ViButton Color="@ThemeColor.Dark" Text="Dark" />
+
+				<!--TODO: btn-link -->
+			</Body>
+		</ViCard>
+
+		<ViCard>
+			<Header><ViCardTitle>Outline Style</ViCardTitle></Header>
+			<Body>
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Primary" Text="Primary" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Secondary" Text="Secondary" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Success" Text="Success" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Danger" Text="Danger" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Warning" Text="Warning" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Info" Text="Info" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Light" Text="Light" />
+				<ViButton Style="ButtonStyle.Outline" Color="@ThemeColor.Dark" Text="Dark" />
+			</Body>
+		</ViCard>
+
+		<ViCard>
+			<Header><ViCardTitle>Size</ViCardTitle></Header>
+			<Body>
+				<ViButton Size="ElementSize.Small" Color="@ThemeColor.Primary" Text="Small" />
+				<ViButton Size="ElementSize.Regular" Color="@ThemeColor.Primary" Text="Regular" />
+				<ViButton Size="ElementSize.Large" Color="@ThemeColor.Primary" Text="Large" />
+			</Body>
+		</ViCard>
+
+		<ViCard>
+			<Header><ViCardTitle>State</ViCardTitle></Header>
+			<Body>
+				<ViButton IsDisabled="true" Color="@ThemeColor.Primary" Text="Disabled" />
+				<ViButton IsDisabled="true" Style="ButtonStyle.Outline" Color="@ThemeColor.Secondary" Text="Disabled" />
+			</Body>
+		</ViCard>
+
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+
+}

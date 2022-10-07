@@ -1,0 +1,15 @@
+﻿@inherits ViComponentBase
+
+<h1 class="@CssClass" @attributes="AdditionalAttributes">
+	@ChildContent
+	@Text
+</h1>
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+}

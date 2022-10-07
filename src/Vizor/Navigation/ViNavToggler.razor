@@ -1,0 +1,20 @@
+﻿@inherits ViComponentBase
+
+<button class="navbar-toggler @CssClass" type="button" data-bs-toggle="collapse" data-bs-target="#NavBarId" aria-controls="@NavBarId" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+</button>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	[CascadingParameter(Name = "NavBarId")]
+	public string? NavBarId { get; set; }
+
+	protected override void OnInitialized()
+	{
+		//TODO: throw exception if NavBarId string.IsNullOrEmpty
+
+		base.OnInitialized();
+	}
+}

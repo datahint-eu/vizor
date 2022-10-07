@@ -1,0 +1,35 @@
+﻿@inherits ViComponentBase
+
+<nav class="@CssClass" style="@GetDividerStyle(DividerStyle, CustomDivider)" aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		@ChildContent
+	</ol>
+</nav>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/breadcrumb/
+
+	//TODO: aria-label="breadcrumb"
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter]
+	public BreadcrumbDividerStyle DividerStyle { get; set; }
+
+	[Parameter]
+	public string? CustomDivider { get; set; }
+
+	public static string? GetDividerStyle(BreadcrumbDividerStyle dividerStyle, string? customDivider)
+	{
+		return dividerStyle switch
+		{
+			BreadcrumbDividerStyle.Slash => "--bs-breadcrumb-divider: '/';",
+			BreadcrumbDividerStyle.Angle => "--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);",
+			BreadcrumbDividerStyle.None => "--bs-breadcrumb-divider: '';",
+			BreadcrumbDividerStyle.Custom => customDivider,
+			_ => null,
+		};
+	}
+}

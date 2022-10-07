@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Vizor\Vizor.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Vizor.Icons.Bootstrap" Version="1.9.1-rc1" />
+		<PackageReference Include="Vizor.Icons.Tabler" Version="1.100.0-rc1" />
+	</ItemGroup>
+
+</Project>

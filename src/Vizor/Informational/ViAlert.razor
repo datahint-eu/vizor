@@ -1,0 +1,41 @@
+﻿@inherits ViComponentBase
+
+<div class="alert alert-important @BsColorConverter.ToAlertColor(Color) @CssClass" role="alert"
+	 @attributes="@AdditionalAttributes">
+	@if (Icon != null)
+	{
+		<div class="d-flex">
+			<div>
+				@Icon
+			</div>
+			<div>
+				@Content
+				@Text
+			</div>
+		</div>
+	}
+	else
+	{
+		@Content
+		@Text
+	}
+</div>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/alerts/
+
+	//TODO: alert-link, btn-close
+
+	[Parameter]
+	public RenderFragment? Content { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public string? Color { get; set; }
+}

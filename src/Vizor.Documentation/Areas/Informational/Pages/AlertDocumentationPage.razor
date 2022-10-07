@@ -1,0 +1,43 @@
+﻿@page "/doc/vizor/info/alert"
+@using Vizor.Icons.Tabler
+
+<ViPage>
+	<ViPageHeader>Alert</ViPageHeader>
+	<ViPageBody>
+
+		<ViCard>
+			<Header><ViCardTitle>Color</ViCardTitle></Header>
+			<Body>
+				<ViAlert Color="@ThemeColor.Primary" Text="A simple primary alert!" />
+				<ViAlert Color="@ThemeColor.Secondary" Text="A simple secondary alert!" />
+				<ViAlert Color="@ThemeColor.Success" Text="A simple success alert!" />
+				<ViAlert Color="@ThemeColor.Danger" Text="A simple danger alert!" />
+				<ViAlert Color="@ThemeColor.Warning" Text="A simple warning alert!" />
+				<ViAlert Color="@ThemeColor.Info" Text="A simple info alert!" />
+				<ViAlert Color="@ThemeColor.Light" Text="A simple light alert!" />
+				<ViAlert Color="@ThemeColor.Dark" Text="A simple dark alert!" />
+			</Body>
+		</ViCard>
+
+		<ViCard>
+			<Header><ViCardTitle>Fancy Content</ViCardTitle></Header>
+			<Body>
+				<ViAlert Color="@ThemeColor.Primary">
+					<Icon><TablerSvgIcon CssClass="alert-icon" Icon="TablerSvgIcon.Help" /></Icon>
+					<Content>
+						<ViAlertTitle>Alert Title</ViAlertTitle>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pulvinar mauris ac lacus vehicula, sed sagittis massa maximus. Curabitur tincidunt libero enim. Ut tempor et dui in porttitor. Sed pharetra neque magna, id fringilla mauris molestie eu. Nullam euismod justo ac ligula aliquam, a convallis magna ultricies.</p>
+						<hr />
+						<p>All done here.</p>
+					</Content>
+				</ViAlert>
+			</Body>
+		</ViCard>
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+
+}

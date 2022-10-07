@@ -1,0 +1,32 @@
+﻿@inherits ViInputBase
+
+<div
+	class="@(IsVertical ? "btn-group-vertical" : "btn-group") @CssClass @ToButtonGroupSize(Size)" role="group"
+	@attributes="@AdditionalAttributes" disabled="@IsDisabled"
+>
+	@ChildContent
+</div>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/button-group/
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter]
+	public ElementSize Size { get; set; } = ElementSize.Regular;
+
+	[Parameter]
+	public bool IsVertical { get; set; }
+
+	public static string? ToButtonGroupSize(ElementSize size)
+	{
+		return size switch
+		{
+			ElementSize.Small => "btn-group-sm",
+			ElementSize.Large => "btn-group-lg",
+			_ => null
+		};
+	}
+}

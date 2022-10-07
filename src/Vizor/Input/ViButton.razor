@@ -1,0 +1,74 @@
+﻿@inherits ViInputBase
+
+<button
+	class="btn @BsColorConverter.ToBtnColor(Color, Style) @ToButtonSize(Size)"
+	type="@Type.ToButtonType()"
+	@attributes="@AdditionalAttributes"
+	@onclick="@OnClick"
+	disabled="@IsDisabled"
+>
+	@if (IsBusy)
+	{
+		<!-- TODO: loading anim -->
+	}
+	else
+	{
+		@Icon
+	}
+	@ChildContent
+	@Text
+</button>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/buttons/
+
+	//TODO: btn-block, href, prevent default, 
+
+	protected internal bool isBusy;
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
+
+	[Parameter]
+	public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+	[Parameter]
+	public bool OnClickPreventDefault { get; set; }
+
+	[Parameter]
+	public bool OnClickStopPropagation { get; set; }
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public ElementSize Size { get; set; } = ElementSize.Regular;
+
+	[Parameter]
+	public ButtonStyle Style { get; set; } = ButtonStyle.Regular;
+
+	[Parameter]
+	public ButtonType Type { get; set; } = ButtonType.Button;
+
+	[Parameter]
+	public ButtonBehavior Behavior { get; set; } = ButtonBehavior.PreventDoubleClick;
+
+	public bool IsBusy => isBusy;
+
+	public static string? ToButtonSize(ElementSize size)
+	{
+		return size switch
+		{
+			ElementSize.Small => "btn-sm",
+			ElementSize.Large => "btn-lg",
+			_ => null
+		};
+	}
+}

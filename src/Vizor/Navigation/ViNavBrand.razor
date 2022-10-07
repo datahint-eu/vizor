@@ -1,0 +1,22 @@
+﻿@inherits ViComponentBase
+
+<a class="navbar-brand @CssClass" href="Link" @attributes="AdditionalAttributes">
+	@ChildContent
+	@Text
+</a>
+
+@code {
+
+	//TODO: <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public string Link { get; set; } = "#";
+}

@@ -1,0 +1,34 @@
+﻿@inherits ViComponentBase
+
+<blockquote
+	class="blockquote @CssClass"
+	@attributes="@AdditionalAttributes"
+>
+	<p>
+		@ChildContent
+		@Text
+	</p>
+	@if (Footer != null)
+	{
+		<footer class="blockquote-footer">
+			@Footer
+			@FooterText
+		</footer>
+	}
+	
+</blockquote>
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public RenderFragment? Footer { get; set; }
+
+	[Parameter]
+	public string? FooterText { get; set; }
+}

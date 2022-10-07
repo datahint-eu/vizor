@@ -1,0 +1,16 @@
+﻿@inherits ViInputBase
+
+<div
+	class="btn-toolbar @CssClass" role="toolbar"
+	@attributes="@AdditionalAttributes" disabled="@IsDisabled"
+>
+	@ChildContent
+</div>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/button-group/
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+}

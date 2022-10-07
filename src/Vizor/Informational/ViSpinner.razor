@@ -1,0 +1,17 @@
+﻿@inherits ViComponentBase
+
+<div class="spinner-border @CssClass" role="status">
+	@if (!string.IsNullOrEmpty(AssistiveText))
+	{
+			<span class="visually-hidden">@AssistiveText</span>
+	}
+</div>
+
+@code {
+
+	[Parameter]
+	public string? AssistiveText { get; set; } = "Loading ...";
+
+	//TODO: spinner style: border, grow
+	//TODO: color
+}

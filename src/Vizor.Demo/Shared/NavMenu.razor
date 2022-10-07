@@ -1,0 +1,23 @@
+﻿<ViNavBar Id="mainNav" Color="@ThemeColor.Dark" CssClass="navbar-dark"> <!-- TODO: navbar-dark must be integrated -->
+    <Brand>
+        <ViNavBrand Link="#">Vizor Demo</ViNavBrand>
+    </Brand>
+    <Toggler>
+        <ViNavToggler />
+    </Toggler>
+    <Start>
+        <ViNavLink Link="doc/vizor/input/button">Button</ViNavLink>
+        <ViNavLink Link="doc/vizor/info/alert">Alert</ViNavLink>
+    </Start>
+</ViNavBar>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

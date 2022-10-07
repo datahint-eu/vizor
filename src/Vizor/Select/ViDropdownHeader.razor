@@ -1,0 +1,22 @@
+﻿@inherits ViComponentBase
+
+<li class="@CssClass">
+	<h6 class="dropdown-header">
+		@ChildContent
+		@Text
+	</h6>
+</li>
+
+
+@code {
+
+	//TODO: CssClass, attributes, custom hX
+
+	// see https://getbootstrap.com/docs/5.2/components/dropdowns/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+}

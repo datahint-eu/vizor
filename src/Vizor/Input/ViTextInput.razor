@@ -1,0 +1,19 @@
+﻿@inherits ViInputBase<string>
+
+<input type="text" class="form-control @CssClass"
+	placeholder="@Placeholder" @attributes="@AdditionalAttributes"
+	disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
+	@bind-value="@Value" @bind-value:event="oninput"
+	/>
+
+	<!-- TODO: validation, after bind event, ... -->
+
+@code {
+
+	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out string result, [NotNullWhen(false)] out string? validationErrorMessage)
+	{
+		result = value ?? string.Empty;
+		validationErrorMessage = null;
+		return true;
+	}
+}

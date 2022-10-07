@@ -1,0 +1,16 @@
+﻿@inherits ViComponentBase
+
+<ul class="dropdown-menu @CssClass" @attributes="AdditionalAttributes">
+	@ChildContent
+</ul>
+
+
+@code {
+
+	//TODO: dropdown-menu-dark
+
+	// see https://getbootstrap.com/docs/5.2/components/dropdowns/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+}

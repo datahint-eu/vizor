@@ -1,0 +1,19 @@
+﻿@inherits ViComponentBase
+
+<!-- TODO: dynamic hX rendering -->
+
+<h4 class="card-subtitle @CssClass" @attributes="AdditionalAttributes">
+	@ChildContent
+	@Text
+</h4>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/card/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+}

@@ -1,0 +1,45 @@
+﻿@inherits ViComponentBase
+
+<div class="card @CssClass" @attributes="AdditionalAttributes">
+	@if (Header != null)
+	{
+		<div class="card-header @HeaderCssClass">
+			@Header
+		</div>
+	}
+	@if (Body != null)
+	{
+		<div class="card-body @BodyCssClass">
+			@Body
+		</div>
+	}
+	@if (Footer != null)
+	{
+		<div class="card-footer @FooterCssClass">
+			@Footer
+		</div>
+	}
+</div>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/card/
+
+	[Parameter]
+	public RenderFragment? Header { get; set; }
+
+	[Parameter]
+	public string? HeaderCssClass { get; set; }
+
+	[Parameter]
+	public RenderFragment? Body { get; set; }
+
+	[Parameter]
+	public string? BodyCssClass { get; set; }
+
+	[Parameter]
+	public RenderFragment? Footer { get; set; }
+
+	[Parameter]
+	public string? FooterCssClass { get; set; }
+}

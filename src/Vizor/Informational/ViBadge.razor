@@ -1,0 +1,28 @@
+﻿@inherits ViComponentBase
+
+<span
+	class="badge @(Style == BadgeStyle.Pill ? "rounded-pill" : "") @BsColorConverter.ToBadgeColor(Color) @CssClass"
+	@attributes="@AdditionalAttributes"
+>
+	@ChildContent
+	@Text
+</span>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/badge/
+
+	//TODO: allow <span> to be replaced with <a href>, text-bg-primary
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public BadgeStyle Style { get; set; }
+}

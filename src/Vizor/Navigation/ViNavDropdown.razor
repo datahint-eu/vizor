@@ -1,0 +1,26 @@
+﻿@inherits ViComponentBase
+
+<li class="nav-item dropdown @CssClass" @attributes="AdditionalAttributes">
+	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		@ChildContent
+		@Text
+	</a>
+	@DropdownMenu
+</li>
+
+
+@code {
+
+	//TODO: onclick support
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment DropdownMenu { get; set; } = default!;
+}
