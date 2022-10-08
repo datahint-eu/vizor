@@ -1,10 +1,16 @@
-﻿namespace Vizor;
+﻿using Vizor.Enums;
 
-public static class BsColorConverter
+namespace Vizor;
+
+public static class ColorConverter
 {
 	public static string? ToBgColor(string? color) => color == null ? null : $"bg-{color}";
 
+	public static string? ToLightBgColor(string? color) => color == null ? null : $"bg-{color}-lt";
+
 	public static string? ToBadgeColor(string? color) => color == null ? null : $"badge-{color}";
+
+	public static string? ToStatusColor(string? color) => color == null ? null : $"status-{color}";
 
 	public static string? ToAlertColor(string? color) => color == null ? null : $"alert-{color}";
 

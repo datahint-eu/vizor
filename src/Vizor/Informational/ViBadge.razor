@@ -1,9 +1,7 @@
 ﻿@inherits ViComponentBase
 
 <span
-	class="badge @(Style == BadgeStyle.Pill ? "rounded-pill" : "") @BsColorConverter.ToBadgeColor(Color) @CssClass"
-	@attributes="@AdditionalAttributes"
->
+	class="badge @(Style == BadgeStyle.Pill ? "rounded-pill" : "") @ColorConverter.ToBadgeColor(Color) @CssClass" @attributes="@AdditionalAttributes">
 	@ChildContent
 	@Text
 </span>

@@ -1,0 +1,56 @@
+﻿@inherits ViComponentBase
+
+@switch (Style)
+{
+	case StatusStyle.DotOnly:
+		<span class="status-dot @ColorConverter.ToStatusColor(Color) @CssClass" @attributes="@AdditionalAttributes" />
+		break;
+	case StatusStyle.AnimatedDotOnly:
+		<span class="status-dot status-dot-animated @ColorConverter.ToStatusColor(Color) @CssClass" @attributes="@AdditionalAttributes" />
+		break;
+	case StatusStyle.TextOnly:
+	case StatusStyle.TextWithDot:
+	case StatusStyle.TextWithAnimatedDot:
+		<span class="status @ColorConverter.ToStatusColor(Color) @CssClass" @attributes="@AdditionalAttributes">
+			@if (Style == StatusStyle.TextWithDot)
+			{
+				<span class="status-dot"></span>
+			}
+			else if (Style == StatusStyle.TextWithAnimatedDot)
+			{
+				<span class="status-dot status-dot-animated"></span>
+			}
+			@ChildContent
+			@Text
+		</span>
+		break;
+	case StatusStyle.IndicatorOnly:
+	case StatusStyle.AnimatedIndicatorOnly:
+		<span class="status-indicator @(Style == StatusStyle.AnimatedIndicatorOnly ? "status-indicator-animated" : "") @ColorConverter.ToStatusColor(Color) @CssClass" @attributes="@AdditionalAttributes">
+			<span class="status-indicator-circle"></span>
+			<span class="status-indicator-circle"></span>
+			<span class="status-indicator-circle"></span>
+		</span>
+		break;
+	default:
+		throw new NotSupportedException($"Unknown StatusStyle {Style}");
+
+}
+
+
+@code {
+
+	// see https://preview.tabler.io/docs/statuses.html
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public StatusStyle Style { get; set; } = StatusStyle.TextWithDot;
+}

@@ -2,7 +2,7 @@
 
 namespace Vizor;
 
-public class ViChildSelectorBase<TChild> : ViComponentBase, IViChildSelector
+public class ViChildSelectorBase<TChild> : ViComponentBase, IViChildSelector where TChild : ViChildBase
 {
 	private readonly List<TChild> children = new();
 

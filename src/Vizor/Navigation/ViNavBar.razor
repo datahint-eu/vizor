@@ -1,6 +1,6 @@
 ﻿@inherits ViComponentBase
 
-<nav class="navbar navbar-expand-lg @BsColorConverter.ToBgColor(Color) @ToPlacement(Placement) @CssClass" @attributes="AdditionalAttributes">
+<nav class="navbar navbar-expand-lg @ColorConverter.ToBgColor(Color) @ToPlacement(Placement) @CssClass" @attributes="AdditionalAttributes">
 	<div class="container-fluid">
 		@Brand
 		@if (Toggler != null)

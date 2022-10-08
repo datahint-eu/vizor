@@ -1,0 +1,23 @@
+﻿@inherits ViComponentBase
+
+<a href="@Link" class="alert-link @CssClass" @attributes="@AdditionalAttributes">
+	@ChildContent
+	@Text
+</a>
+
+
+@code {
+
+	//TODO: onclick support
+
+	// see https://preview.tabler.io/docs/alerts.html
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Link { get; set; } = default!;
+}

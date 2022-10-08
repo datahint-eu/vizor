@@ -1,4 +1,4 @@
-﻿namespace Vizor;
+﻿namespace Vizor.Enums;
 
 public enum HeadingSize
 {

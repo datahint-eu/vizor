@@ -1,3 +1,27 @@
 ﻿@inherits ViChildSelectorBase<ViTabPage>
 
-<span>TODO</span>
+<div class="card">
+	<ul class="nav nav-tabs" data-bs-toggle="tabs">
+		@foreach (var child in Children)
+		{
+			<li class="nav-item">
+				<a class="nav-link @(child == ActiveChild ? "active" : "")" data-bs-toggle="tab" @onclick="async () => await ActivateChild(child)">
+					@child.Icon
+					@child.Title
+				</a>
+			</li>
+		}
+	</ul>
+	<div class="card-body">
+		<div class="tab-content">
+			<div class="tab-pane active show">
+				@ActiveChild
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+
+	// see https://preview.tabler.io/docs/tabs.html
+}

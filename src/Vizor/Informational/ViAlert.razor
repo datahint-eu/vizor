@@ -1,7 +1,6 @@
 ﻿@inherits ViComponentBase
 
-<div class="alert alert-important @BsColorConverter.ToAlertColor(Color) @CssClass" role="alert"
-	 @attributes="@AdditionalAttributes">
+<div class="alert alert-important @ColorConverter.ToAlertColor(Color) @CssClass" role="alert" @attributes="@AdditionalAttributes">
 	@if (Icon != null)
 	{
 		<div class="d-flex">
@@ -24,6 +23,7 @@
 @code {
 
 	// see https://getbootstrap.com/docs/5.2/components/alerts/
+	// see https://preview.tabler.io/docs/alerts.html
 
 	//TODO: alert-link, btn-close
 

@@ -1,8 +1,11 @@
-﻿namespace Vizor;
+﻿namespace Vizor.Enums;
 
 public enum ElementSize
 {
 	Regular,
+	Medium,
 	Small,
-	Large
+	ExtraSmall,
+	Large,
+	ExtraLarge
 }

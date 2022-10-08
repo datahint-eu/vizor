@@ -1,0 +1,50 @@
+﻿<div class="empty">
+	@if (Icon != null)
+	{
+		<div class="empty-icon">
+			<TablerSvgIcon Icon="@Icon.Value" />
+		</div>
+	}
+	@if (ImageUrl != null)
+	{
+		<div class="empty-img">
+			<img src="@ImageUrl" height="128" alt="">
+		</div>
+	}
+	<p class="empty-title">@Title</p>
+	<p class="empty-subtitle text-muted">@SubTitle</p>
+	@if (ActionButtons != null)
+	{
+		<div class="empty-action">
+			@ActionButtons
+		</div>
+	}
+</div>
+
+@code {
+
+	// see https://preview.tabler.io/docs/empty.html
+
+	[Parameter]
+	public string Title { get; set; } = "No results found";
+
+	[Parameter]
+	public string SubTitle { get; set; } = "Try adjusting your search or filter to find what you're looking for.";
+
+	[Parameter]
+	public IconData? Icon { get; set; }
+
+	[Parameter]
+	public string? ImageUrl { get; set; }
+
+	[Parameter]
+	public RenderFragment? ActionButtons { get; set; }
+
+	protected override void OnInitialized()
+	{
+		if (Icon == null && ImageUrl == null)
+		{
+			Icon = TablerSvgIcon.MoodSad;
+		}
+	}
+}

@@ -1,0 +1,25 @@
+﻿<div class="hr-text @ToTextAlign(TextAlign) @ColorConverter.ToTextColor(TextColor)">@Text</div>
+
+@code {
+
+	// see https://preview.tabler.io/docs/divider.html
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public Align TextAlign { get; set; } = Align.Center;
+
+	[Parameter]
+	public string? TextColor { get; set; }
+
+	public static string? ToTextAlign(Align align)
+	{
+		return align switch
+		{
+			Align.Left => "hr-text-left",
+			Align.Right => "hr-text-right",
+			_ => null
+		};
+	}
+}

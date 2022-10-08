@@ -1,0 +1,27 @@
+﻿<div class="empty">
+	<div class="empty-header">404</div>
+	<p class="empty-title">@Title</p>
+	<p class="empty-subtitle text-muted">
+		@SubTitle
+	</p>
+	<div class="empty-action">
+		<a href="/" class="btn btn-primary">
+			<TablerSvgIcon Icon="TablerSvgIcon.Home" />
+			@ButtonText
+		</a>
+	</div>
+</div>
+
+@code {
+
+	// see https://preview.tabler.io/docs/empty.html
+
+	[Parameter]
+	public string Title { get; set; } = "Oops… You just found an error page";
+
+	[Parameter]
+	public string SubTitle { get; set; } = "Try adjusting your search or filter to find what you're looking for.";
+
+	[Parameter]
+	public string ButtonText { get; set; } = "Take me home";
+}

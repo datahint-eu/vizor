@@ -1,0 +1,52 @@
+﻿@inherits ViComponentBase
+
+@if (ImageUrl != null)
+{
+	<span class="avatar @CssClass @ToAvatarSize(Size)" style="background-image: url(@ImageUrl)" @attributes="@AdditionalAttributes" />
+}
+else if (ChildContent != null)
+{
+	<span class="avatar @CssClass @ToAvatarSize(Size) @ColorConverter.ToBgColor(Color)" @attributes="@AdditionalAttributes">@ChildContent</span>
+}
+
+@code {
+
+	// see https://preview.tabler.io/docs/avatars.html
+
+	[Parameter]
+	public ElementSize Size { get; set; } = ElementSize.Regular;
+
+	[Parameter]
+	public AvatarStyle Style { get; set; } = AvatarStyle.Regular;
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public string? ImageUrl { get; set; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	public static string? ToAvatarSize(ElementSize size)
+	{
+		return size switch
+		{
+			ElementSize.Small => "avatar-sm",
+			ElementSize.ExtraSmall => "avatar-xs",
+			ElementSize.Large => "avatar-lg",
+			ElementSize.ExtraLarge => "avatar-xl",
+			ElementSize.Medium => "avatar-md",
+			_ => null
+		};
+	}
+
+	public static string? ToAvatarStyle(AvatarStyle style)
+	{
+		return style switch
+		{
+			AvatarStyle.Circle => "avatar-rounded-circle",
+			_ => null
+		};
+	}
+}

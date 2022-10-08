@@ -1,0 +1,16 @@
+﻿@inherits ViComponentBase
+
+<div class="avatar-list @(IsStacked ? "avatar-list-stacked" : "") @CssClass" @attributes="@AdditionalAttributes">
+	@ChildContent
+</div>
+
+@code {
+
+	// see https://preview.tabler.io/docs/avatars.html
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public bool IsStacked { get; set; }
+}
