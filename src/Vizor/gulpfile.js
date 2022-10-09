@@ -3,7 +3,7 @@
 //
 // in the project dir:
 //   npm init
-//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass merge-stream
+//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify gulp-order
 //   npm install @tabler/core
 //
 // to build:
@@ -15,7 +15,8 @@ var path = require('path'),
 	gulp = require('gulp'),
 	sass = require('gulp-sass')(require('sass')),
 	cleancss = require('gulp-clean-css'),
-	merge = require('merge-stream');
+	concat = require('gulp-concat'),
+	minify = require('gulp-minify');
 
 var vizorStyles = './Styles';
 var vizorScripts = './Scripts';
@@ -24,21 +25,22 @@ var libroot = path.resolve(__dirname, "./node_modules");
 
 
 var srcPaths = {
-	tablerCss: [
-		path.resolve(libroot, '@tabler/core/dist/css/tabler.min.css')
+	css: [
+		path.resolve(libroot, '@tabler/core/dist/css/tabler.min.css'),
+		path.resolve(libroot, 'tom-select/dist/css/tom-select.bootstrap5.min.css')
 	],
 
-	tablerJs: [
+	js: [
 		path.resolve(libroot, 'bootstrap/dist/js/bootstrap.bundle.min.js'),
 		path.resolve(libroot, '@tabler/core/dist/js/tabler.min.js'),
+		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js')
 	]
 };
 
 
 var destPaths = {
 	css: path.resolve(wwwroot, 'css'),
-	js: path.resolve(wwwroot, 'js'),
-	lib: path.resolve(wwwroot, 'lib')
+	js: path.resolve(wwwroot, 'js')
 };
 
 
@@ -48,15 +50,19 @@ gulp.task('clean', () => {
 		.pipe(clean());
 });
 
-gulp.task('tablerCss', () => {
-	return gulp.src(srcPaths.tablerCss)
-		.pipe(gulp.dest(destPaths.css));
+gulp.task('buildCss', () => {
+	return gulp.src(srcPaths.css)
+		.pipe(concat('vizor-all.css'))
+		.pipe(cleancss())
+		.pipe(gulp.dest(destPaths.css))
 });
 
-gulp.task('tablerJs', () => {
-	return gulp.src(srcPaths.tablerJs)
-		.pipe(gulp.dest(destPaths.js));
+gulp.task('buildJs', () => {
+	return gulp.src(srcPaths.js)
+		.pipe(concat('vizor-all.js'))
+		.pipe(minify())
+		.pipe(gulp.dest(destPaths.js))
 });
 
 gulp.task('cleanup', gulp.series(['clean']));
-gulp.task('default', gulp.series(['tablerCss'], ['tablerJs']));
+gulp.task('default', gulp.series(['buildCss'], ['buildJs']));

@@ -21,3 +21,4 @@ src/.vs/
 
 node_modules/
 .vs/
+/src/Vizor/package-lock.json
