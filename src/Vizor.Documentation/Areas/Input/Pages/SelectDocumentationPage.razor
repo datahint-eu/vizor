@@ -1,0 +1,46 @@
+﻿@page "/doc/vizor/input/select"
+
+<ViPage>
+	<ViPageHeader>Select</ViPageHeader>
+	<ViPageBody>
+
+		<ViCard>
+			<Header><ViCardTitle>Color</ViCardTitle></Header>
+			<Body>
+				<ViSingleSelect TItem="string">
+					<ViSelectAllowEmpty />
+					<ViSelectDataSource TItem="string" Source="@GermanCarBrands" ItemExpr="(item) => item" DisabledExpr="@DisabledExpr" />
+				</ViSingleSelect>
+
+				<br />
+
+				<ViSingleSelect TItem="string" @bind-SelectedItem="@selected" @bind-SelectedItem:after="@OnAfterValueChange">
+					<ViSelectDataSource TItem="string" Name="German" Source="@GermanCarBrands" ItemExpr="(item) => item" />
+					<ViSelectDataSource TItem="string" Name="Korean" Source="@KoreanCarBrands" ItemExpr="(item) => item" />
+					<ViSelectDataSource TItem="string" Name="French" Source="@FrenchCarBrands" ItemExpr="(item) => item" IsDisabled="true" />
+				</ViSingleSelect>
+				<br />
+				<label>@selected</label>
+			</Body>
+		</ViCard>
+
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+
+	private string[] GermanCarBrands = new[] { "Audi", "BMW", "Mercedes", "VW" };
+	private string[] KoreanCarBrands = new[] { "Kia", "Hyundai" };
+	private string[] FrenchCarBrands = new[] { "Renault", "Peugeot" };
+
+	private bool DisabledExpr(string item) => item == "BMW";
+
+	private string? selected;
+
+	private void OnAfterValueChange()
+	{
+		// do something
+	}
+}

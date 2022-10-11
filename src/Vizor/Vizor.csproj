@@ -27,4 +27,8 @@
 	<ItemGroup>
 	  <Folder Include="wwwroot\" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Vizor.Data\Vizor.Data.csproj" />
+	</ItemGroup>
 </Project>

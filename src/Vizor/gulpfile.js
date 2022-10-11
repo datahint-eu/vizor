@@ -3,7 +3,7 @@
 //
 // in the project dir:
 //   npm init
-//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify gulp-order
+//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify
 //   npm install @tabler/core
 //
 // to build:
@@ -33,7 +33,8 @@ var srcPaths = {
 	js: [
 		path.resolve(libroot, 'bootstrap/dist/js/bootstrap.bundle.min.js'),
 		path.resolve(libroot, '@tabler/core/dist/js/tabler.min.js'),
-		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js')
+		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js'),
+		path.resolve(vizorScripts, 'select.js')
 	]
 };
 

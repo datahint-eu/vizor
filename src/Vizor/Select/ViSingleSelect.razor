@@ -1,0 +1,81 @@
+﻿@typeparam TItem
+@inherits ViComponentBase
+@implements IViSelect<TItem>
+
+@inject IJSRuntime JsRuntime
+@implements IDisposable
+
+<select id="@Id" class="@CssClass" @attributes="@AdditionalAttributes">
+	<CascadingValue Value="@this" IsFixed="true" Name="ViSelect">
+		@ChildContent
+	</CascadingValue>
+</select>
+
+@code {
+
+	private List<ViSelectDataSource<TItem>> dataSources = new(3);
+	private DotNetObjectReference<ViSingleSelect<TItem>>? objRef;
+
+	[Parameter]
+	public string Id { get; set; } = RazorExtensions.RandomId();
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter]
+	public TItem? SelectedItem { get; set; }
+
+	[Parameter]
+	public EventCallback<TItem> SelectedItemChanged { get; set; }
+
+	protected override void OnInitialized()
+	{
+		objRef = DotNetObjectReference.Create(this);
+	}
+
+	public void Dispose()
+	{
+		objRef?.Dispose();
+		objRef = null;
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		await base.OnAfterRenderAsync(firstRender);
+
+		if (firstRender)
+		{
+			await JsRuntime.InvokeVoidAsync("viConvertSelect", '#' + Id, objRef);
+		}
+	}
+
+	public int Attach(ViSelectDataSource<TItem> dataSource)
+	{
+		dataSources.Add(dataSource);
+
+		return dataSources.Count - 1;
+	}
+
+	[JSInvokable]
+	public async Task SelectValueCallback(string value)
+	{
+		//var value = e.Value?.ToString() ?? "-1";
+
+		var underscoreIndex = value.IndexOf('_');
+		int sourceIndex = -1, itemIndex = -1;
+
+		int.TryParse(value.Substring(0, underscoreIndex >= 0 ? underscoreIndex : value.Length), out sourceIndex);
+		int.TryParse(underscoreIndex >= 0 ? value.Substring(underscoreIndex + 1) : "-1", out itemIndex);
+
+		if (sourceIndex < 0 || itemIndex < 0)
+		{
+			SelectedItem = default;
+		}
+		else
+		{
+			SelectedItem = dataSources[sourceIndex].Items[itemIndex];
+		}
+
+		await SelectedItemChanged.InvokeAsync(SelectedItem);
+	}
+}

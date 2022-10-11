@@ -1,0 +1,87 @@
+﻿@inherits ViInputBase
+
+@typeparam TItem
+
+@if (!string.IsNullOrEmpty(Name))
+{
+	<optgroup label="@Name" disabled="@IsDisabled.ToConditionalAttribute()">
+		@for (int i = 0; i < Items.Count; ++i)
+		{
+			<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()">@ItemExpr(Items[i])</option>
+		}
+	</optgroup>
+}
+else
+{
+	@for (int i = 0; i < Items.Count; ++i)
+	{
+		<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()">@ItemExpr(Items[i])</option>
+	}
+}
+
+
+@code {
+
+	protected int dataSourceIndex = 0;
+
+	[Parameter, EditorRequired]
+	public object Source { get; set; } = default!;
+
+	[Parameter, EditorRequired]
+	public Func<TItem, string> ItemExpr { get; set; } = default!;
+
+	[Parameter]
+	public Func<TItem, bool>? DisabledExpr { get; set; }
+
+	[Parameter]
+	public string? Name { get; set; }
+
+	[CascadingParameter(Name = "ViSelect")]
+	public IViSelect<TItem> Parent { get; set; } = default!;
+
+	protected internal IReadOnlyList<TItem> Items { get; protected set; } = default!;
+
+	protected override void OnInitialized()
+	{
+		dataSourceIndex = Parent.Attach(this);
+
+		Items = Adapt(Source);
+		StateHasChanged();
+	}
+
+	protected override void OnParametersSet()
+	{
+		base.OnParametersSet();
+
+		//TODO ?
+	}
+
+	protected IReadOnlyList<TItem> Adapt(object dataSource)
+	{
+		if (dataSource is IReadOnlyList<TItem> list)
+		{
+			return list;
+		}
+		else if (dataSource is ICollection<TItem> collection)
+		{
+			var items = new List<TItem>(collection.Count);
+			items.AddRange(collection);
+			return items;
+		}
+		else if (dataSource is IEnumerable<TItem> enumerable)
+		{
+			var items = new List<TItem>();
+			items.AddRange(enumerable);
+		}
+		else if (dataSource is TItem[] arr)
+		{
+			var items = new List<TItem>(arr.Length);
+			items.AddRange(arr);
+			return items;
+		}
+
+		throw new ArgumentException("Not a valid ViSelectDataSource", nameof(dataSource));
+	}
+
+	private bool IsItemDisabled(int index) => DisabledExpr == null ? false : DisabledExpr(Items[index]);
+}
