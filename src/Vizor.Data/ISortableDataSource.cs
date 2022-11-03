@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vizor.Data
 {
-	internal class Class1
+	internal class ISortableDataSource
 	{
 	}
 }

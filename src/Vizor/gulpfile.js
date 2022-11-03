@@ -25,6 +25,10 @@ var libroot = path.resolve(__dirname, "./node_modules");
 
 
 var srcPaths = {
+	scss: [
+		path.resolve(vizorStyles, 'datagrid.scss')
+	],
+
 	css: [
 		path.resolve(libroot, '@tabler/core/dist/css/tabler.min.css'),
 		path.resolve(libroot, 'tom-select/dist/css/tom-select.bootstrap5.min.css')
@@ -51,9 +55,16 @@ gulp.task('clean', () => {
 		.pipe(clean());
 });
 
+gulp.task('compileScss', () => {
+	return gulp.src(srcPaths.scss)
+		.pipe(concat('vizor-custom.css'))
+		.pipe(sass())
+		.pipe(gulp.dest(destPaths.css));
+});
+
 gulp.task('buildCss', () => {
 	return gulp.src(srcPaths.css)
-		.pipe(concat('vizor-all.css'))
+		.pipe(concat('vizor-tabler.css'))
 		.pipe(cleancss())
 		.pipe(gulp.dest(destPaths.css))
 });
@@ -66,4 +77,4 @@ gulp.task('buildJs', () => {
 });
 
 gulp.task('cleanup', gulp.series(['clean']));
-gulp.task('default', gulp.series(['buildCss'], ['buildJs']));
+gulp.task('default', gulp.series(['compileScss'], ['buildCss'], ['buildJs']));

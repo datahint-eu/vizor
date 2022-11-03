@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vizor.Icons.Bootstrap" Version="1.9.1-rc1" />
-    <PackageReference Include="Vizor.Icons.Tabler" Version="1.100.0-rc1" />
+    <PackageReference Include="Vizor.Icons.Bootstrap" Version="1.9.1" />
+    <PackageReference Include="Vizor.Icons.Tabler" Version="1.109.0" />
   </ItemGroup>
 
   <ItemGroup>

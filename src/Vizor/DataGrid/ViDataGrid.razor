@@ -1,0 +1,199 @@
+﻿@typeparam TItem
+
+@implements IViDataGrid<TItem>
+
+<!-- TODO: see https://preview.tabler.io/tables.html : table-striped -->
+<!-- TODO: -->
+
+<CascadingValue IsFixed="true" Value="this" Name="IViDataGrid">
+	@ChildContent
+</CascadingValue>
+
+<div class="vidatagrid">
+	<div class="card">
+		@if (Title != null)
+		{
+			<div class="card-header">
+				<h3 class="card-title">@Title</h3>
+			</div>
+		}
+
+		@if (ShowSearch)
+		{
+			<div class="card-body border-bottom py-3">
+				<div class="d-flex">
+					<!-- TODO: search, optional elements -->
+				</div>
+			</div>
+		}
+
+		<div class="table-responsive">
+			@if (isLoading)
+			{
+				<div class="loaderoverlay"></div>
+			}
+
+			<table class="table card-table table-vcenter text-nowrap datatable">
+				<thead>
+					<tr>
+						@foreach (var col in columns)
+						{
+							if (!col.IsVisible)
+								continue;
+
+							if (col.IsSortable)
+							{
+								<th><button class="table-sort">@col.Name</button></th>
+							}
+							else
+							{
+								<th>@col.Name</th>
+							}
+							<!-- TODO: asc desc class-->
+						}
+					</tr>
+				</thead>
+
+				<!-- TODO: see https://preview.tabler.io/card-actions.html# for actions like refresh, ... to show/hide columns, ... -->
+
+				<tbody class="table-tbody">
+					@if (dataSource == null || dataSource.ItemCount == 0)
+					{
+						<div class="empty">
+							<div class="empty-img">
+								<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+									<circle cx="15" cy="15" r="4"></circle>
+									<path d="M18.5 18.5l2.5 2.5"></path>
+									<path d="M4 6h16"></path>
+									<path d="M4 12h4"></path>
+									<path d="M4 18h4"></path>
+								</svg>
+							</div>
+							<p class="empty-title">No results found</p>
+							<p class="empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
+						</div>
+					}
+					else
+					{
+						var index = currentPageIndex * PageSize;
+						@foreach (var item in items)
+						{
+							<tr @key="index" class="@RowCssClass">
+								@foreach (var col in columns)
+								{
+									if (!col.IsVisible)
+										continue;
+
+									@col.Render(item)
+									;
+								}
+							</tr>
+
+							++index;
+						}
+						<!--
+						<Virtualize Items="@items" Context="item" TItem="TItem">
+						</Virtualize>
+						-->
+					}
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="card-footer d-flex align-items-center">
+			@if (dataSource != null)
+			{
+				@if (UsePagination)
+				{
+					<p class="m-0 text-muted">Showing <span>@((currentPageIndex * PageSize) + 1)</span> to <span>@((currentPageIndex * PageSize) + PageSize)</span> of <span>@dataSource.ItemCount</span> entries</p>
+
+					<ul class="pagination m-0 ms-auto">
+						<li class="page-item disabled">
+							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
+								prev
+							</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item active"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#">
+								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
+							</a>
+						</li>
+					</ul>
+				}
+				else
+				{
+					<p class="m-0 text-muted">Showing <span>@dataSource.ItemCount</span> entries</p>
+				}
+			}
+		</div>
+
+	</div>
+</div>
+
+
+@code {
+
+	private List<IViDataGridColumn<TItem>> columns = new();
+
+	private bool isLoading = true;
+	private int currentPageIndex = 0;
+	private ICollection<TItem> items = new List<TItem>(0);
+	private GridDataSource<TItem>? dataSource;
+
+	[Parameter, EditorRequired]
+	public object? DataSource { get; set; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Title { get; set; }
+
+	[Parameter]
+	public bool UsePagination { get; set; }
+
+	[Parameter]
+	public bool ShowSearch { get; set; }
+
+	[Parameter]
+	public int PageSize { get; set; } = 50;
+
+	[Parameter]
+	public int[] PageSizes { get; set; } = new[] { 10, 25, 50, 100 };
+
+	[Parameter]
+	public string? RowCssClass { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		if (dataSource == null || dataSource.DataSource != DataSource)
+		{
+			dataSource = new GridDataSource<TItem>(DataSource);
+
+			isLoading = true;
+			//await InvokeAsync(StateHasChanged);
+
+			if (UsePagination)
+				items = await dataSource.LoadDataAsync(currentPageIndex * PageSize, PageSize);
+			else
+				items = await dataSource.LoadDataAsync(0, dataSource.ItemCount);
+
+			isLoading = false;
+			//await InvokeAsync(StateHasChanged);
+		}
+	}
+
+	public void AddColumn(IViDataGridColumn<TItem> column)
+	{
+		this.columns.Add(column);
+		StateHasChanged();
+	}
+}

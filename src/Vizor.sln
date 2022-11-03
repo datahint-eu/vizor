@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vizor.Demo", "Vizor.Demo\Vi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vizor.Documentation", "Vizor.Documentation\Vizor.Documentation.csproj", "{2211674A-9940-42AD-885F-000D594DBDC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vizor.Data", "Vizor.Data\Vizor.Data.csproj", "{7ABF923D-D751-46A4-921D-62623DBB2B4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vizor.Data", "Vizor.Data\Vizor.Data.csproj", "{7ABF923D-D751-46A4-921D-62623DBB2B4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,7 +7,7 @@
 	<optgroup label="@Name" disabled="@IsDisabled.ToConditionalAttribute()">
 		@for (int i = 0; i < Items.Count; ++i)
 		{
-			<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()">@ItemExpr(Items[i])</option>
+			<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()" selected="@(comparer.Equals(Items[i], Parent.SelectedItem).ToConditionalAttribute())">@ItemExpr(Items[i])</option>
 		}
 	</optgroup>
 }
@@ -15,7 +15,7 @@ else
 {
 	@for (int i = 0; i < Items.Count; ++i)
 	{
-		<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()">@ItemExpr(Items[i])</option>
+		<option value="@(dataSourceIndex + "_" + i)" disabled="@IsItemDisabled(i).ToConditionalAttribute()" selected="@(comparer.Equals(Items[i], Parent.SelectedItem).ToConditionalAttribute())">@ItemExpr(Items[i])</option>
 	}
 }
 
@@ -23,6 +23,7 @@ else
 @code {
 
 	protected int dataSourceIndex = 0;
+	private static EqualityComparer<TItem> comparer = EqualityComparer<TItem>.Default;
 
 	[Parameter, EditorRequired]
 	public object Source { get; set; } = default!;

@@ -1,0 +1,31 @@
+﻿@typeparam TItem
+
+@implements IViDataGridColumn<TItem>
+
+@code {
+
+	[CascadingParameter(Name = "IViDataGrid")]
+	public IViDataGrid<TItem> Parent { get; set; } = default!;
+
+	[Parameter]
+	public bool IsVisible { get; set; } = true;
+
+	[Parameter]
+	public bool IsSortable { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Name { get; set; } = default!;
+
+	[Parameter, EditorRequired]
+	public RenderFragment<TItem?> CellTemplate { get; set; } = default!;
+
+	protected override void OnInitialized()
+	{
+		Parent.AddColumn(this);
+	}
+
+	public RenderFragment? Render(TItem? item)
+	{
+		return CellTemplate.Invoke(item);
+	}
+}

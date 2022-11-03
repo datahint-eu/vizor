@@ -1,0 +1,67 @@
+﻿@typeparam TItem
+
+@implements IViDataGridColumn<TItem>
+
+@code {
+
+	[CascadingParameter(Name = "IViDataGrid")]
+	public IViDataGrid<TItem> Parent { get; set; } = default!;
+
+	[Parameter]
+	public bool IsVisible { get; set; } = true;
+
+	[Parameter]
+	public bool IsSortable { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Name { get; set; } = default!;
+
+	[Parameter]
+	public Func<TItem, object>? ValueExpr { get; set; }
+
+	[Parameter]
+	public string? Format { get; set; }
+
+	[Parameter]
+	public string? CssClass { get; set; }
+
+	[Parameter]
+	public Align? TextAlign { get; set; }
+
+	protected override void OnInitialized()
+	{
+		Parent.AddColumn(this);
+	}
+
+	public RenderFragment? Render(TItem? item)
+	{
+		if (item == null || ValueExpr == null)
+			return Surround(null);
+
+		var value = ValueExpr.Invoke(item);
+		if (value == null)
+			return Surround(null);
+
+		if (Format == null)
+			return Surround(@<text>@value.ToString()</text>);
+
+		var formatted = string.Format(Format, value);
+		return Surround(@<text>@formatted</text>);
+	}
+
+	private RenderFragment Surround(RenderFragment? inner)
+	{
+		return @<td style="@GetStyle()" class="@CssClass">@inner</td>;
+	}
+
+	private string? GetStyle()
+	{
+		return TextAlign switch
+		{
+			Align.Left => "text-align: left",
+			Align.Center => "text-align: center",
+			Align.Right => "text-align: right",
+			_ => null
+		};
+	}
+}
