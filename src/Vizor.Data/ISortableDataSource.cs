@@ -8,5 +8,6 @@ namespace Vizor.Data
 {
 	internal class ISortableDataSource
 	{
+		//TODO:
 	}
 }

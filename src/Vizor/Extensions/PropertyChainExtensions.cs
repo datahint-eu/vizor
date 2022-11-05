@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Net.NetworkInformation;
 
 namespace Vizor.Extensions;
 
@@ -7,7 +6,7 @@ namespace Vizor.Extensions;
 public static class PropertyChainExtensions
 {
     public static string ToPropertyChain(this LambdaExpression expression)
-        => GetChain(expression);
+        => GetChain(expression.Body);
 
     public static string ToPropertyChain(this Expression<Func<object?>> expression)
         => GetChain(expression.Body);

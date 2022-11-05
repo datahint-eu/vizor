@@ -1,12 +1,14 @@
 ﻿@inherits ViInputBase<string>
 
-<input type="text" class="form-control @CssClass"
+<input type="text" class="form-control @CssClass @validationCssClass"
 	placeholder="@Placeholder" @attributes="@AdditionalAttributes"
 	disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
-	@bind-value="@Value" @bind-value:event="oninput"
+	aria-invalid="@validationAriaInvalid"
+	@bind-value="@BindableStringValue" @bind-value:event="oninput"
 	/>
+@RenderValidationMessages()
 
-	<!-- TODO: validation, after bind event, ... -->
+	<!-- TODO:  after bind event, ... -->
 
 @code {
 

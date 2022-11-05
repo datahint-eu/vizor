@@ -1,28 +1,57 @@
 ﻿@inherits ViComponentBase
 
-@if (Context != null)
+@if (context != null)
 {
-	<CascadingValue IsFixed="true" Name="ViFormContext" Value="@Context">
-		@ChildContent
-	</CascadingValue>
+	<form class="@CssClass" @attributes="@AdditionalAttributes" @onsubmit="OnSubmit">
+		<CascadingValue IsFixed="true" Name="ViFormContext" Value="@context">
+			<CascadingValue IsFixed="true" Name="ViFormStyle" Value="@Style">
+				@ChildContent
+			</CascadingValue>
+		</CascadingValue>
+	</form>
 }
 
 @code {
 
-	//TODO: FormStyle(cascading)
+	private ViFormContext? context;
 
 	[Parameter, EditorRequired]
 	public object? Model { get; set; }
 
+	[Parameter]
+	public FormStyle Style { get; set; }
+
 	[Parameter, EditorRequired]
 	public RenderFragment ChildContent { get; set; } = default!;
 
-	public ViFormContext? Context { get; set; }
+	[Parameter]
+	public EventCallback<ViFormContext> OnValidSubmit { get; set; }
+
+	[Parameter]
+	public EventCallback<ViFormContext> OnInvalidSubmit { get; set; }
 
 	protected override Task OnInitializedAsync()
 	{
-		Context = new ViFormContext(Model);
+		context = new ViFormContext(Model);
 
 		return Task.CompletedTask;
+	}
+
+	private async Task OnSubmit()
+	{
+		if (context == null)
+			return;
+
+		bool isValid = await context.ValidateAsync();
+
+		if (isValid && OnValidSubmit.HasDelegate)
+		{
+			await OnValidSubmit.InvokeAsync(context);
+		}
+
+		if (!isValid && OnInvalidSubmit.HasDelegate)
+		{
+			await OnInvalidSubmit.InvokeAsync(context);
+		}
 	}
 }
