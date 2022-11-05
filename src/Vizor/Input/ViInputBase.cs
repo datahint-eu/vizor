@@ -13,13 +13,12 @@ public abstract class ViInputBase : ViComponentBase
 public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 {
 	private bool isInitialized;
-	private bool previousValueParseSuccess; //TODO: do we need this ??
 
 	protected readonly EventHandler validateChangedHandler;
 	protected bool typeIsNullable;
+	protected bool? isValid;
 	protected string? validationProperty;
 	protected string? validationCssClass;
-	protected string? validationAriaInvalid;
 	protected string[]? validationMessages;
 
 	public ViInputBase()
@@ -87,8 +86,6 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 			{
 				validationMessages = new[] { validationErrorMessage };
 			}
-
-			previousValueParseSuccess = parseSuccess;
 		}
 	}
 
@@ -143,7 +140,7 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 	{
 		if (Context is not null && validationProperty is not null)
 		{
-			_ = Context.IsValid(validationProperty, out validationCssClass, out validationAriaInvalid, out validationMessages);
+			isValid = Context.IsValid(validationProperty, out validationCssClass, out validationMessages);
 		}
 
 		StateHasChanged();

@@ -1,7 +1,10 @@
 ﻿@inherits ViInputBase<bool>
 
 <label class="form-check form-switch">
-	<input class="form-check-input" type="checkbox" @attributes="@AdditionalAttributes" @bind-value="@Value" @bind-value:event="oninput" checked="@Value">
+	<input class="form-check-input @CssClass @validationCssClass" type="checkbox"
+		   @attributes="@AdditionalAttributes"
+		   aria-invalid="@isValid.ToConditionalAttributeInverse()"
+		   @bind-value="@BindableStringValue" @bind-value:event="oninput" checked="@Value" />
 	@if (ChildContent != null || Text != null)
 	{
 		<span class="form-check-label">
@@ -14,6 +17,7 @@
 		<span class="form-check-description">@Description</span>
 	}
 </label>
+@RenderValidationMessages()
 
 @code {
 

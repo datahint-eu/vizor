@@ -1,14 +1,15 @@
 ﻿@inherits ViInputBase<string>
 
-<textarea
-	class="form-control @CssClass"
-	rows="@Rows"
-	placeholder="@Placeholder" @attributes="@AdditionalAttributes"
-	disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
-	@bind-value="@Value" @bind-value:event="oninput">
+<textarea class="form-control @CssClass @validationCssClass"
+		  rows="@Rows"
+		  placeholder="@Placeholder" @attributes="@AdditionalAttributes"
+		  disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
+		  aria-invalid="@isValid.ToConditionalAttributeInverse()"
+		  @bind-value="@BindableStringValue" @bind-value:event="oninput">
 </textarea>
+@RenderValidationMessages()
 
-<!-- TODO: validation, after bind event, ... -->
+<!-- TODO: after bind event, ... -->
 @code {
 
 	[Parameter]

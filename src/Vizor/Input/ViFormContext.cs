@@ -27,18 +27,16 @@ public class ViFormContext
 		return Task.FromResult(result);
 	}
 
-	public bool IsValid(string property, out string cssClass, out string? ariaInvalid, out string[]? messages)
+	public bool IsValid(string property, out string cssClass, out string[]? messages)
 	{
 		if (allMessages == null || !allMessages.TryGetValue(property, out messages))
 		{
 			messages = null;
 			cssClass = "is-valid";
-			ariaInvalid = null;
 			return true;
 		}
 
 		cssClass = "is-invalid";
-		ariaInvalid = "true";
 		return false;
 	}
 }

@@ -39,6 +39,7 @@ public class EmployeeValidator : AbstractValidator<Employee>
 		RuleFor(e => e.Password).MinimumLength(8).MaximumLength(64);
 		RuleFor(e => e.DateOfBirth).Must(d => d.Year < 2000).WithMessage("Date of birth must be before 1-1-2000");
 		RuleFor(e => e.Role).NotEmpty();
+		RuleFor(e => e.Remarks).MaximumLength(128);
 
 		//TODO: validate phone number if not null
 

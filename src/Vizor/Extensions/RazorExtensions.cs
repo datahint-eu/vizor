@@ -7,6 +7,8 @@ public static class RazorExtensions
 
 	public static string? ToConditionalAttribute(this bool b) => b == true ? "true" : null;
 
+	public static string? ToConditionalAttributeInverse(this bool? b) => b == false ? "true" : null;
+
 	public static string RandomId(int len = 8)
 	{
 		var result = new char[len];
