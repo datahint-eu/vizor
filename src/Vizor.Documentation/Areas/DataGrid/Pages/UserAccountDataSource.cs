@@ -21,20 +21,11 @@ public struct UserAccount
 public class UserAccountDataSource : IDataSource<UserAccount>
 {
 	private const int TotalCount = 500;
+	private List<UserAccount> users = new(TotalCount);
 
-	public Task<int> Count() => Task.FromResult(TotalCount);
-
-	public async Task<ICollection<UserAccount>> Load(int offset, int count)
+	public UserAccountDataSource()
 	{
-		if (count <= 0)
-			count = TotalCount;
-		if (offset + count > TotalCount) // TotalCount = 110, offset 100, count 50 --> count = 10
-			count = TotalCount - offset;
-
-		await Task.Delay(1000);
-
-		var lst = new List<UserAccount>(count);
-		for (int i = 0; i < count; ++i)
+		for (int i = 0; i < TotalCount; ++i)
 		{
 			var faker = new Faker("en");
 			var u = new UserAccount()
@@ -43,9 +34,22 @@ public class UserAccountDataSource : IDataSource<UserAccount>
 				LastName = faker.Person.LastName,
 				Email = faker.Person.Email,
 				Age = faker.Random.Number(18, 99),
-				Index = offset + i
+				Index = i + 1
 			};
-			lst.Add(u);
+			users.Add(u);
+		}
+	}
+
+	public Task<int> Count() => Task.FromResult(TotalCount);
+
+	public async Task<ICollection<UserAccount>> Load(int offset, int count)
+	{
+		await Task.Delay(1000);
+
+		var lst = new List<UserAccount>(count);
+		for (int i = offset; i < offset + count; ++i)
+		{
+			lst.Add(users[i]);
 		}
 		return lst;
 	}

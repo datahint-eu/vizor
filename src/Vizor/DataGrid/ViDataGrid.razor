@@ -129,9 +129,10 @@
 							var start = PaginationStartIndex;
 							var end = PaginationEndIndex;
 
-							for (int i = start; i < end; ++i)
+							for (int i = start; i <= end; ++i)
 							{
-								<li class="page-item @(i == currentPageIndex ? "active" : "")"><button class="page-link" @onclick="() => NavigateToPageAsync(i)">@(i + 1)</button></li>
+								int index = i;
+								<li class="page-item @(i == currentPageIndex ? "active" : "")"><button class="page-link" @onclick="() => NavigateToPageAsync(index)">@(i + 1)</button></li>
 							}
 
 							if (end < maxPageIndex)
@@ -222,8 +223,12 @@
 
 		if (UsePagination)
 		{
-			items = await dataSource.LoadDataAsync(currentPageIndex * PageSize, PageSize);
-			maxPageIndex = (int)Math.Floor((double)itemCount / PageSize);
+			int count = PageSize;
+			if ((currentPageIndex * PageSize) + PageSize > itemCount)
+				count = itemCount - (currentPageIndex * PageSize);
+
+			items = await dataSource.LoadDataAsync(currentPageIndex * PageSize, count);
+			maxPageIndex = (int)Math.Floor((double)itemCount / PageSize) - 1;
 		}
 		else
 		{
