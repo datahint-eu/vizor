@@ -1,6 +1,7 @@
 ﻿@typeparam TItem
 
 @implements IViDataGrid<TItem>
+@inherits ViComponentBase
 
 <!-- TODO: see https://preview.tabler.io/tables.html : table-striped -->
 <!-- TODO: -->
@@ -9,7 +10,7 @@
 	@ChildContent
 </CascadingValue>
 
-<div class="vidatagrid">
+<div class="vidatagrid @CssClass" @attributes="@AdditionalAttributes">
 	<div class="card">
 		@if (Title != null)
 		{
@@ -57,7 +58,7 @@
 				<!-- TODO: see https://preview.tabler.io/card-actions.html# for actions like refresh, ... to show/hide columns, ... -->
 
 				<tbody class="table-tbody">
-					@if (dataSource == null || dataSource.ItemCount == 0)
+					@if (dataSource == null || itemCount == 0)
 					{
 						<div class="empty">
 							<div class="empty-img">
@@ -107,30 +108,50 @@
 			{
 				@if (UsePagination)
 				{
-					<p class="m-0 text-muted">Showing <span>@((currentPageIndex * PageSize) + 1)</span> to <span>@((currentPageIndex * PageSize) + PageSize)</span> of <span>@dataSource.ItemCount</span> entries</p>
+					if (itemCount > 0)
+					{
+						<p class="m-0 text-muted">Showing <span>@((currentPageIndex * PageSize) + 1)</span> to <span>@((currentPageIndex * PageSize) + PageSize)</span> of <span>@itemCount</span> entries</p>
+					}
+					else
+					{
+						<p class="m-0 text-muted">Showing 0 entries</p>
+					}
 
 					<ul class="pagination m-0 ms-auto">
-						<li class="page-item disabled">
-							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+						<li class="page-item @(CanNavigatePrevious ? "" : "disabled")">
+							<button class="page-link" @onclick="PreviousPageAsync" tabindex="-1" aria-disabled="@(CanNavigatePrevious ? null : "true")">
 								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
 								prev
-							</a>
+							</button>
 						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item active"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">
+
+						@{
+							var start = PaginationStartIndex;
+							var end = PaginationEndIndex;
+
+							for (int i = start; i < end; ++i)
+							{
+								<li class="page-item @(i == currentPageIndex ? "active" : "")"><button class="page-link" @onclick="() => NavigateToPageAsync(i)">@(i + 1)</button></li>
+							}
+
+							if (end < maxPageIndex)
+							{
+								<li class="page-item"><button class="page-link">...</button></li>
+								<li class="page-item"><button class="page-link" @onclick="() => NavigateToPageAsync(maxPageIndex)">@(maxPageIndex + 1)</button></li>
+							}
+						}
+
+						<li class="page-item @(CanNavigateNext ? "" : "disabled")">
+							<button class="page-link" @onclick="NextPageAsync" aria-disabled="@(CanNavigateNext ? null : "true")">
+								next
 								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
-							</a>
+							</button>
 						</li>
 					</ul>
 				}
 				else
 				{
-					<p class="m-0 text-muted">Showing <span>@dataSource.ItemCount</span> entries</p>
+					<p class="m-0 text-muted">Showing <span>@itemCount</span> entries</p>
 				}
 			}
 		</div>
@@ -145,6 +166,9 @@
 
 	private bool isLoading = true;
 	private int currentPageIndex = 0;
+	private int maxPageIndex = 0;
+
+	private int itemCount = -1;
 	private ICollection<TItem> items = new List<TItem>(0);
 	private GridDataSource<TItem>? dataSource;
 
@@ -158,7 +182,7 @@
 	public string? Title { get; set; }
 
 	[Parameter]
-	public bool UsePagination { get; set; }
+	public bool UsePagination { get; set; } = true;
 
 	[Parameter]
 	public bool ShowSearch { get; set; }
@@ -174,26 +198,78 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		if (dataSource == null || dataSource.DataSource != DataSource)
-		{
-			dataSource = new GridDataSource<TItem>(DataSource);
-
-			isLoading = true;
-			//await InvokeAsync(StateHasChanged);
-
-			if (UsePagination)
-				items = await dataSource.LoadDataAsync(currentPageIndex * PageSize, PageSize);
-			else
-				items = await dataSource.LoadDataAsync(0, dataSource.ItemCount);
-
-			isLoading = false;
-			//await InvokeAsync(StateHasChanged);
-		}
+		await ReloadData();
 	}
 
 	public void AddColumn(IViDataGridColumn<TItem> column)
 	{
 		this.columns.Add(column);
 		StateHasChanged();
+	}
+
+	public async Task ReloadData()
+	{
+		if (dataSource == null || dataSource.DataSource != DataSource)
+		{
+			dataSource = new GridDataSource<TItem>(DataSource);
+		}
+
+		isLoading = true;
+		//await InvokeAsync(StateHasChanged);
+
+		if (itemCount < 0)
+			itemCount = await dataSource.Count();
+
+		if (UsePagination)
+		{
+			items = await dataSource.LoadDataAsync(currentPageIndex * PageSize, PageSize);
+			maxPageIndex = (int)Math.Floor((double)itemCount / PageSize);
+		}
+		else
+		{
+			items = await dataSource.LoadDataAsync(0, itemCount);
+			maxPageIndex = 0;
+		}
+
+		isLoading = false;
+		//await InvokeAsync(StateHasChanged);
+	}
+
+	private bool CanNavigatePrevious => currentPageIndex > 0 && !isLoading;
+
+	private bool CanNavigateNext => currentPageIndex < maxPageIndex && !isLoading;
+
+	private Task PreviousPageAsync() => NavigateToPageAsync(currentPageIndex - 1);
+
+	private Task NextPageAsync() => NavigateToPageAsync(currentPageIndex + 1);
+
+	private Task LastPageAsync() => NavigateToPageAsync(maxPageIndex);
+
+	private int PaginationStartIndex
+	{
+		get
+		{
+			return currentPageIndex switch
+			{
+				0 or 1 or 2 => 0,
+				_ => Math.Min(currentPageIndex - 2, maxPageIndex)
+			};
+		}
+	}
+
+	private int PaginationEndIndex => Math.Min(currentPageIndex + 3, maxPageIndex);
+
+	private async Task NavigateToPageAsync(int pageIndex)
+	{
+		if (pageIndex == currentPageIndex)
+			return;
+
+		if (pageIndex < 0)
+			pageIndex = 0;
+		if (pageIndex > maxPageIndex)
+			pageIndex = maxPageIndex;
+
+		currentPageIndex = pageIndex;
+		await ReloadData();
 	}
 }

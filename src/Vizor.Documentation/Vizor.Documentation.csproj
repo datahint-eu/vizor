@@ -16,6 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Bogus" Version="34.0.2" />
 		<PackageReference Include="Vizor.Icons.Bootstrap" Version="1.9.1" />
 		<PackageReference Include="Vizor.Icons.Tabler" Version="1.109.0" />
 	</ItemGroup>

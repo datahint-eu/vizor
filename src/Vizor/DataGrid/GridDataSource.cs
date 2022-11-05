@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Vizor.Data;
 
 namespace Vizor.DataGrid;
 
@@ -12,13 +12,15 @@ internal class GridDataSource<TItem>
 
 		if (dataSource is null)
 		{
-			ItemCount = 0;
 			loader = new EmptyGridDataSourceWrapper();
 		}
 		else if (dataSource is IReadOnlyList<TItem> list)
 		{
-			ItemCount = list.Count;
 			loader = new ListGridDataSourceWrapper(list);
+		}
+		else if (dataSource is IDataSource<TItem> source)
+		{
+			loader = new GridDataSourceWrapper(source);
 		}
 		else
 		{
@@ -26,8 +28,9 @@ internal class GridDataSource<TItem>
 		}
 	}
 
-	public int ItemCount { get; set; }
 	public object? DataSource { get; }
+
+	public Task<int> Count() => loader.Count();
 
 	public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
 	{
@@ -36,11 +39,15 @@ internal class GridDataSource<TItem>
 
 	internal interface IGridDataSourceWrapper
 	{
+		Task<int> Count();
+
 		Task<ICollection<TItem>> LoadDataAsync(int offset, int count);
 	}
 
 	internal class EmptyGridDataSourceWrapper : IGridDataSourceWrapper
 	{
+		public Task<int> Count() => Task.FromResult(0);
+
 		public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
 		{
 			return Task.FromResult((ICollection<TItem>)new List<TItem>(0));
@@ -55,6 +62,8 @@ internal class GridDataSource<TItem>
 		{
 			this.list = list;
 		}
+
+		public Task<int> Count() => Task.FromResult(list.Count);
 
 		public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
 		{
@@ -71,5 +80,20 @@ internal class GridDataSource<TItem>
 
 			return Task.FromResult((ICollection<TItem>)result);
 		}
+	}
+
+	internal class GridDataSourceWrapper : IGridDataSourceWrapper
+	{
+		private readonly IDataSource<TItem> source;
+
+		public GridDataSourceWrapper(IDataSource<TItem> source)
+		{
+			this.source = source;
+		}
+
+		public Task<int> Count() => source.Count();
+
+		public async Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
+			=> await source.Load(offset, count);
 	}
 }

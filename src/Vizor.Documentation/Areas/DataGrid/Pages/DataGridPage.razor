@@ -4,12 +4,19 @@
 	<ViPageHeader>DataGrid</ViPageHeader>
 	<ViPageBody>
 
-		<ViDataGrid TItem="Car" DataSource="@cars" Title="Cars">
+		<ViDataGrid TItem="Car" DataSource="@cars" Title="Cars" UsePagination="false">
 			<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" />
 			<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" />
 			<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" />
 		</ViDataGrid>
 
+		<ViDataGrid CssClass="mt-2" TItem="UserAccount" DataSource="@users" Title="Users" UsePagination="true">
+			<ViSimpleColumn TItem="UserAccount" Name="Index" ValueExpr="(item) => item.Index" />
+			<ViSimpleColumn TItem="UserAccount" Name="First Name" ValueExpr="(item) => item.FirstName" />
+			<ViSimpleColumn TItem="UserAccount" Name="Last Name" ValueExpr="(item) => item.LastName" />
+			<ViSimpleColumn TItem="UserAccount" Name="Email" ValueExpr="(item) => item.Email" />
+			<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" />
+		</ViDataGrid>
 	</ViPageBody>
 </ViPage>
 
@@ -24,6 +31,7 @@
 		new Car{Brand="VW", Model="ID.5", Price=65000 },
 		new Car{Brand="Kia", Model="EV6", Price=62000 },
 	};
+	private UserAccountDataSource users = new UserAccountDataSource();
 
 	struct Car
 	{

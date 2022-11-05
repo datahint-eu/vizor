@@ -2,5 +2,7 @@
 
 public interface IDataSource<TItem>
 {
-	Task Load();
+	Task<int> Count();
+
+	Task<ICollection<TItem>> Load(int offset, int count);
 }
