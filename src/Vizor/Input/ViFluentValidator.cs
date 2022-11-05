@@ -2,9 +2,9 @@
 
 namespace Vizor;
 
-public class ViCreateValidator<TValidator> : ComponentBase where TValidator : IValidator
+public class ViFluentValidator<TValidator> : ComponentBase where TValidator : IValidator
 {
-	[CascadingParameter]
+	[CascadingParameter(Name = "ViFormContext")]
 	private ViFormContext Context { get; set; } = default!;
 
 	protected override void OnInitialized()

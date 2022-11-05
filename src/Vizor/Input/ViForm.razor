@@ -1,0 +1,28 @@
+﻿@inherits ViComponentBase
+
+@if (Context != null)
+{
+	<CascadingValue IsFixed="true" Name="ViFormContext" Value="@Context">
+		@ChildContent
+	</CascadingValue>
+}
+
+@code {
+
+	//TODO: FormStyle(cascading)
+
+	[Parameter, EditorRequired]
+	public object? Model { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	public ViFormContext? Context { get; set; }
+
+	protected override Task OnInitializedAsync()
+	{
+		Context = new ViFormContext(Model);
+
+		return Task.CompletedTask;
+	}
+}

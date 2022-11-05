@@ -1,0 +1,33 @@
+﻿@if (Style == FormStyle.Vertical)
+{
+	<div class="mb-3">
+		<label class="form-label @(IsRequired ? "required" : "")">@Label</label>
+		<div>
+			@ChildContent
+		</div>
+	</div>
+}
+else
+{
+	<div class="form-group mb-3 row">
+		<label class="col-3 col-form-label @(IsRequired ? "required" : "")">@Label</label>
+		<div class="col">
+			@ChildContent
+		</div>
+	</div>
+}
+
+@code {
+
+	[CascadingParameter(Name = "FormStyle")]
+	public FormStyle Style { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Label { get; set; } = default!;
+
+	[Parameter]
+	public bool IsRequired { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment? ChildContent { get; set; }
+}

@@ -1,0 +1,17 @@
+﻿@inherits ViComponentBase
+
+<small class="form-hint @CssClass">
+	@ChildContent
+	@Text
+</small>
+
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+}

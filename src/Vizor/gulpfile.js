@@ -26,6 +26,7 @@ var libroot = path.resolve(__dirname, "./node_modules");
 
 var srcPaths = {
 	scss: [
+		path.resolve(vizorStyles, '_blazor.scss'),
 		path.resolve(vizorStyles, 'datagrid.scss')
 	],
 

@@ -12,10 +12,24 @@
 
 <div class="vidatagrid @CssClass" @attributes="@AdditionalAttributes">
 	<div class="card">
-		@if (Title != null)
+		@if (Title != null || ShowRefresh)
 		{
 			<div class="card-header">
-				<h3 class="card-title">@Title</h3>
+				@if (Title != null)
+				{
+					<h3 class="card-title">@Title</h3>
+				}
+				@if (ShowRefresh)
+				{
+					<div class="card-actions btn-actions">
+						<button @onclick="ReloadData" class="btn-action">
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path></svg>
+						</button>
+						<button class="btn-action">
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="19" r="1"></circle><circle cx="12" cy="5" r="1"></circle></svg>
+						</button>
+					</div>
+				}
 			</div>
 		}
 
@@ -187,6 +201,9 @@
 
 	[Parameter]
 	public bool ShowSearch { get; set; }
+
+	[Parameter]
+	public bool ShowRefresh { get; set; } = true;
 
 	[Parameter]
 	public int PageSize { get; set; } = 50;
