@@ -1,0 +1,18 @@
+﻿@inherits ViModalBase
+
+<ViModalContent Modal="this">
+	<TitleContent>
+		Simple Modal
+	</TitleContent>
+	<BodyContent>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+	</BodyContent>
+	<FooterContent>
+		<ViButton CssClass="me-auto" OnClick="(() => Close())">Close</ViButton>
+		<ViButton Color="@ThemeColor.Primary" OnClick="(() => Submit())">Save</ViButton>
+	</FooterContent>
+</ViModalContent>
+
+@code {
+
+}

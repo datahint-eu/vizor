@@ -39,6 +39,7 @@ var srcPaths = {
 		path.resolve(libroot, 'bootstrap/dist/js/bootstrap.bundle.min.js'),
 		path.resolve(libroot, '@tabler/core/dist/js/tabler.min.js'),
 		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js'),
+		path.resolve(vizorScripts, 'modal.js'),
 		path.resolve(vizorScripts, 'select.js')
 	]
 };

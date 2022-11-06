@@ -1,0 +1,32 @@
+﻿@page "/doc/vizor/info/modals"
+@using Vizor.Documentation.Areas.Informational.Modals;
+
+<ViPage>
+	<ViPageHeader>Modals</ViPageHeader>
+	<ViPageBody>
+
+		<ViCard>
+			<Header><ViCardTitle>Modals</ViCardTitle></Header>
+			<Body>
+				<ViButton OnClick="ShowSimpleModal">Simple Modal</ViButton>
+			</Body>
+		</ViCard>
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+	[CascadingParameter(Name = "ViModalService")]
+	public ViModalService ModalService { get; set; } = default!;
+
+	private async Task ShowSimpleModal()
+	{
+		var result = await ModalService.Show<SimpleModal>();
+
+		if (result == ModalResult.Submit)
+		{
+			// do something
+		}
+	}
+}

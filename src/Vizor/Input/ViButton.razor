@@ -1,7 +1,7 @@
 ﻿@inherits ViInputBase
 
 <button
-	class="btn @ColorConverter.ToBtnColor(Color, Style) @ToButtonSize(Size)"
+	class="btn @CssClass @ColorConverter.ToBtnColor(Color, Style) @ToButtonSize(Size)"
 	type="@Type.ToButtonType()"
 	@attributes="@AdditionalAttributes"
 	@onclick="@OnClick"
