@@ -6,9 +6,10 @@
 	<ViPageBody>
 
 		<ViCard>
-			<Header><ViCardTitle>Modals</ViCardTitle></Header>
+			<Header><ViCardTitle>Simple Modal</ViCardTitle></Header>
 			<Body>
-				<ViButton OnClick="ShowSimpleModal">Simple Modal</ViButton>
+				<ViButton OnClick="ShowSimpleModal">Show</ViButton>
+				Result: @simpleModalResult
 			</Body>
 		</ViCard>
 	</ViPageBody>
@@ -17,16 +18,15 @@
 
 
 @code {
+
+	private ModalResult? simpleModalResult;
+
 	[CascadingParameter(Name = "ViModalService")]
 	public ViModalService ModalService { get; set; } = default!;
 
 	private async Task ShowSimpleModal()
 	{
-		var result = await ModalService.Show<SimpleModal>();
-
-		if (result == ModalResult.Submit)
-		{
-			// do something
-		}
+		simpleModalResult = await ModalService.Show<SimpleModal>();
+		StateHasChanged();
 	}
 }

@@ -5,11 +5,11 @@
 		<div class="modal-content">
 			<a id="@(Modal.Id + "-close")" class="invisible" data-bs-dismiss="modal" aria-hidden="true" />
 
-			@if (ShowCloseButton || TitleContent != null || TitleText != null)
+			@if (ShowCloseButton || Title != null || TitleText != null)
 			{
 				<div class="modal-header">
 					<h5 class="modal-title">
-						@TitleContent
+						@Title
 						@TitleText
 					</h5>
 					@if (ShowCloseButton)
@@ -23,12 +23,12 @@
 				<div class="modal-status @ToModalStyle(Style)"></div>
 			}
 			<div class="modal-body">
-				@BodyContent
+				@Body
 			</div>
-			@if (FooterContent != null)
+			@if (Footer != null)
 			{
 				<div class="modal-footer">
-					@FooterContent
+					@Footer
 				</div>
 			}
 
@@ -51,13 +51,13 @@
 	public string? TitleText { get; set; }
 
 	[Parameter]
-	public RenderFragment? TitleContent { get; set; }
+	public RenderFragment? Title { get; set; }
 
 	[Parameter]
-	public RenderFragment? BodyContent { get; set; }
+	public RenderFragment? Body { get; set; }
 
 	[Parameter]
-	public RenderFragment? FooterContent { get; set; }
+	public RenderFragment? Footer { get; set; }
 
 	[Parameter]
 	public bool ShowCloseButton { get; set; } = true;
