@@ -1,11 +1,19 @@
 ﻿@inherits ViComponentBase
 
 <li class="nav-item dropdown @CssClass" @attributes="AdditionalAttributes">
-	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		@ChildContent
-		@Text
+	<a class="nav-link dropdown-toggle" href="#test" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		@if (Icon != null)
+		{
+			<span class="nav-link-icon d-md-none d-lg-inline-block">
+				@Icon
+			</span>
+		}
+		<span class="nav-link-title">
+			@ItemContent
+			@ItemText
+		</span>
 	</a>
-	@DropdownMenu
+	@ChildContent
 </li>
 
 
@@ -16,11 +24,14 @@
 	// see https://getbootstrap.com/docs/5.2/components/navbar/
 
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? ItemContent { get; set; }
 
 	[Parameter]
-	public string? Text { get; set; }
+	public string? ItemText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
 
 	[Parameter, EditorRequired]
-	public RenderFragment DropdownMenu { get; set; } = default!;
+	public RenderFragment ChildContent { get; set; } = default!;
 }

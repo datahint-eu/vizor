@@ -1,27 +1,37 @@
-﻿<ViNavBar Id="mainNav" Color="@ThemeColor.Dark" CssClass="navbar-dark"> <!-- TODO: navbar-dark must be integrated -->
-    <Brand>
-        <ViNavBrand Link="#">Vizor Demo</ViNavBrand>
-    </Brand>
-    <Toggler>
-        <ViNavToggler />
-    </Toggler>
-    <Start>
-        <ViNavLink Link="/doc/vizor/input/button">Button</ViNavLink>
-        <ViNavLink Link="/doc/vizor/input/select">Select</ViNavLink>
-        <ViNavLink Link="/doc/vizor/info/alert">Alert</ViNavLink>
-        <ViNavLink Link="/doc/vizor/input/form">Form</ViNavLink>
-        <ViNavLink Link="/doc/vizor/datagrid">DataGrid</ViNavLink>
-        <ViNavLink Link="/doc/vizor/info/modals">Modals</ViNavLink>
-    </Start>
+﻿<ViNavBar Id="mainNav" Color="@ThemeColor.Dark" CssClass="navbar-dark">
+	<!-- TODO: navbar-dark must be integrated -->
+	<Brand>
+		<ViNavBrand Link="#">Vizor Demo</ViNavBrand>
+	</Brand>
+	<Toggler>
+		<ViNavToggler />
+	</Toggler>
+	<Start>
+		<ViNavDropdown ItemText="Input" MenuId="input">
+			<ViDropdownMenu Id="input">
+				<ViDropdownItem Link="/doc/vizor/input/button">Button</ViDropdownItem>
+				<ViDropdownItem Link="/doc/vizor/input/select">Select</ViDropdownItem>
+				<ViDropdownDivider />
+				<ViDropdownItem Link="/doc/vizor/input/form">Form</ViDropdownItem>
+			</ViDropdownMenu>
+		</ViNavDropdown>
+		<ViNavDropdown ItemText="Info" MenuId="info">
+			<ViDropdownMenu Id="info">
+				<ViDropdownItem Link="/doc/vizor/info/alert">Alert</ViDropdownItem>
+				<ViDropdownItem Link="/doc/vizor/info/modals">Modals</ViDropdownItem>
+			</ViDropdownMenu>
+		</ViNavDropdown>
+		<ViNavLink Link="/doc/vizor/datagrid">DataGrid</ViNavLink>
+	</Start>
 </ViNavBar>
 
 @code {
-    private bool collapseNavMenu = true;
+	private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
 }
