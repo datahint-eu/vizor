@@ -5,12 +5,12 @@
 		<div class="modal-content">
 			<a id="@(Modal.Id + "-close")" class="invisible" data-bs-dismiss="modal" aria-hidden="true" />
 
-			@if (ShowCloseButton || Title != null || TitleText != null)
+			@if (Header != null || HeaderText != null)
 			{
-				<div class="modal-header">
+				<div class="modal-header @HeaderCssClass">
 					<h5 class="modal-title">
-						@Title
-						@TitleText
+						@Header
+						@HeaderText
 					</h5>
 					@if (ShowCloseButton)
 					{
@@ -18,16 +18,21 @@
 					}
 				</div>
 			}
+			else if (ShowCloseButton)
+			{
+				<button type="button" class="btn-close" @onclick="(() => Modal.Close())"></button>
+			}
+
 			@if (Style != ModalStyle.Info)
 			{
 				<div class="modal-status @ToModalStyle(Style)"></div>
 			}
-			<div class="modal-body">
+			<div class="modal-body @BodyCssClass">
 				@Body
 			</div>
 			@if (Footer != null)
 			{
-				<div class="modal-footer">
+				<div class="modal-footer @FooterCssClass">
 					@Footer
 				</div>
 			}
@@ -48,16 +53,25 @@
 	public ModalStyle Style { get; set; }
 
 	[Parameter]
-	public string? TitleText { get; set; }
+	public string? HeaderText { get; set; }
 
 	[Parameter]
-	public RenderFragment? Title { get; set; }
+	public RenderFragment? Header { get; set; }
+
+	[Parameter]
+	public string? HeaderCssClass { get; set; }
 
 	[Parameter]
 	public RenderFragment? Body { get; set; }
 
 	[Parameter]
+	public string? BodyCssClass { get; set; }
+
+	[Parameter]
 	public RenderFragment? Footer { get; set; }
+
+	[Parameter]
+	public string? FooterCssClass { get; set; }
 
 	[Parameter]
 	public bool ShowCloseButton { get; set; } = true;

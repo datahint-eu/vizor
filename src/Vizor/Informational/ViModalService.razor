@@ -12,9 +12,6 @@
 
 @code {
 
-	private List<ViModalContext> modalDialogs = new();
-	private List<string> modalsToShow = new();
-
 	private TaskCompletionSource<ViModalBase>? modalRendered;
 
 	private RenderFragment? modalFragment;
@@ -29,6 +26,60 @@
 
 	public async Task<ModalResult> Show<TModal>() where TModal : ViModalBase
 	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment? fragment = builder =>
+		{
+			builder.OpenComponent<TModal>(0);
+			builder.AddAttribute(1, "Id", id);
+			builder.CloseComponent();
+		};
+
+		return await ShowInternal(fragment, id);
+	}
+
+	public async Task<ModalResult> ShowSuccess(string message, string? description, string submitText = "Ok", string cancelText = "Close")
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment fragment = @<ViStatusModal Id="@id" Style="ModalStyle.Success" Message="@message" Description="@description"
+											CancelContent="@TextToFragment(cancelText)" SubmitContent="@TextToFragment(submitText)" />;
+
+		return await ShowInternal(fragment, id);
+	}
+
+	public async Task<ModalResult> ShowWarning(string message, string? description, string submitText = "Ok", string cancelText = "Close")
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment fragment = @<ViStatusModal Id="@id" Style="ModalStyle.Warning" Message="@message" Description="@description"
+											CancelContent="@TextToFragment(cancelText)" SubmitContent="@TextToFragment(submitText)" />;
+
+		return await ShowInternal(fragment, id);
+	}
+
+	public async Task<ModalResult> ShowDanger(string message, string? description, string submitText = "Ok", string cancelText = "Close")
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment fragment = @<ViStatusModal Id="@id" Style="ModalStyle.Danger" Message="@message" Description="@description"
+											CancelContent="@TextToFragment(cancelText)" SubmitContent="@TextToFragment(submitText)" />;
+
+		return await ShowInternal(fragment, id);
+	}
+
+	public async Task<ModalResult> ShowInfo(string message, string? description, string submitText = "Ok", string cancelText = "Close")
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment fragment = @<ViStatusModal Id="@id" Style="ModalStyle.Info" Message="@message" Description="@description"
+											CancelContent="@TextToFragment(cancelText)" SubmitContent="@TextToFragment(submitText)" />;
+
+		return await ShowInternal(fragment, id);
+	}
+
+	private RenderFragment TextToFragment(string text)
+	{
+		return @<text>@text</text>;
+	}
+
+	private async Task<ModalResult> ShowInternal(RenderFragment? fragment, string id)
+	{
 		if (modal != null)
 		{
 			throw new InvalidOperationException("Only 1 modal can be active at any given time");
@@ -37,22 +88,17 @@
 		modalRendered = new TaskCompletionSource<ViModalBase>();
 
 		modal = null;
-		modalId = RazorExtensions.RandomId();
-		modalFragment = builder =>
-		{
-			builder.OpenComponent<TModal>(0);
-			builder.AddAttribute(1, "Id", modalId);
-			builder.CloseComponent();
-		};
+		modalId = id;
+		modalFragment = fragment;
 
 		await InvokeAsync(StateHasChanged);
 
 		modal = await modalRendered.Task;
-		await JSRuntime.InvokeVoidAsync("viToggleModal", modalId + "-toggle");
+		await JSRuntime.InvokeVoidAsync("viToggleModal", id + "-toggle");
 
 		var result = await modal.Show();
 
-		await JSRuntime.InvokeVoidAsync("viToggleModal", modalId + "-close");
+		await JSRuntime.InvokeVoidAsync("viToggleModal", id + "-close");
 
 		modal = null;
 		modalId = null;

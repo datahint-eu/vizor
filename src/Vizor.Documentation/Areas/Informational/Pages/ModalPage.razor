@@ -9,7 +9,22 @@
 			<Header><ViCardTitle>Simple Modal</ViCardTitle></Header>
 			<Body>
 				<ViButton OnClick="ShowSimpleModal">Show</ViButton>
+
+				<br />
 				Result: @simpleModalResult
+			</Body>
+		</ViCard>
+
+		<ViCard CssClass="mt-2">
+			<Header><ViCardTitle>Status Modal</ViCardTitle></Header>
+			<Body>
+				<ViButton Color="@ThemeColor.Primary" OnClick="ShowInfoModal">Info</ViButton>
+				<ViButton Color="@ThemeColor.Success" OnClick="ShowSuccessModal">Success</ViButton>
+				<ViButton Color="@ThemeColor.Warning" OnClick="ShowWarningModal">Warning</ViButton>
+				<ViButton Color="@ThemeColor.Danger" OnClick="ShowDangerModal">Danger</ViButton>
+
+				<br />
+				Result: @statusModalResult
 			</Body>
 		</ViCard>
 	</ViPageBody>
@@ -20,6 +35,7 @@
 @code {
 
 	private ModalResult? simpleModalResult;
+	private ModalResult? statusModalResult;
 
 	[CascadingParameter(Name = "ViModalService")]
 	public ViModalService ModalService { get; set; } = default!;
@@ -27,6 +43,30 @@
 	private async Task ShowSimpleModal()
 	{
 		simpleModalResult = await ModalService.Show<SimpleModal>();
+		StateHasChanged();
+	}
+
+	private async Task ShowInfoModal()
+	{
+		statusModalResult = await ModalService.ShowInfo("Some Information", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.");
+		StateHasChanged();
+	}
+
+	private async Task ShowSuccessModal()
+	{
+		statusModalResult = await ModalService.ShowSuccess("Payment succedeed", "Your payment of $290 has been successfully submitted.", "View Invoice");
+		StateHasChanged();
+	}
+
+	private async Task ShowWarningModal()
+	{
+		statusModalResult = await ModalService.ShowWarning("Are you sure?", "Do you really want to move 84 files? This action cannot be undone.", "Move 84 items");
+		StateHasChanged();
+	}
+
+	private async Task ShowDangerModal()
+	{
+		statusModalResult = await ModalService.ShowDanger("Are you sure?", "Do you really want to remove 84 files? This action cannot be undone.", "Delete 84 items");
 		StateHasChanged();
 	}
 }

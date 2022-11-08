@@ -1,0 +1,95 @@
+﻿@using Vizor.Input
+@inherits ViModalBase
+
+<ViModalContent Modal="this" Style="@Style" Size="@Size" BodyCssClass="text-center py-4">
+	<Body>
+		@Image
+		<h3>@Message</h3>
+		@if (Description != null)
+		{
+			<div class="text-muted">@Description</div>
+		}
+	</Body>
+	<Footer>
+		<div class="w-100">
+			<div class="row">
+				<div class="col">
+					<ViButton CssClass="w-100" OnClick="(() => Close())">@CancelContent</ViButton>
+				</div>
+				<div class="col">
+					<ViButton CssClass="w-100" Color="@ButtonTheme" OnClick="(() => Submit())">@SubmitContent</ViButton>
+				</div>
+			</div>
+		</div>
+	</Footer>
+</ViModalContent>
+
+@code {
+
+	[Parameter, EditorRequired]
+	public string Message { get; set; } = default!;
+
+	[Parameter]
+	public string? Description { get; set; }
+
+	[Parameter]
+	public ModalSize Size { get; set; } = ModalSize.Small;
+
+	[Parameter]
+	public ModalStyle Style { get; set; }
+
+	[Parameter]
+	public RenderFragment? Image { get; set; }
+
+	[Parameter]
+	public RenderFragment? CancelContent { get; set; }
+
+	[Parameter]
+	public RenderFragment? SubmitContent { get; set; }
+
+	protected override void OnInitialized()
+	{
+		if (Image == null)
+		{
+			switch (Style)
+			{
+				case ModalStyle.Success:
+					Image = @<svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2l4 -4"></path></svg>;
+					break;
+				case ModalStyle.Warning:
+					Image = @<svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-warning icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 9v2m0 4v.01"></path><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path></svg>;
+					break;
+				case ModalStyle.Danger:
+					Image = @<svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 9v2m0 4v.01"></path><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path></svg>;
+					break;
+				case ModalStyle.Info:
+					Image = @<svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-primary icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12.01" y2="8"></line><polyline points="11 12 12 12 12 16 13 16"></polyline></svg>;
+					break;
+			}
+		}
+
+		if (CancelContent == null)
+		{
+			CancelContent = @<text>Close</text>;
+		}
+
+		if (SubmitContent == null)
+		{
+			SubmitContent = @<text>Ok</text>;
+		}
+	}
+
+	protected string? ButtonTheme
+	{
+		get
+		{
+			return Style switch
+			{
+				ModalStyle.Success => ThemeColor.Success,
+				ModalStyle.Warning => ThemeColor.Warning,
+				ModalStyle.Danger => ThemeColor.Danger,
+				_ => ThemeColor.Primary,
+			};
+		}
+	}
+}
