@@ -1,4 +1,7 @@
 ﻿@page "/doc/vizor/info/modals"
+
+@inject ViModalService ModalService
+
 @using Vizor.Documentation.Areas.Informational.Modals;
 
 <ViPage>
@@ -36,9 +39,6 @@
 
 	private ModalResult? simpleModalResult;
 	private ModalResult? statusModalResult;
-
-	[CascadingParameter(Name = "ViModalService")]
-	public ViModalService ModalService { get; set; } = default!;
 
 	private async Task ShowSimpleModal()
 	{

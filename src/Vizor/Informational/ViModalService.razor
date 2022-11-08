@@ -1,28 +1,11 @@
 ﻿@using System.Reflection;
-<CascadingValue IsFixed="true" Value="this" Name="ViModalService">
-	@ChildContent
-
-	@modalFragment
-
-	@if (modalId != null)
-	{
-		<a @key="@modal" id="@(modalId + "-toggle")" class="invisible" data-bs-toggle="modal" data-bs-target="@("#" + modalId)" aria-hidden="true" />
-	}
-</CascadingValue>
 
 @code {
 
+	private ViModalRenderer? renderer;
 	private TaskCompletionSource<ViModalBase>? modalRendered;
 
-	private RenderFragment? modalFragment;
-	private string? modalId;
 	private ViModalBase? modal;
-
-	[Inject]
-	public IJSRuntime JSRuntime { get; set; } = default!;
-
-	[Parameter, EditorRequired]
-	public RenderFragment ChildContent { get; set; } = default!;
 
 	public async Task<ModalResult> Show<TModal>() where TModal : ViModalBase
 	{
@@ -73,6 +56,11 @@
 		return await ShowInternal(fragment, id);
 	}
 
+	internal void SetRenderer(ViModalRenderer? renderer)
+	{
+		this.renderer = renderer;
+	}
+
 	private RenderFragment TextToFragment(string text)
 	{
 		return @<text>@text</text>;
@@ -80,6 +68,10 @@
 
 	private async Task<ModalResult> ShowInternal(RenderFragment? fragment, string id)
 	{
+		if (renderer == null)
+		{
+			throw new InvalidOperationException($"{typeof(ViModalRenderer)} was not initialized in the current layout");
+		}
 		if (modal != null)
 		{
 			throw new InvalidOperationException("Only 1 modal can be active at any given time");
@@ -88,22 +80,17 @@
 		modalRendered = new TaskCompletionSource<ViModalBase>();
 
 		modal = null;
-		modalId = id;
-		modalFragment = fragment;
-
-		await InvokeAsync(StateHasChanged);
+		await renderer.UpdateAsync(fragment, id);
 
 		modal = await modalRendered.Task;
-		await JSRuntime.InvokeVoidAsync("viToggleModal", id + "-toggle");
+		await renderer.ToggleModalAsync(id);
 
 		var result = await modal.Show();
 
-		await JSRuntime.InvokeVoidAsync("viToggleModal", id + "-close");
+		await renderer.CloseModalAsync(id);
 
 		modal = null;
-		modalId = null;
-		modalFragment = null;
-		await InvokeAsync(StateHasChanged);
+		await renderer.UpdateAsync(null, null);
 
 		return result;
 	}
@@ -114,7 +101,5 @@
 
 		//TODO: sanity checks
 		modalRendered?.TrySetResult(modal);
-
-		StateHasChanged();
 	}
 }

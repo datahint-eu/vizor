@@ -10,7 +10,7 @@ public class ViModalBase : ComponentBase
 	[Parameter, EditorRequired]
 	public string Id { get; set; } = default!;
 
-	[CascadingParameter(Name = "ViModalService")]
+	[Inject]
 	public ViModalService ModalService { get; set; } = default!;
 
 	public object? Data { get; private set; }

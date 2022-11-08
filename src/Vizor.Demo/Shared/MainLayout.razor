@@ -2,19 +2,19 @@
 
 <PageTitle>Vizor.Demo</PageTitle>
 
-<ViModalService>
-	<div class="page">
-		<div class="sidebar">
-			<NavMenu />
-		</div>
+<ViModalRenderer />
 
-		<main>
-			<article class="content px-4">
-				@Body
-			</article>
-		</main>
+<div class="page">
+	<div class="sidebar">
+		<NavMenu />
 	</div>
-</ViModalService>
+
+	<main>
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
+</div>
 
 @code {
 

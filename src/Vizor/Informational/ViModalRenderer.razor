@@ -1,0 +1,37 @@
+﻿@inject ViModalService ModalService
+
+@ModalFragment
+
+@if (ModalId != null)
+{
+	<a @key="@ModalId" id="@(ModalId + "-toggle")" class="invisible" data-bs-toggle="modal" data-bs-target="@("#" + ModalId)" aria-hidden="true" />
+}
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ModalFragment { get; set; }
+
+	[Parameter]
+	public string? ModalId { get; set; }
+
+	[Inject]
+	public IJSRuntime JSRuntime { get; set; } = default!;
+
+	protected override void OnInitialized()
+	{
+		ModalService.SetRenderer(this);
+	}
+
+	internal async Task UpdateAsync(RenderFragment? fragment, string? id)
+	{
+		ModalFragment = fragment;
+		ModalId = id;
+
+		await InvokeAsync(StateHasChanged);
+	}
+
+	internal ValueTask ToggleModalAsync(string id) => JSRuntime.InvokeVoidAsync("viToggleModal", id + "-toggle");
+
+	internal ValueTask CloseModalAsync(string id) => JSRuntime.InvokeVoidAsync("viToggleModal", id + "-close");
+}
