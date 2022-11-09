@@ -12,7 +12,6 @@
  - https://codepen.io/alexdevero/pen/avKpLX (css only !)
  - https://github.com/azouaoui-med/pro-sidebar-template (vanilla js)
  - https://www.codeply.com/p/CVVo4PD2hs (pure bootstrap)
- - https://preview.keenthemes.com/keen/demo5/pages/user-profile/overview.html
 
  topnav:
   - https://codepen.io/typo3-freelancer/pen/poEvyGj (plain BS5 multi level topnav + mega menu)
@@ -29,6 +28,7 @@ carousel:
  - https://colorlib.com/wp/bootstrap-slider/
 
 themes:
+- https://preview.keenthemes.com/keen/demo5/pages/user-profile/overview.html (content pages, menu, tables, activity log, ...)
  - https://colorlib.com/wp/free-html5-admin-dashboard-templates/
  - https://dashboardpack.com/live-demo-preview/?livedemo=357190 ==> tables+card effect ! form advance
  - https://preview.themeforest.net/item/ubold-responsive-web-app-kit/full_screen_preview/13489470?_ga=2.140638194.1917633759.1665170300-2130607929.1662141462

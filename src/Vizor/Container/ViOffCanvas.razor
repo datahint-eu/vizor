@@ -1,7 +1,56 @@
 ﻿@inherits ViComponentBase
 
-<span>TODO</span>
+<div class="offcanvas @GetPlacementCss() @CssClass" tabindex="-1" id="@Id" aria-labelledby="@(Id + "-label")" @attributes="AdditionalAttributes">
+	<div class="offcanvas-header">
+		<h2 class="offcanvas-title" id="@(Id + "-label")">
+			@Title
+			@TitleText
+		</h2>
+		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<div>
+			@Body
+		</div>
+		@if (Footer != null)
+		{
+			<div class="mt-3">
+				@Footer
+			</div>
+		}
+	</div>
+</div>
 
 @code {
+	// toggle with
+	// <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasStart" role="button" aria-controls="offcanvasStart">Toggle start offcanvas</a>
 
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Title { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment Body { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? Footer { get; set; }
+
+	[Parameter]
+	public OffCanvasPlacement Placement { get; set; }
+
+	private string GetPlacementCss()
+	{
+		return Placement switch
+		{
+			OffCanvasPlacement.Left => "offcanvas-start",
+			OffCanvasPlacement.Top => "offcanvas-top",
+			OffCanvasPlacement.Bottom => "offcanvas-bottom",
+			_ => "offcanvas-end"
+		};
+	}
 }

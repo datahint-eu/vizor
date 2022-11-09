@@ -1,0 +1,28 @@
+﻿@page "/doc/vizor/container/offcanvas"
+@using Vizor.Icons.Tabler
+
+<ViPage>
+	<ViPageHeader>OffCanvas</ViPageHeader>
+	<ViPageBody>
+
+		<ViCard>
+			<Header><ViCardTitle>Color</ViCardTitle></Header>
+			<Body>
+				<ViButton data-bs-toggle="offcanvas" href="#offcanvas-right">Right</ViButton>
+			</Body>
+		</ViCard>
+
+		<ViOffCanvas Id="offcanvas-right" Placement="OffCanvasPlacement.Right">
+			<Title>Sidebar</Title>
+			<Body>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda ea est, eum exercitationem fugiat illum itaque laboriosam magni necessitatibus, nemo nisi numquam quae reiciendis repellat sit soluta unde. Aut!
+			</Body>
+		</ViOffCanvas>
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+
+}
