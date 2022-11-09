@@ -1,0 +1,13 @@
+﻿<div class="card-stamp-icon @ColorConverter.ToBgColor(Color)">
+	@Icon
+</div>
+
+@code {
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment Icon { get; set; } = default!;
+
+}

@@ -1,6 +1,13 @@
 ﻿@inherits ViComponentBase
 
 <div class="card @CssClass" @attributes="AdditionalAttributes">
+	@if (Stamp != null)
+	{
+		<div class="card-stamp @StampCssClass">
+			@Stamp
+		</div>
+	}
+
 	@if (Header != null)
 	{
 		<div class="card-header @HeaderCssClass">
@@ -23,7 +30,11 @@
 
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/card/
+	[Parameter]
+	public RenderFragment? Stamp { get; set; }
+
+	[Parameter]
+	public string? StampCssClass { get; set; } = "card-stamp-lg";
 
 	[Parameter]
 	public RenderFragment? Header { get; set; }
