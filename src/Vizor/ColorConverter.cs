@@ -14,7 +14,9 @@ public static class ColorConverter
 
 	public static string? ToAlertColor(string? color) => color == null ? null : $"alert-{color}";
 
-	public static string? ToBtnColor(string? color, ButtonStyle style)
+    public static string? ToNavBarColor(string? color) => color == null ? null : $"navbar-{color}";
+
+    public static string? ToBtnColor(string? color, ButtonStyle style)
 	{
 		//TODO: support for pill, ghost
 

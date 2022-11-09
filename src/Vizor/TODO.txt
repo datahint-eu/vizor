@@ -8,7 +8,15 @@
  - https://colorlib.com/etc/bootstrap-sidebar/sidebar-03/
  - https://colorlib.com/etc/bootstrap-sidebar/sidebar-07/
  - https://preview.colorlib.com/theme/sidebar/colorlib-sidebar-v01/
+ - https://codepen.io/Shven/pen/JjJMwo (css only)
+ - https://codepen.io/alexdevero/pen/avKpLX (css only !)
+ - https://github.com/azouaoui-med/pro-sidebar-template (vanilla js)
+ - https://www.codeply.com/p/CVVo4PD2hs (pure bootstrap)
+ - https://preview.keenthemes.com/keen/demo5/pages/user-profile/overview.html
 
+ topnav:
+  - https://codepen.io/typo3-freelancer/pen/poEvyGj (plain BS5 multi level topnav + mega menu)
+  - https://themes.getbootstrap.com/preview/?theme_id=1692 (maisonette) !!
 
  
 forms & validation:
@@ -30,3 +38,6 @@ themes:
  - https://github.com/puikinsh/Adminator-admin-dashboard --> Roboto font
  - https://colorlib.com//polygon/adminty/default/index.html --> sidenav, elements
  - https://colorlib.com//polygon/admindek/default/index.html --> sidenav, elements, modals, toolbar, session timeout
+
+ - https://codepen.io/trooperandz/pen/EOgJvg look & feel
+ - https://codepen.io/olsiodobashi/pen/BLBdgr dark theme

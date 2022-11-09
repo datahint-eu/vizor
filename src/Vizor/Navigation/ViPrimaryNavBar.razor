@@ -1,0 +1,63 @@
+﻿@inherits ViComponentBase
+
+<header class="navbar navbar-expand-md d-print-none @ColorConverter.ToNavBarColor(Color) @ToPlacement(Placement) @CssClass" @attributes="AdditionalAttributes">
+	<div class="container-xl">
+		@Toggler
+		@Brand
+		
+		@if (MenuItems != null)
+		{
+			<div class="collapse navbar-collapse" id="@Id">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					@MenuItems
+				</ul>
+			</div>
+		}
+		@if (End != null)
+		{
+			<div class="navbar-nav flex-row order-md-last">
+				@End
+			</div>
+		}
+	</div>
+</header>
+
+@code {
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
+
+	//TODO: nav-scrollable
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public NavbarPlacement Placement { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? Brand { get; set; }
+
+	[Parameter]
+	public RenderFragment? Toggler { get; set; }
+
+	[Parameter]
+	public RenderFragment? MenuItems { get; set; }
+
+	[Parameter]
+	public RenderFragment? End { get; set; }
+
+	public static string? ToPlacement(NavbarPlacement placement)
+	{
+		return placement switch
+		{
+			NavbarPlacement.FixedTop => "fixed-top",
+			NavbarPlacement.FixedBottom => "fixed-bottom",
+			NavbarPlacement.StickyTop => "sticky-top",
+			NavbarPlacement.StickyBottom => "sticky-bottom",
+			_ => null
+		};
+	}
+}

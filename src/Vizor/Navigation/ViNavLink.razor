@@ -3,14 +3,26 @@
 <li class="nav-item">
 	@if (IsActive)
 	{
-		<a class="nav-link active @CssClass" aria-current="page" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled">
+		<a class="nav-link active @CssClass" aria-current="page" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled.ToConditionalAttribute()">
+			@if (Icon != null)
+			{
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+					@Icon
+				</span>
+			}
 			@ChildContent
 			@Text
 		</a>
 	}
 	else
 	{
-		<a class="nav-link @CssClass" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled">
+		<a class="nav-link @CssClass" @attributes="AdditionalAttributes" href="@Link" disabled="@IsDisabled.ToConditionalAttribute()">
+			@if (Icon != null)
+			{
+				<span class="nav-link-icon d-md-none d-lg-inline-block">
+					@Icon
+				</span>
+			}
 			@ChildContent
 			@Text
 		</a>
@@ -32,6 +44,9 @@
 
 	[Parameter, EditorRequired]
 	public string Link { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
 
 	[Parameter]
 	public bool IsActive { get; set; }

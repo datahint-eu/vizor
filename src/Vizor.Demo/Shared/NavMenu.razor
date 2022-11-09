@@ -1,29 +1,34 @@
-﻿<ViNavBar Id="mainNav" Color="@ThemeColor.Dark" CssClass="navbar-dark">
+﻿<ViPrimaryNavBar Id="mainNav" Color="@ThemeColor.Light" CssClass="">
 	<!-- TODO: navbar-dark must be integrated -->
 	<Brand>
-		<ViNavBrand Link="#">Vizor Demo</ViNavBrand>
+		<ViNavBrand Link="#"><ViNavBrandImage Source="./img/logo_bw.png" AltText="Vizor" /></ViNavBrand>
 	</Brand>
 	<Toggler>
-		<ViNavToggler />
+		<ViNavToggler NavBarId="navbar-sec" />
 	</Toggler>
-	<Start>
-		<ViNavDropdown ItemText="Input" MenuId="input">
-			<ViDropdownMenu Id="input">
+</ViPrimaryNavBar>
+<ViSecondaryNavBar Id="navbar-sec">
+	<MenuItems>
+		<ViNavDropdown ItemText="Input" Icon="@GetIcon(TablerSvgIcon.Forms)">
+			<ViDropdownMenu>
 				<ViDropdownItem Link="/doc/vizor/input/button">Button</ViDropdownItem>
 				<ViDropdownItem Link="/doc/vizor/input/select">Select</ViDropdownItem>
 				<ViDropdownDivider />
 				<ViDropdownItem Link="/doc/vizor/input/form">Form</ViDropdownItem>
 			</ViDropdownMenu>
 		</ViNavDropdown>
-		<ViNavDropdown ItemText="Info" MenuId="info">
-			<ViDropdownMenu Id="info">
+		<ViNavDropdown ItemText="Info" Icon="@GetIcon(TablerSvgIcon.Tooltip)">
+			<ViDropdownMenu>
 				<ViDropdownItem Link="/doc/vizor/info/alert">Alert</ViDropdownItem>
 				<ViDropdownItem Link="/doc/vizor/info/modals">Modals</ViDropdownItem>
 			</ViDropdownMenu>
 		</ViNavDropdown>
-		<ViNavLink Link="/doc/vizor/datagrid">DataGrid</ViNavLink>
-	</Start>
-</ViNavBar>
+		<ViNavLink Link="/doc/vizor/datagrid" Icon="@GetIcon(TablerSvgIcon.Table)">DataGrid</ViNavLink>
+	</MenuItems>
+	<End>
+		<ViNavSearch />
+	</End>
+</ViSecondaryNavBar>
 
 @code {
 	private bool collapseNavMenu = true;
@@ -33,5 +38,10 @@
 	private void ToggleNavMenu()
 	{
 		collapseNavMenu = !collapseNavMenu;
+	}
+
+	private RenderFragment GetIcon(IconData icon)
+	{
+		return @<TablerSvgIcon Icon="@icon" />;
 	}
 }

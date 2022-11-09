@@ -1,0 +1,32 @@
+﻿<div class="navbar-expand-md">
+	<div class="navbar-collapse collapse" id="@Id">
+		<div class="navbar navbar-light">
+			<div class="container-xl">
+				@if (MenuItems != null)
+				{
+					<ul class="navbar-nav">
+						@MenuItems
+					</ul>
+				}
+				@if (End != null)
+				{
+					<div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+						@End
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+@code {
+
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? MenuItems { get; set; }
+
+	[Parameter]
+	public RenderFragment? End { get; set; }
+
+}
