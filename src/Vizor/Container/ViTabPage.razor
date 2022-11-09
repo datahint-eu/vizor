@@ -1,0 +1,43 @@
+﻿@inherits ViChildBase
+@implements IViChild
+
+<li class="nav-item" role="presentation">
+	<a class="nav-link @(IsActive ? "active" : "")" data-bs-toggle="tab" href="@("#" + Id)" aria-selected="@IsActive">
+		@Icon
+		@Title
+		@TitleText
+	</a>
+</li>
+
+@code {
+
+	//TODO: tabindex="-1" if not selected ?
+
+	[Parameter]
+	public RenderFragment? Title { get; set; }
+
+	[Parameter]
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (ChildSelector == null)
+			throw new Exception(); //TODO: correct exception type
+
+		if (Title == null && TitleText == null)
+			throw new ArgumentException($"Parameter {nameof(Title)} or {nameof(TitleText)} must be set in the {nameof(ViTabPage)} component");
+
+		await ChildSelector.AddChild(this);
+	}
+
+	private async Task ActivateAsync()
+	{
+		if (ChildSelector == null)
+			return;
+
+		await ChildSelector.ActivateChild(this);
+	}
+}
