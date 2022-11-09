@@ -1,0 +1,101 @@
+﻿@page "/doc/vizor/info/value_list"
+@using Vizor.Icons.Tabler
+
+<ViPage>
+	<ViPageHeader CategoryText="Informational">Value List</ViPageHeader>
+	<ViPageBody>
+
+		<div class="col-6">
+			<ViCard CssClass="mb-2">
+				<Header><ViCardTitle>Value List</ViCardTitle></Header>
+				<Body>
+					<ViValueList Style="@ValueListStyle.List">
+						<ViSmartValue ValueExpr="() => autoLabel" />
+						<ViSmartValue ValueExpr="() => __auto_Label2" />
+
+						<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human)" FormatString="H" />
+						<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human+)" FormatString="H+" />
+
+						<ViSmartValue ValueExpr="() => b" Label="Custom Bool" FormatString="Over 18,Under 18" />
+
+						<ViSmartValue ValueExpr="() => rightAlign" Label="Enum with font icon" FontIcon="ti ti-layout-align-right" />
+						<ViSmartValue ValueExpr="() => leftAlign" Label="Enum with SVG icon">
+							<Icon><TablerSvgIcon CssClass="me-2" Icon="TablerSvgIcon.LayoutAlignLeft" /></Icon>
+						</ViSmartValue>
+
+						<ViSmartValue ValueExpr="() => Property" />
+					</ViValueList>
+				</Body>
+			</ViCard>
+		</div>
+
+		@foreach (var style in styles)
+		{
+			<ViCard CssClass="mb-2">
+				<Header><ViCardTitle>@style</ViCardTitle></Header>
+				<Body>
+					<ViValueList Style="@style">
+						<ViSmartValue ValueExpr="() => b" Label="Boolean" />
+						<ViSmartValue ValueExpr="() => s" Label="Short" />
+						<ViSmartValue ValueExpr="() => us" Label="UShort" />
+						<ViSmartValue ValueExpr="() => i" Label="Int" />
+						<ViSmartValue ValueExpr="() => ui" Label="Uint" />
+						<ViSmartValue ValueExpr="() => l" Label="Long" />
+						<ViSmartValue ValueExpr="() => ul" Label="Ulong" />
+						<ViSmartValue ValueExpr="() => f" Label="Float" />
+						<ViSmartValue ValueExpr="() => d" Label="Double" />
+						<ViSmartValue ValueExpr="() => dec" Label="Decimal" />
+
+						<ViSmartValue ValueExpr="() => dt" Label="DateTime" />
+						<ViSmartValue ValueExpr="() => dto" Label="DateTimeOffset" />
+						<ViSmartValue ValueExpr="() => dat" Label="DateOnly" />
+						<ViSmartValue ValueExpr="() => to" Label="TimeOnly" />
+						<ViSmartValue ValueExpr="() => ts" Label="TimeSpan" />
+
+						<ViSmartValue ValueExpr="() => str" Label="String" />
+						<ViSmartValue ValueExpr="() => g" Label="Guid" />
+
+						<ViSmartValue ValueExpr="() => n" Label="Null" />
+					</ViValueList>
+				</Body>
+			</ViCard>
+		}
+	</ViPageBody>
+</ViPage>
+
+
+
+@code {
+
+	private List<ValueListStyle> styles = new List<ValueListStyle> { ValueListStyle.List, ValueListStyle.Grid };
+
+	private string autoLabel = "Value";
+	private string __auto_Label2 = "Value";
+
+	private Align leftAlign = Align.Left;
+	private Align rightAlign = Align.Right;
+
+	private bool b = true;
+	private short s = short.MaxValue;
+	private ushort us = ushort.MaxValue;
+	private int i = int.MaxValue;
+	private uint ui = uint.MaxValue;
+	private long l = long.MaxValue;
+	private ulong ul = ulong.MaxValue;
+	private float f = float.MaxValue;
+	private double d = double.MaxValue;
+	private decimal dec = 100m;
+
+	private string str = "SmartValue";
+	private Guid g = Guid.NewGuid();
+
+	private DateTime dt = DateTime.UtcNow;
+	private DateTimeOffset dto = DateTimeOffset.UtcNow;
+	private DateOnly dat = DateOnly.FromDateTime(DateTime.Now);
+	private TimeOnly to = TimeOnly.FromDateTime(DateTime.Now);
+	private TimeSpan ts = new TimeSpan(12, 00, 00);
+
+	private object? n = null;
+
+	private string Property => "prop";
+}

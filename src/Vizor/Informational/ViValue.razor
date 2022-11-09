@@ -1,0 +1,49 @@
+﻿@if (Style == ValueListStyle.List)
+{
+	<dt class="col-5">
+		@Icon
+		@if (!string.IsNullOrEmpty(FontIcon))
+		{
+			<i class="icon @FontIcon me-2" />
+		}
+		@Label
+	</dt>
+	<dd class="col-7">@ChildContent</dd>
+}
+else if (Style == ValueListStyle.Grid)
+{
+	<div class="datagrid-item">
+		<div class="datagrid-title">
+			@Icon
+			@if (!string.IsNullOrEmpty(FontIcon))
+			{
+			   <i class="icon @FontIcon me-2" />
+			}
+			@Label
+		</div>
+		<div class="datagrid-content">@ChildContent</div>
+	</div>
+}
+else
+{
+	throw new ArgumentException($"{nameof(ValueListStyle)} {Style} not supported");
+}
+
+@code {
+
+	[CascadingParameter(Name = "ValueListStyle")]
+	public ValueListStyle Style { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Label { get; set; } = default!;
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter]
+	public string? FontIcon { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
+
+}

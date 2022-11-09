@@ -1,0 +1,263 @@
+﻿@using Humanizer
+@using System.Reflection
+@using System.Linq.Expressions;
+
+<ViValue Label="@Label" FontIcon="@FontIcon" Icon="@Icon">
+	@if (value == null)
+	{
+		<text>&nbsp;</text>
+	}
+	else
+	{
+		@Render(value, FormatString)
+	}
+</ViValue>
+
+@code {
+
+	private object? value;
+
+	private const string DefaultDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+	private const string DefaultDateTimeOffsetFormat = "yyyy-MM-dd HH:mm:ss Z";
+	private const string DefaultDateOnlyFormat = "yyyy-MM-dd";
+	private const string DefaultTimeOnlyFormat = "HH:mm:ss";
+	private const string DefaultTimeSpanFormat = "c";
+
+	[Parameter]
+	public string? Label { get; set; }
+
+	[Parameter, EditorRequired]
+	public Expression<Func<object?>> ValueExpr { get; set; } = default!;
+
+	[Parameter]
+	public string? FontIcon { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
+
+	[Parameter]
+	public string? FormatString { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		// see https://stackoverflow.com/a/672212/51650
+		var member = ValueExpr.Body as MemberExpression;
+		if (member == null)
+		{
+			var unary = ValueExpr.Body as UnaryExpression;
+			member = unary?.Operand as MemberExpression;
+
+			if (member == null)
+			{
+				throw new ArgumentException(string.Format("Expression '{0}' refers to a method, not a property.", ValueExpr.ToString()));
+			}
+		}
+
+		string memberName;
+		if (member.Member is PropertyInfo propInfo)
+		{
+			memberName = propInfo.Name;
+			value = ValueExpr.Compile().Invoke();
+		}
+		else if (member.Member is FieldInfo fieldInfo)
+		{
+			memberName = fieldInfo.Name;
+			value = ValueExpr.Compile().Invoke();
+		}
+		else
+		{
+			throw new ArgumentException(string.Format("Expression '{0}' does not refer to a field or property.", ValueExpr.ToString()));
+		}
+
+		// auto determine a label if not set
+		if (string.IsNullOrEmpty(Label))
+			Label = memberName.ToLabel();
+	}
+
+	private static RenderFragment Render(object? value, string? formatString)
+	{
+		//TODO: other types ?
+
+		switch (value)
+		{
+			case string s: return Render(s);
+
+			case bool b: return Render(b, formatString);
+			case byte by: return Render((ulong)by, formatString);
+			case sbyte sb: return Render((long)sb, formatString);
+			case short s: return Render((long)s, formatString);
+			case ushort us: return Render((ulong)us, formatString);
+			case int i: return Render((long)i, formatString);
+			case uint ui: return Render((ulong)ui, formatString);
+			case long l: return Render(l, formatString);
+			case ulong ul: return Render(ul, formatString);
+			case decimal dec: return Render(dec, formatString);
+
+			case float f: return Render((double)f, formatString);
+			case double d: return Render(d, formatString);
+
+			case Guid g: return Render(g);
+			case DateTime dt: return Render(dt, formatString);
+			case DateTimeOffset dto: return Render(dto, formatString);
+			case DateOnly d: return Render(d, formatString);
+			case TimeOnly t: return Render(t, formatString);
+			case TimeSpan ts: return Render(ts, formatString);
+
+			default:
+				return Render(value?.ToString());
+		}
+	}
+
+	private static RenderFragment Render(string? val)
+	{
+		return @<text>@val</text>;
+	}
+
+	private static RenderFragment Render(Guid val)
+	{
+		return @<text>@val</text>;
+	}
+
+	private static RenderFragment Render(bool val, string? formatString)
+	{
+		// the FormatString can be in the format "YesText,NoText" or "YesText"
+
+		var chunks = (formatString ?? string.Empty).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+		if (chunks.Length == 2)
+		{
+			var yesText = chunks[0];
+			var noText = chunks[1];
+			return @<ViYesNo Value="@val" YesText="@yesText" NoText="@noText" />;
+		}
+		else if (chunks.Length == 1)
+		{
+			var yesText = chunks[0];
+			return @<ViYesNo Value="@val" YesText="@yesText" />;
+		}
+
+		return @<ViYesNo Value="@val" />;
+	}
+
+	private static RenderFragment Render(long val, string? formatString)
+	{
+		if (formatString == "C") // 'Currency' format: treat value as cents
+		{
+			decimal decVal = (decimal)val / 100m;
+			return @<text>@decVal.ToString("C")</text>;
+		}
+		else if (!string.IsNullOrEmpty(formatString))
+		{
+			return @<text>@val.ToString(formatString)</text>;
+		}
+		else
+		{
+			return @<text>@val</text>;
+		}
+	}
+
+	private static RenderFragment Render(ulong val, string? formatString)
+	{
+		if (formatString == "C") // 'Currency' format: treat value as cents
+		{
+			decimal decVal = (decimal)val / 100m;
+			return @<text>@decVal.ToString("C")</text>;
+		}
+		else if (!string.IsNullOrEmpty(formatString))
+		{
+			return @<text>@val.ToString(formatString)</text>;
+		}
+		else
+		{
+			return @<text>@val</text>;
+		}
+	}
+
+	private static RenderFragment Render(double val, string? formatString)
+	{
+		if (!string.IsNullOrEmpty(formatString))
+		{
+			return @<text>@val.ToString(formatString)</text>;
+		}
+		else
+		{
+			return @<text>@val</text>;
+		}
+	}
+
+	private static RenderFragment Render(decimal val, string? formatString)
+	{
+		// assume currency formatting
+		if (formatString == null)
+			formatString = "C";
+
+		if (!string.IsNullOrEmpty(formatString))
+		{
+			return @<text>@val.ToString(formatString)</text>;
+		}
+		else
+		{
+			return @<text>@val</text>;
+		}
+	}
+
+	private static RenderFragment Render(DateTime val, string? formatString)
+	{
+		// visualize as local time //TODO: ShowUtc parameter to disable this ?
+		if (val.Kind == DateTimeKind.Utc)
+			val = val.ToLocalTime();
+
+		if (formatString == "H")
+		{
+			return @<text>@val.Humanize()</text>;
+		}
+		else if (formatString == "H+")
+		{
+			return @<text>@val.Humanize() (@val.ToString(DefaultDateTimeFormat))</text>;
+		}
+
+		var fmt = formatString ?? DefaultDateTimeFormat;
+		return @<text>@val.ToString(fmt)</text>;
+	}
+
+	private static RenderFragment Render(DateTimeOffset val, string? formatString)
+	{
+		if (formatString == "H")
+		{
+			return @<text>@val.Humanize()</text>;
+		}
+		else if (formatString == "H+")
+		{
+			return @<text>@val.Humanize() (@val.ToString(DefaultDateTimeOffsetFormat))</text>;
+		}
+
+		var fmt = formatString ?? DefaultDateTimeOffsetFormat;
+		return @<text>@val.ToString(fmt)</text>;
+	}
+
+	private static RenderFragment Render(DateOnly val, string? formatString)
+	{
+		if (formatString == "H")
+		{
+			return @<text>@val.Humanize()</text>;
+		}
+		else if (formatString == "H+")
+		{
+			return @<text>@val.Humanize() (@val.ToString(DefaultDateOnlyFormat))</text>;
+		}
+
+		var fmt = formatString ?? DefaultDateOnlyFormat;
+		return @<text>@val.ToString(fmt)</text>;
+	}
+
+	private static RenderFragment Render(TimeOnly val, string? formatString)
+	{
+		var fmt = formatString ?? DefaultTimeOnlyFormat;
+		return @<text>@val.ToString(fmt)</text>;
+	}
+
+	private static RenderFragment Render(TimeSpan val, string? formatString)
+	{
+		var fmt = formatString ?? DefaultTimeSpanFormat;
+		return @<text>@val.ToString(fmt)</text>;
+	}
+}

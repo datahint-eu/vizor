@@ -1,0 +1,29 @@
+﻿@inherits ViComponentBase
+
+<CascadingValue IsFixed="true" Value="@Style" Name="ValueListStyle">
+	@if (Style == ValueListStyle.List)
+	{
+		<dl class="row @CssClass" @attributes="@AdditionalAttributes">
+			@ChildContent
+		</dl>
+	}
+	else if (Style == ValueListStyle.Grid)
+	{
+		<div class="datagrid @CssClass" @attributes="@AdditionalAttributes">
+			@ChildContent
+		</div>
+	}
+	else
+	{
+		throw new ArgumentException($"{nameof(ValueListStyle)} {Style} not supported");
+	}
+</CascadingValue>
+
+@code {
+
+	[Parameter]
+	public ValueListStyle Style { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+}

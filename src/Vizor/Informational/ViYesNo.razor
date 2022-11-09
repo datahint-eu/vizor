@@ -1,0 +1,28 @@
+﻿@inherits ViComponentBase
+
+@if (Value)
+{
+	<span class="text-success @CssClass">
+		<TablerSvgIcon Icon="TablerSvgIcon.Check" />
+		@YesText
+	</span>
+}
+else
+{
+	<span class="text-danger @CssClass">
+		<TablerSvgIcon Icon="TablerSvgIcon.X" />
+		@NoText
+	</span>
+}
+
+@code {
+
+	[Parameter, EditorRequired]
+	public bool Value { get; set; }
+
+	[Parameter]
+	public string YesText { get; set; } = "Yes";
+
+	[Parameter]
+	public string NoText { get; set; } = "No";
+}
