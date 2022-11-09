@@ -1,8 +1,11 @@
 ﻿@using Humanizer
 @using System.Reflection
 @using System.Linq.Expressions;
+@using System.Text.Json;
+@using System.Xml.Serialization;
+@using System.Xml;
 
-<ViValue Label="@Label" FontIcon="@FontIcon" Icon="@Icon">
+<ViValue Label="@(Label ?? "")" FontIcon="@FontIcon" Icon="@Icon">
 	@if (value == null)
 	{
 		<text>&nbsp;</text>
@@ -80,6 +83,7 @@
 
 		switch (value)
 		{
+			case char c: return Render(c.ToString());
 			case string s: return Render(s);
 
 			case bool b: return Render(b, formatString);
@@ -104,7 +108,7 @@
 			case TimeSpan ts: return Render(ts, formatString);
 
 			default:
-				return Render(value?.ToString());
+				return RenderObject(value, formatString);
 		}
 	}
 
@@ -259,5 +263,28 @@
 	{
 		var fmt = formatString ?? DefaultTimeSpanFormat;
 		return @<text>@val.ToString(fmt)</text>;
+	}
+
+	private static RenderFragment RenderObject(object? val, string? formatString)
+	{
+		if (val == null)
+			return @<text></text>;
+
+		switch (formatString)
+		{
+			case "json":
+				var jsonOpts = new JsonSerializerOptions() { WriteIndented = true };
+				return @<pre>@JsonSerializer.Serialize(val, jsonOpts)</pre>;
+			case "xml":
+				var serializer = new XmlSerializer(val.GetType());
+				var stringWriter = new StringWriter();
+				using (var writer = XmlWriter.Create(stringWriter, new XmlWriterSettings() { Indent = true }))
+				{
+					serializer.Serialize(writer, val);
+					return @<pre>@stringWriter.ToString()</pre>;
+				}
+			default:
+				return @<text>@val.ToString()</text>;
+		}
 	}
 }

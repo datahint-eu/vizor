@@ -5,29 +5,43 @@
 	<ViPageHeader CategoryText="Informational">Value List</ViPageHeader>
 	<ViPageBody>
 
-		<div class="col-6">
-			<ViCard CssClass="mb-2">
-				<Header><ViCardTitle>Value List</ViCardTitle></Header>
-				<Body>
-					<ViValueList Style="@ValueListStyle.List">
-						<ViSmartValue ValueExpr="() => autoLabel" />
-						<ViSmartValue ValueExpr="() => __auto_Label2" />
+		<ViCardRow>
+			<div class="col-5 d-flex align-items-stretch">
+				<ViCard CssClass="mb-2">
+					<Header><ViCardTitle>Value List</ViCardTitle></Header>
+					<Body>
+						<ViValueList Style="@ValueListStyle.List">
+							<ViSmartValue ValueExpr="() => autoLabel" />
+							<ViSmartValue ValueExpr="() => __auto_Label2" />
 
-						<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human)" FormatString="H" />
-						<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human+)" FormatString="H+" />
+							<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human)" FormatString="H" />
+							<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human+)" FormatString="H+" />
 
-						<ViSmartValue ValueExpr="() => b" Label="Custom Bool" FormatString="Over 18,Under 18" />
+							<ViSmartValue ValueExpr="() => b" Label="Custom Bool" FormatString="Over 18,Under 18" />
 
-						<ViSmartValue ValueExpr="() => rightAlign" Label="Enum with font icon" FontIcon="ti ti-layout-align-right" />
-						<ViSmartValue ValueExpr="() => leftAlign" Label="Enum with SVG icon">
-							<Icon><TablerSvgIcon CssClass="me-2" Icon="TablerSvgIcon.LayoutAlignLeft" /></Icon>
-						</ViSmartValue>
+							<ViSmartValue ValueExpr="() => rightAlign" Label="Enum with font icon" FontIcon="ti ti-layout-align-right" />
+							<ViSmartValue ValueExpr="() => leftAlign" Label="Enum with SVG icon">
+								<Icon><TablerSvgIcon CssClass="me-2" Icon="TablerSvgIcon.LayoutAlignLeft" /></Icon>
+							</ViSmartValue>
 
-						<ViSmartValue ValueExpr="() => Property" />
-					</ViValueList>
-				</Body>
-			</ViCard>
-		</div>
+							<ViSmartValue ValueExpr="() => Property" />
+						</ViValueList>
+					</Body>
+				</ViCard>
+			</div>
+
+			<div class="col-7 d-flex align-items-stretch">
+				<ViCard CssClass="mb-2">
+					<Header><ViCardTitle>Value List</ViCardTitle></Header>
+					<Body>
+						<ViValueList Style="@ValueListStyle.List" LabelWidth="2">
+							<ViSmartValue ValueExpr="() => sampleClass" Label="Json" FormatString="json" />
+							<ViSmartValue ValueExpr="() => sampleClass" Label="XML" FormatString="xml" />
+						</ViValueList>
+					</Body>
+				</ViCard>
+			</div>
+		</ViCardRow>
 
 		@foreach (var style in styles)
 		{
@@ -98,4 +112,13 @@
 	private object? n = null;
 
 	private string Property => "prop";
+
+	private SampleClass sampleClass = new();
+
+	public class SampleClass
+	{
+		public string Name { get; set; } = "Name";
+
+		public int Age { get; set; } = 18;
+	}
 }

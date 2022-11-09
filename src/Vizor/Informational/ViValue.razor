@@ -1,6 +1,6 @@
 ﻿@if (Style == ValueListStyle.List)
 {
-	<dt class="col-5">
+	<dt class="col-@LabelWidth">
 		@Icon
 		@if (!string.IsNullOrEmpty(FontIcon))
 		{
@@ -8,7 +8,7 @@
 		}
 		@Label
 	</dt>
-	<dd class="col-7">@ChildContent</dd>
+	<dd class="col-@ValueWidth">@ChildContent</dd>
 }
 else if (Style == ValueListStyle.Grid)
 {
@@ -31,8 +31,13 @@ else
 
 @code {
 
+	private int ValueWidth => 12 - LabelWidth;
+
 	[CascadingParameter(Name = "ValueListStyle")]
 	public ValueListStyle Style { get; set; }
+
+	[CascadingParameter(Name = "LabelWidth")]
+	public int LabelWidth { get; set; }
 
 	[Parameter, EditorRequired]
 	public string Label { get; set; } = default!;
@@ -45,5 +50,4 @@ else
 
 	[Parameter]
 	public RenderFragment? Icon { get; set; }
-
 }
