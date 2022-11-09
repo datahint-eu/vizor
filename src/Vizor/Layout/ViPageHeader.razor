@@ -1,15 +1,76 @@
 ﻿@inherits ViComponentBase
 
-<h1 class="@CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
-	@Text
-</h1>
+<div class="page-header @CssClass" @attributes="@AdditionalAttributes">
+	<div class="row align-items-center mw-100">
+		@if (Avatar != null)
+		{
+			<div class="col-auto">
+				@Avatar
+			</div>
+		}
+		<div class="col">
+			@if (Breadcrumb != null)
+			{
+				<div class="mb-1">
+					<Vizor.Navigation.ViBreadcrumb>
+						@Breadcrumb
+					</Vizor.Navigation.ViBreadcrumb>
+				</div>
+			}
+			@if (Category != null && CategoryText != null)
+			{
+				<div class="page-pretitle">
+					@Category
+					@CategoryText
+				</div>
+			}
+			<h2 class="page-title">
+				@Title
+				@TitleText
+			</h2>
+			@if (SubTitle != null)
+			{
+				<div class="page-subtitle">
+					<div class="row">
+						@SubTitle
+					</div>
+				</div>
+			}
+		</div>
+		@if (Buttons != null)
+		{
+			<div class="col-auto ms-auto d-print-none">
+				<div class="btn-list">
+					@Buttons
+				</div>
+			</div>
+		}
+	</div>
+</div>
 
 @code {
 
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? Title { get; set; }
 
 	[Parameter]
-	public string? Text { get; set; }
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Category { get; set; }
+
+	[Parameter]
+	public string? CategoryText { get; set; }
+
+	[Parameter]
+	public RenderFragment? SubTitle { get; set; }
+
+	[Parameter]
+	public RenderFragment? Buttons { get; set; }
+
+	[Parameter]
+	public RenderFragment? Avatar { get; set; }
+
+	[Parameter]
+	public RenderFragment? Breadcrumb { get; set; }
 }
