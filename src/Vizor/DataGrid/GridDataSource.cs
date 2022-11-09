@@ -1,10 +1,14 @@
-﻿using Vizor.Data;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+using Vizor.Data;
+using Vizor.DataGrid.Wrappers;
+using Vizor.Informational;
 
 namespace Vizor.DataGrid;
 
 internal class GridDataSource<TItem>
 {
-	private IGridDataSourceWrapper loader;
+	private IGridDataSourceWrapper<TItem> loader;
 
 	public GridDataSource(object? dataSource)
 	{
@@ -12,88 +16,38 @@ internal class GridDataSource<TItem>
 
 		if (dataSource is null)
 		{
-			loader = new EmptyGridDataSourceWrapper();
+			loader = new EmptyGridDataSourceWrapper<TItem>();
 		}
 		else if (dataSource is IReadOnlyList<TItem> list)
 		{
-			loader = new ListGridDataSourceWrapper(list);
+			loader = new ListGridDataSourceWrapper<TItem>(list);
+		}
+		else if (dataSource is TItem[] arr)
+		{
+			loader = new ArrayGridDataSourceWrapper<TItem>(arr);
 		}
 		else if (dataSource is IDataSource<TItem> source)
 		{
-			loader = new GridDataSourceWrapper(source);
+			loader = new NonSortableDataSourceWrapper<TItem>(source);
 		}
 		else
 		{
-			throw new ArgumentException($"DataSource must be of type {nameof(IReadOnlyList<TItem>)} or ...");
+			//TODO: all types
+			throw new ArgumentException($"DataSource must be of type {typeof(IReadOnlyList<TItem>)} or {typeof(IDataSource<TItem>)} or {typeof(TItem[])} or ...");
 		}
+
+		//TODO: sortable data source --> SupportsSorting = true
+		//TODO: if List or arr[] --> reflection based sorting
 	}
 
 	public object? DataSource { get; }
 
+	public bool SupportsSorting => loader.SupportsSorting;
+
 	public Task<int> Count() => loader.Count();
 
-	public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
+	public Task<ICollection<TItem>> LoadDataAsync(int offset, int count, Expression<Func<TItem, object?>>? sortExpr, ViSortOrder sortOrder)
 	{
-		return loader.LoadDataAsync(offset, count);
-	}
-
-	internal interface IGridDataSourceWrapper
-	{
-		Task<int> Count();
-
-		Task<ICollection<TItem>> LoadDataAsync(int offset, int count);
-	}
-
-	internal class EmptyGridDataSourceWrapper : IGridDataSourceWrapper
-	{
-		public Task<int> Count() => Task.FromResult(0);
-
-		public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
-		{
-			return Task.FromResult((ICollection<TItem>)new List<TItem>(0));
-		}
-	}
-
-	internal class ListGridDataSourceWrapper : IGridDataSourceWrapper
-	{
-		private readonly IReadOnlyList<TItem> list;
-
-		public ListGridDataSourceWrapper(IReadOnlyList<TItem> list)
-		{
-			this.list = list;
-		}
-
-		public Task<int> Count() => Task.FromResult(list.Count);
-
-		public Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
-		{
-			if (offset >= list.Count)
-				return Task.FromResult((ICollection<TItem>)new List<TItem>(0));
-
-			var result = new List<TItem>(count);
-			var index = offset;
-			while (index < list.Count && result.Count < count)
-			{
-				result.Add(list[index]);
-				++index;
-			}
-
-			return Task.FromResult((ICollection<TItem>)result);
-		}
-	}
-
-	internal class GridDataSourceWrapper : IGridDataSourceWrapper
-	{
-		private readonly IDataSource<TItem> source;
-
-		public GridDataSourceWrapper(IDataSource<TItem> source)
-		{
-			this.source = source;
-		}
-
-		public Task<int> Count() => source.Count();
-
-		public async Task<ICollection<TItem>> LoadDataAsync(int offset, int count)
-			=> await source.Load(offset, count);
+		return loader.LoadDataAsync(offset, count, sortExpr, sortOrder);
 	}
 }

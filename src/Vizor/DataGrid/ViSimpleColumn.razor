@@ -13,6 +13,12 @@
 	[Parameter]
 	public bool IsSortable { get; set; }
 
+	[Parameter]
+	public ViSortOrder SortOrder { get; set; } = ViSortOrder.Unspecified;
+
+	[Parameter]
+	public Expression<Func<TItem, object?>>? SortExpr { get; set; }
+
 	[Parameter, EditorRequired]
 	public string Name { get; set; } = default!;
 
@@ -31,6 +37,16 @@
 	protected override void OnInitialized()
 	{
 		Parent.AddColumn(this);
+	}
+
+	protected override void OnParametersSet()
+	{
+		if (IsSortable == true && SortExpr == null) {
+			//TODO: SortExpr = ValueExpr;
+
+			if (SortExpr == null)
+				throw new ArgumentException($"Column '{Name}' is marked {nameof(IsSortable)}, but {nameof(SortExpr)} is not set and could not be derived from ValueExpr.");
+		}
 	}
 
 	public RenderFragment? Render(TItem? item)

@@ -17,6 +17,7 @@
 							<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human)" FormatString="H" />
 							<ViSmartValue ValueExpr="() => dt" Label="DateTime (Human+)" FormatString="H+" />
 
+							<ViSmartValue ValueExpr="() => bn" Label="Nullable Bool" />
 							<ViSmartValue ValueExpr="() => b" Label="Custom Bool" FormatString="Over 18,Under 18" />
 
 							<ViSmartValue ValueExpr="() => rightAlign" Label="Enum with font icon" FontIcon="ti ti-layout-align-right" />
@@ -89,6 +90,7 @@
 	private Align leftAlign = Align.Left;
 	private Align rightAlign = Align.Right;
 
+	private bool? bn = false;
 	private bool b = true;
 	private short s = short.MaxValue;
 	private ushort us = ushort.MaxValue;

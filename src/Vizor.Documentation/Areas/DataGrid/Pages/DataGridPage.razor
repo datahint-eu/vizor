@@ -5,18 +5,23 @@
 	<ViPageHeader CategoryText="DataGrid">DataGrid</ViPageHeader>
 	<ViPageBody>
 
-		<ViDataGrid TItem="Car" DataSource="@cars" Title="Cars" UsePagination="false">
-			<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" />
-			<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" />
-			<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" />
+		<ViDataGrid TItem="Car" DataSource="@cars" TitleText="Cars" UsePagination="false">
+			<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" IsSortable="true" SortExpr="(item) => item.Brand" />
+			<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" IsSortable="true" SortExpr="(item) => item.Model" />
+			<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" IsSortable="true" SortExpr="(item) => item.Price" />
 		</ViDataGrid>
 
-		<ViDataGrid CssClass="mt-2" TItem="UserAccount" DataSource="@users" Title="Users" UsePagination="true">
-			<ViSimpleColumn TItem="UserAccount" Name="Index" ValueExpr="(item) => item.Index" />
-			<ViSimpleColumn TItem="UserAccount" Name="First Name" ValueExpr="(item) => item.FirstName" />
-			<ViSimpleColumn TItem="UserAccount" Name="Last Name" ValueExpr="(item) => item.LastName" />
-			<ViSimpleColumn TItem="UserAccount" Name="Email" ValueExpr="(item) => item.Email" />
-			<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" />
+		<ViDataGrid CssClass="mt-2" TItem="UserAccount" DataSource="@users" TitleText="Users" UsePagination="true">
+			<Header>
+				<div class="text-muted">1 second delay to simulate loading</div>
+			</Header>
+			<ChildContent>
+				<ViSimpleColumn TItem="UserAccount" Name="Index" ValueExpr="(item) => item.Index" IsSortable="true" SortExpr="(item) => item.Index" />
+				<ViSimpleColumn TItem="UserAccount" Name="First Name" ValueExpr="(item) => item.FirstName" IsSortable="true" SortExpr="(item) => item.FirstName" />
+				<ViSimpleColumn TItem="UserAccount" Name="Last Name" ValueExpr="(item) => item.LastName" IsSortable="true" SortExpr="(item) => item.LastName" />
+				<ViSimpleColumn TItem="UserAccount" Name="Email" ValueExpr="(item) => item.Email" IsSortable="true" SortExpr="(item) => item.Email" />
+				<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" IsSortable="true" SortExpr="(item) => item.Age" />
+			</ChildContent>
 		</ViDataGrid>
 	</ViPageBody>
 </ViPage>
