@@ -4,5 +4,5 @@ public interface IDataSource<TItem>
 {
 	Task<int> Count();
 
-	Task<ICollection<TItem>> Load(int offset, int count);
+	Task<ICollection<TItem>> LoadDataAsync(int offset, int count);
 }

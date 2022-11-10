@@ -62,9 +62,8 @@
 							if (!col.IsVisible)
 								continue;
 
-							if (col.IsSortable)
+							if (col.IsSortable && (dataSource?.SupportsSorting ?? false))
 							{
-								//TODO: also check that the dataSource supports sorting
 								<th><button class="table-sort @GetSortOrderCss(col.SortOrder)" @onclick="async () => await ToggleSortAndReloadData(col)">@col.Name</button></th>
 							}
 							else

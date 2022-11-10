@@ -30,6 +30,7 @@ internal class ListGridDataSourceWrapper<TItem> : IGridDataSourceWrapper<TItem>
 				list = list.OrderByDescending(expr).ToList();
 		}
 
+		// copy 'count' items to the resulting list
 		var result = new List<TItem>(count);
 		var index = offset;
 		while (index < list.Count && result.Count < count)

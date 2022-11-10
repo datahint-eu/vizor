@@ -4,6 +4,8 @@
 
 @code {
 
+	private Func<TItem, object?>? retrieveValueExpr;
+
 	[CascadingParameter(Name = "IViDataGrid")]
 	public IViDataGrid<TItem> Parent { get; set; } = default!;
 
@@ -23,7 +25,7 @@
 	public string Name { get; set; } = default!;
 
 	[Parameter]
-	public Func<TItem, object>? ValueExpr { get; set; }
+	public Expression<Func<TItem, object?>>? ValueExpr { get; set; }
 
 	[Parameter]
 	public string? Format { get; set; }
@@ -42,19 +44,21 @@
 	protected override void OnParametersSet()
 	{
 		if (IsSortable == true && SortExpr == null) {
-			//TODO: SortExpr = ValueExpr;
+			SortExpr = ValueExpr;
 
 			if (SortExpr == null)
 				throw new ArgumentException($"Column '{Name}' is marked {nameof(IsSortable)}, but {nameof(SortExpr)} is not set and could not be derived from ValueExpr.");
 		}
+
+		retrieveValueExpr = ValueExpr?.Compile();
 	}
 
 	public RenderFragment? Render(TItem? item)
 	{
-		if (item == null || ValueExpr == null)
+		if (item == null || retrieveValueExpr == null)
 			return Surround(null);
 
-		var value = ValueExpr.Invoke(item);
+		var value = retrieveValueExpr.Invoke(item);
 		if (value == null)
 			return Surround(null);
 

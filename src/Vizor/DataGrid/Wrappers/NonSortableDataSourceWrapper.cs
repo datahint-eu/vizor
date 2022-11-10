@@ -16,5 +16,5 @@ internal class NonSortableDataSourceWrapper<TItem> : IGridDataSourceWrapper<TIte
 	public Task<int> Count() => source.Count();
 
 	public async Task<ICollection<TItem>> LoadDataAsync(int offset, int count, Expression<Func<TItem, object?>>? sortExpr, ViSortOrder sortOrder)
-		=> await source.Load(offset, count);
+		=> await source.LoadDataAsync(offset, count);
 }

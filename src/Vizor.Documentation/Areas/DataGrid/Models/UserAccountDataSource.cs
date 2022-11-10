@@ -18,7 +18,7 @@ public struct UserAccount
     public int Index { get; set; }
 }
 
-public class UserAccountDataSource : IDataSource<UserAccount>
+public class UserAccountDataSource : ISortableDataSource<UserAccount>
 {
     private const int TotalCount = 500;
     private List<UserAccount> users = new(TotalCount);
@@ -42,9 +42,28 @@ public class UserAccountDataSource : IDataSource<UserAccount>
 
     public Task<int> Count() => Task.FromResult(TotalCount);
 
-    public async Task<ICollection<UserAccount>> Load(int offset, int count)
+    public async Task<ICollection<UserAccount>> LoadDataAsync(int offset, int count, string? propertyName, ViSortOrder sortOrder)
     {
         await Task.Delay(1000);
+
+        switch (propertyName)
+        {
+            case nameof(UserAccount.FirstName):
+				users.Sort((x, y) => x.FirstName.CompareTo(y.FirstName));
+                break;
+			case nameof(UserAccount.LastName):
+				users.Sort((x, y) => x.LastName.CompareTo(y.LastName));
+				break;
+			case nameof(UserAccount.Email):
+				users.Sort((x, y) => x.Email.CompareTo(y.Email));
+				break;
+			case nameof(UserAccount.Age):
+				users.Sort((x, y) => x.Age.CompareTo(y.Age));
+				break;
+			case nameof(UserAccount.Index):
+				users.Sort((x, y) => x.Index.CompareTo(y.Index));
+				break;
+		}
 
         var lst = new List<UserAccount>(count);
         for (int i = offset; i < offset + count; ++i)

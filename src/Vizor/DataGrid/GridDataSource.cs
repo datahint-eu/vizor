@@ -30,14 +30,18 @@ internal class GridDataSource<TItem>
 		{
 			loader = new NonSortableDataSourceWrapper<TItem>(source);
 		}
+		else if (dataSource is ISortableDataSource<TItem> sortableSource)
+		{
+			loader = new SortableDataSourceWrapper<TItem>(sortableSource);
+		}
+		else if (dataSource is ISortableExprDataSource<TItem> sortableExprSource)
+		{
+			loader = new SortableExprDataSourceWrapper<TItem>(sortableExprSource);
+		}
 		else
 		{
-			//TODO: all types
-			throw new ArgumentException($"DataSource must be of type {typeof(IReadOnlyList<TItem>)} or {typeof(IDataSource<TItem>)} or {typeof(TItem[])} or ...");
+			throw new ArgumentException($"DataSource must be of type {typeof(IReadOnlyList<TItem>)} or {typeof(IDataSource<TItem>)} or {typeof(TItem[])} or {typeof(ISortableDataSource<TItem>)} or {typeof(ISortableExprDataSource<TItem>)}");
 		}
-
-		//TODO: sortable data source --> SupportsSorting = true
-		//TODO: if List or arr[] --> reflection based sorting
 	}
 
 	public object? DataSource { get; }
