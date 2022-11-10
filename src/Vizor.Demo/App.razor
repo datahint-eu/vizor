@@ -1,7 +1,6 @@
 ﻿@using System.Reflection
-@using Vizor.Documentation.Areas.Input.Pages
 
-<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@(new Assembly[] { typeof(ButtonPage).Assembly })">
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         @*<FocusOnNavigate RouteData="@routeData" Selector="h1" />*@
