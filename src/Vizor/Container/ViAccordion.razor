@@ -17,8 +17,22 @@
 
 @inherits ViComponentBase
 
-<span>TODO</span>
+<div class="accordion @CssClass" id="@id" @attributes="@AdditionalAttributes">
+	<CascadingValue IsFixed="true" Value="@id" Name="ViAccordionId">
+		<CascadingValue IsFixed="true" Value="@RemainOpen" Name="ViAccordionRemainOpen">
+			@ChildContent
+		</CascadingValue>
+	</CascadingValue>
+</div>
 
 @code {
+
+	private string id = RazorExtensions.RandomId();
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter]
+	public bool RemainOpen { get; set; }
 
 }

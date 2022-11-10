@@ -1,6 +1,7 @@
-# Vizor
-Blazor UI library
+# Vizor UI components for Blazor
 
-featuring:
-- Based on Bootstrap 5 and .NET 7
+- .NET 7 Blazor library
+- Based on Bootstrap 5: https://getbootstrap.com/
 - Based on Tabler: https://github.com/tabler/tabler
+
+More information coming soon!

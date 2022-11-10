@@ -1,0 +1,63 @@
+﻿@*
+//   Copyright 2022 DataHint BV
+//   Copyright 2022 Ben Motmans
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+*@
+
+@inherits ViComponentBase
+
+<div class="accordion-item @CssClass" @attributes="@AdditionalAttributes">
+	<h2 class="accordion-header" id="@(id + "-h")">
+		<button class="accordion-button @(IsExpanded ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="@("#" + id)" aria-expanded="@IsExpanded.ToTrueFalse()" aria-controls="@id">
+			@Header
+			@HeaderText
+		</button>
+	</h2>
+	<div id="@id" class="accordion-collapse collapse @(IsExpanded ? "show" : "")" aria-labelledby="@(id + "-h")" data-bs-parent="@DataBsParent">
+		<div class="accordion-body pt-0">
+			@ChildContent
+		</div>
+	</div>
+</div>
+
+@code {
+
+	private string id = RazorExtensions.RandomId();
+
+	[CascadingParameter(Name = "ViAccordionId")]
+	public string AccordionId { get; set; } = default!;
+
+	[CascadingParameter(Name = "ViAccordionRemainOpen")]
+	public bool RemainOpen { get; set; }
+
+	[Parameter]
+	public RenderFragment? Header { get; set; }
+
+	[Parameter]
+	public string? HeaderText { get; set; }
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public bool IsExpanded { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		if (AccordionId == null)
+			throw new InvalidOperationException($"{typeof(ViAccordionItem)} must be used inside a {typeof(ViAccordion)}");
+	}
+
+	private string? DataBsParent => RemainOpen ? null : "#" + AccordionId;
+}

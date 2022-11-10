@@ -22,6 +22,8 @@ public static class RazorExtensions
 
 	public static string? ToConditionalAttribute(this bool b) => b == true ? "true" : null;
 
+	public static string ToTrueFalse(this bool b) => b == true ? "true" : "false";
+
 	public static string? ToConditionalAttributeInverse(this bool? b) => b == false ? "true" : null;
 
 	public static string RandomId(int len = 8)
