@@ -15,10 +15,8 @@
 
 namespace Vizor.Enums;
 
-public enum BadgeStyle
+public enum SpinnerStyle
 {
-	Rectangular = 0,
-	Pill,
-	Outline,
-	Light
+	Circle = 0,
+	Grow
 }

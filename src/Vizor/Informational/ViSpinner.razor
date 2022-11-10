@@ -17,10 +17,10 @@
 
 @inherits ViComponentBase
 
-<div class="spinner-border @CssClass" role="status">
+<div class="@GetStyle() @ColorConverter.ToTextColor(Color) @CssClass" role="status">
 	@if (!string.IsNullOrEmpty(AssistiveText))
 	{
-			<span class="visually-hidden">@AssistiveText</span>
+		<span class="visually-hidden">@AssistiveText</span>
 	}
 </div>
 
@@ -29,6 +29,23 @@
 	[Parameter]
 	public string? AssistiveText { get; set; } = "Loading ...";
 
-	//TODO: spinner style: border, grow
-	//TODO: color
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public SpinnerStyle Style { get; set; }
+
+	[Parameter]
+	public ElementSize Size { get; set; }
+
+	private string GetStyle()
+	{
+		return (Style, Size) switch
+		{
+			(SpinnerStyle.Circle, ElementSize.Small) => "spinner-border spinner-border-sm",
+			(SpinnerStyle.Grow, ElementSize.Small) => "spinner-grow spinner-grow-sm",
+			(SpinnerStyle.Grow, _) => "spinner-grow",
+			(_, _) => "spinner-border"
+		};
+	}
 }

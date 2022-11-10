@@ -17,16 +17,14 @@
 
 @inherits ViInputBase
 
-<button
-	class="btn @CssClass @ColorConverter.ToBtnColor(Color, Style) @ToButtonSize(Size)"
-	type="@Type.ToButtonType()"
-	@attributes="@AdditionalAttributes"
-	@onclick="@OnClick"
-	disabled="@IsDisabled"
->
-	@if (IsBusy)
+<button class="btn @CssClass @ColorConverter.ToBtnColor(Color, Style) @ToButtonSize(Size)"
+		type="@Type.ToButtonType()"
+		@attributes="@AdditionalAttributes"
+		@onclick="@HandleClick"
+		disabled="@GetDisabledState().ToConditionalAttribute()">
+	@if (isBusy && (Behavior & ButtonBehavior.ShowBusySpinner) == ButtonBehavior.ShowBusySpinner)
 	{
-		<!-- TODO: loading anim -->
+		<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
 	}
 	else
 	{
@@ -40,7 +38,8 @@
 
 	// see https://getbootstrap.com/docs/5.2/components/buttons/
 
-	//TODO: btn-block, href, prevent default, 
+	//TODO: btn-block, href, prevent default,
+	//TODO: alternative spinner states
 
 	protected internal bool isBusy;
 
@@ -79,6 +78,8 @@
 
 	public bool IsBusy => isBusy;
 
+	protected bool GetDisabledState() => IsDisabled || (((Behavior & ButtonBehavior.PreventDoubleClick) == ButtonBehavior.PreventDoubleClick) && isBusy);
+
 	public static string? ToButtonSize(ElementSize size)
 	{
 		return size switch
@@ -87,5 +88,27 @@
 			ElementSize.Large => "btn-lg",
 			_ => null
 		};
+	}
+
+	private async Task HandleClick(MouseEventArgs e)
+	{
+		if ((Behavior & ButtonBehavior.PreventDoubleClick) == ButtonBehavior.PreventDoubleClick)
+		{
+			if (isBusy)
+				return;
+		}
+
+		try
+		{
+			isBusy = true;
+			if (OnClick.HasDelegate)
+			{
+				await OnClick.InvokeAsync(e);
+			}
+		}
+		finally
+		{
+			isBusy = false;
+		}
 	}
 }

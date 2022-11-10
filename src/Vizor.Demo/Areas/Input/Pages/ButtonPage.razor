@@ -1,7 +1,7 @@
 ﻿@page "/doc/vizor/input/button"
 
 <ViPage>
-	<ViPageHeader CategoryText="Input">Button</ViPageHeader>
+	<ViPageHeader CategoryText="Input" TitleText="Button"></ViPageHeader>
 	<ViPageBody>
 
 		<ViCard>
@@ -51,6 +51,20 @@
 			</Body>
 		</ViCard>
 
+		<ViCard CssClass="mt-2">
+			<Header><ViCardTitle>Busy</ViCardTitle></Header>
+			<Body>
+				<ViButton Behavior="ButtonBehavior.ShowBusySpinner | ButtonBehavior.PreventDoubleClick" OnClick="LongAction">Long Action</ViButton>
+			</Body>
+		</ViCard>
+
+		<ViCard CssClass="mt-2">
+			<Header><ViCardTitle>Badge</ViCardTitle></Header>
+			<Body>
+				<ViButton>Notifications <ViBadge CssClass="ms-2" Color="@ThemeColor.Warning">4</ViBadge></ViButton>
+			</Body>
+		</ViCard>
+
 	</ViPageBody>
 </ViPage>
 
@@ -58,4 +72,8 @@
 
 @code {
 
+	private async Task LongAction()
+	{
+		await Task.Delay(3000);
+	}
 }
