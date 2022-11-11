@@ -52,7 +52,7 @@
 
 					*@
 
-					<ViFormElement Label="TravelDistance">
+					<ViFormElement Label="TravelDistance (nullable)">
 						<ViNumberInput @bind-Value="@employee.TravelDistance" ValidationFor="@(() => employee.TravelDistance)" />
 						<span>
 							@if (@employee.TravelDistance == null) {
@@ -68,7 +68,7 @@
 						<span>@employee.Remarks</span>
 					</ViFormElement>
 
-					<button type="submit">Save</button>
+					<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
 				</Body>
 			</ViCard>
 
@@ -76,24 +76,24 @@
 				<Header><ViCardTitle>Address</ViCardTitle></Header>
 				<Body>
 
-					<ViFormElement Label="Street And Number">
+					<ViFormElement Label="Street And Number" IsRequired="true">
 						<ViTextInput @bind-Value="@employee.Address.StreetAndNumber" ValidationFor="@(() => employee.Address.StreetAndNumber)" />
 						<span>@employee.Address.StreetAndNumber</span>
 					</ViFormElement>
-					<ViFormElement Label="Postal Code">
+					<ViFormElement Label="Postal Code" IsRequired="true">
 						<ViTextInput @bind-Value="@employee.Address.PostalCode" ValidationFor="@(() => employee.Address.PostalCode)" />
 						<span>@employee.Address.PostalCode</span>
 					</ViFormElement>
-					<ViFormElement Label="City">
+					<ViFormElement Label="City" IsRequired="true">
 						<ViTextInput @bind-Value="@employee.Address.City" ValidationFor="@(() => employee.Address.City)" />
 						<span>@employee.Address.City</span>
 					</ViFormElement>
-					<ViFormElement Label="Country">
+					<ViFormElement Label="Country" IsRequired="true">
 						<ViTextInput @bind-Value="@employee.Address.CountryCode" ValidationFor="@(() => employee.Address.CountryCode)" />
 						<span>@employee.Address.CountryCode</span>
 					</ViFormElement>
 
-					<button type="submit">Save</button>
+					<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
 				</Body>
 			</ViCard>
 		</ViForm>

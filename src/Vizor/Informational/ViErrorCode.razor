@@ -16,7 +16,7 @@
 *@
 
 <div class="empty">
-	<div class="empty-header">404</div>
+	<div class="empty-header">@Code</div>
 	<p class="empty-title">@Title</p>
 	<p class="empty-subtitle text-muted">
 		@SubTitle
@@ -33,12 +33,28 @@
 
 	// see https://preview.tabler.io/docs/empty.html
 
+	[Parameter, EditorRequired]
+	public int Code { get; set; }
+
 	[Parameter]
 	public string Title { get; set; } = "Oops… You just found an error page";
 
 	[Parameter]
-	public string SubTitle { get; set; } = "Try adjusting your search or filter to find what you're looking for.";
+	public string SubTitle { get; set; } = default!;
 
 	[Parameter]
 	public string ButtonText { get; set; } = "Take me home";
+
+	protected override void OnInitialized()
+	{
+		if (SubTitle == null)
+		{
+			SubTitle = Code switch
+			{
+				404 => "Try adjusting your search or filter to find what you are looking for.",
+				500 => "We are sorry but our server encountered an internal error.",
+				_ => ""
+			};
+		}
+	}
 }

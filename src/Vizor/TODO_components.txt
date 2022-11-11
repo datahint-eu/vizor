@@ -1,0 +1,21 @@
+﻿high prio
+---------
+
+- radio button / group
+- enum select
+- select group
+- file dropzone
+- charts
+- error 500
+
+low prio
+--------
+
+- color picker
+- payment method selector
+- country selector
+- language selector
+- copy content button (in input components)
+- input mask
+- form control 'flush' style
+- input group buttons/icons/dropdown
