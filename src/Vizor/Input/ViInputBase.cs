@@ -13,8 +13,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System.Linq.Expressions;
-using Microsoft.AspNetCore.Components.Forms;
 using Vizor.Base;
 
 namespace Vizor;
@@ -29,12 +27,14 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 {
 	private bool isInitialized;
 
-	protected readonly EventHandler validateChangedHandler;
+	protected readonly EventHandler<ViFormValidationEventArgs> validateChangedHandler;
 	protected bool typeIsNullable;
+	protected bool valueChangedOnce; // keep track if the value changed at least once, the 
 	protected bool? isValid;
 	protected string? validationProperty;
 	protected string? validationCssClass;
 	protected string[]? validationMessages;
+	protected string? parseErrorMessage;
 
 	public ViInputBase()
 	{
@@ -54,15 +54,10 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 	public TValue? Value { get; set; }
 
 	[Parameter]
-	public EventCallback<TValue> ValueChanged { get; set; }
+	public EventCallback<TValue?> ValueChanged { get; set; }
 
 	[Parameter]
-	public Expression<Func<TValue>>? ValidationFor { get; set; }
-
-
-	//TODO: remove this param ??
-	[Parameter]
-	public Expression<Func<TValue>>? ValueExpression { get; set; }
+	public Expression<Func<TValue?>>? ValidationFor { get; set; }
 
 	[CascadingParameter(Name = "ViFormContext")]
 	private ViFormContext? Context { get; set; }
@@ -74,7 +69,7 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 
 		if (!isInitialized)
 		{
-			typeIsNullable = Nullable.GetUnderlyingType(typeof(TValue)) != null;
+			typeIsNullable = Nullable.GetUnderlyingType(typeof(TValue)) != null; // used in base classes
 
 			validationProperty = ValidationFor?.ToPropertyChain();
 
@@ -92,14 +87,18 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 		get => FormatValueAsString(Value);
 		set
 		{
+			valueChangedOnce = true;
+
 			bool parseSuccess = TryParseValueFromString(value, out TValue? parsedValue, out string? validationErrorMessage);
 			if (parseSuccess)
 			{
+				parseErrorMessage = null;
 				_ = SetValueAsync(parsedValue);
 			}
 			else if (validationErrorMessage != null)
 			{
-				validationMessages = new[] { validationErrorMessage };
+				parseErrorMessage = validationErrorMessage;
+				Context?.ValidateOnPropertyChange();
 			}
 		}
 	}
@@ -121,7 +120,7 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 
 			if (Context is not null && validationProperty is not null)
 			{
-				_ = await Context.ValidateAsync();
+				_ = Context.ValidateOnPropertyChange();
 			}
 		}
 	}
@@ -151,11 +150,16 @@ public abstract class ViInputBase<TValue> : ViInputBase, IDisposable
 		}
 	}
 
-	private void OnValidationChanged(object? sender, EventArgs eventArgs)
+	private void OnValidationChanged(object? sender, ViFormValidationEventArgs e)
 	{
-		if (Context is not null && validationProperty is not null)
+		// this prevents the visual validation state to change if we never even tried to change the property value
+		// UNLESS the form was submitted
+		if (!e.Submit && !valueChangedOnce)
+			return;
+
+		if (Context is not null)
 		{
-			isValid = Context.IsValid(validationProperty, out validationCssClass, out validationMessages);
+			isValid = Context.IsValid(validationProperty, parseErrorMessage, out validationCssClass, out validationMessages);
 		}
 
 		StateHasChanged();

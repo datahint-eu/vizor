@@ -19,17 +19,17 @@ namespace Vizor;
 
 public static class ColorConverter
 {
-	public static string? ToBgColor(string? color) => color == null ? null : $"bg-{color}";
+	public static string? ToBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"bg-{color}";
 
-	public static string? ToLightBgColor(string? color) => color == null ? null : $"bg-{color}-lt";
+	public static string? ToLightBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"bg-{color}-lt";
 
-	public static string? ToStatusColor(string? color) => color == null ? null : $"status-{color}";
+	public static string? ToStatusColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"status-{color}";
 
-	public static string? ToAlertColor(string? color) => color == null ? null : $"alert-{color}";
+	public static string? ToAlertColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"alert-{color}";
 
-    public static string? ToNavBarColor(string? color) => color == null ? null : $"navbar-{color}";
+    public static string? ToNavBarColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"navbar-{color}";
 
-    public static string? ToBtnColor(string? color, ButtonStyle style)
+    public static string? ToBtnColor([NotNullIfNotNull(nameof(color))] string? color, ButtonStyle style)
 	{
 		//TODO: support for pill, ghost
 
@@ -40,7 +40,7 @@ public static class ColorConverter
 		};
 	}
 
-	public static string? ToTextColor(string? color) => color == null ? null : $"text-{color}";
+	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"text-{color}";
 
-	public static string? ToTextAndBgColor(string? color) => color == null ? null : $"text-bg-{color}";
+	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"text-bg-{color}";
 }

@@ -18,15 +18,13 @@
 @inherits ViInputBase<string>
 
 <input type="text" class="form-control @CssClass @validationCssClass"
-	placeholder="@Placeholder" @attributes="@AdditionalAttributes"
-	disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
+	   placeholder="@Placeholder" @attributes="@AdditionalAttributes"
+	   disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
 	   aria-invalid="@isValid.ToConditionalAttributeInverse()"
-	@bind-value="@BindableStringValue" @bind-value:event="oninput"
-	/>
+	   @bind="@BindableStringValue" @bind:event="oninput" />
 @RenderValidationMessages()
 
-	<!-- TODO:  after bind event, ... -->
-
+<!-- TODO:  after bind event, ... -->
 @code {
 
 	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out string result, [NotNullWhen(false)] out string? validationErrorMessage)

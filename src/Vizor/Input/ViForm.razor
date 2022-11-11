@@ -59,7 +59,7 @@
 		if (context == null)
 			return;
 
-		bool isValid = await context.ValidateAsync();
+		bool isValid = context.ValidateOnSubmit();
 
 		if (isValid && OnValidSubmit.HasDelegate)
 		{

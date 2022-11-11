@@ -22,7 +22,7 @@
 		  placeholder="@Placeholder" @attributes="@AdditionalAttributes"
 		  disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
 		  aria-invalid="@isValid.ToConditionalAttributeInverse()"
-		  @bind-value="@BindableStringValue" @bind-value:event="oninput">
+		  @bind="@BindableStringValue" @bind:event="oninput">
 </textarea>
 @RenderValidationMessages()
 

@@ -19,7 +19,7 @@ public class ViFormContext
 {
 	private IDictionary<string, string[]>? allMessages;
 
-	public event EventHandler? ValidationChanged;
+	public event EventHandler<ViFormValidationEventArgs>? ValidationChanged;
 
 	public ViFormContext(object? model)
 	{
@@ -30,28 +30,54 @@ public class ViFormContext
 
 	public object? Model { get; }
 
-	public Task<bool> ValidateAsync()
+	public bool ValidateOnSubmit() => ValidateInternal(true);
+
+	public bool ValidateOnPropertyChange() => ValidateInternal(false);
+
+	private bool ValidateInternal(bool submit)
 	{
 		var result = Validator?.Validate(out allMessages) ?? false;
 
 		if (ValidationChanged != null)
 		{
-			ValidationChanged.Invoke(this, EventArgs.Empty);
+			ValidationChanged.Invoke(this, new ViFormValidationEventArgs(submit));
 		}
 
-		return Task.FromResult(result);
+		return result;
 	}
 
-	public bool IsValid(string property, out string cssClass, out string[]? messages)
+	public bool IsValid(string? property, string? parseErrorMessage, out string cssClass, out string[]? messages)
 	{
-		if (allMessages == null || !allMessages.TryGetValue(property, out messages))
+		bool retval = true;
+
+		if (property != null && allMessages != null && allMessages.TryGetValue(property, out messages))
+		{
+			retval = false;
+		}
+		else
 		{
 			messages = null;
-			cssClass = "is-valid";
-			return true;
 		}
 
-		cssClass = "is-invalid";
-		return false;
+		// parse error messages should almost never happen, so it's OK to use a slightly more expensive copy operation and keep the rest of the code simple
+		if (parseErrorMessage != null)
+		{
+			if (messages?.Length > 0)
+			{
+				var tmp = new string[messages.Length + 1];
+				Array.Copy(messages, 0, tmp, 0, messages.Length);
+				messages = tmp;
+			}
+			else
+			{
+				messages = new string[1];
+			}
+			messages[^1] = parseErrorMessage;
+
+			retval = false;
+		}
+
+		cssClass = retval ? "is-valid" : "is-invalid";
+		return retval;
 	}
 }

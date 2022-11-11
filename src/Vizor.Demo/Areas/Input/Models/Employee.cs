@@ -22,7 +22,7 @@ public class Employee
 
 	public string? PhoneNumber { get; set; }
 
-	public int TravelDistance { get; set; }
+	public int? TravelDistance { get; set; }
 
 	public Address Address { get; set; } = new Address();
 
@@ -40,6 +40,8 @@ public class EmployeeValidator : AbstractValidator<Employee>
 		RuleFor(e => e.DateOfBirth).Must(d => d.Year < 2000).WithMessage("Date of birth must be before 1-1-2000");
 		RuleFor(e => e.Role).NotEmpty();
 		RuleFor(e => e.Remarks).MaximumLength(128);
+
+		RuleFor(e => e.TravelDistance).Must(d => d < 100).WithMessage("Travel distance must be < 100km").When(d => d != null);
 
 		//TODO: validate phone number if not null
 

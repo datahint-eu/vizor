@@ -1,4 +1,5 @@
-﻿//   Copyright 2022 DataHint BV
+﻿@*
+//   Copyright 2022 DataHint BV
 //   Copyright 2022 Ben Motmans
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +13,26 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
+*@
 
-namespace Vizor;
+@inherits ViInputBase<DateOnly>
 
-public class ViDateOnlyInput : ViInputBase<DateOnly>
-{
+<input type="date" class="form-control @CssClass @validationCssClass"
+	   placeholder="@Placeholder" @attributes="@AdditionalAttributes"
+	   disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
+	   aria-invalid="@isValid.ToConditionalAttributeInverse()"
+	   @bind-BindableStringValue="@BindableStringValue" @bind-BindableStringValue:event="oninput" />
+@RenderValidationMessages()
+
+<!-- TODO:  after bind event, ... -->
+@code {
+
 	public const string DateFormat = "yyyy-MM-dd";
+
+	protected override string FormatValueAsString(DateOnly value)
+	{
+		return value.ToString(DateFormat);
+	}
 
 	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out DateOnly result, [NotNullWhen(false)] out string? validationErrorMessage)
 	{
@@ -28,7 +43,7 @@ public class ViDateOnlyInput : ViInputBase<DateOnly>
 		}
 		else
 		{
-			validationErrorMessage = $"Failed to parse '{value}' as a DateOnly value"; //TODO: include the field name
+			validationErrorMessage = $"Failed to parse '{value}' as a DateOnly value";
 			return false;
 		}
 	}

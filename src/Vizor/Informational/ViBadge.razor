@@ -56,9 +56,9 @@ else
 		return Style switch
 		{
 			BadgeStyle.Outline => $"badge-outline {ColorConverter.ToTextColor(Color)}",
-			BadgeStyle.Light => ColorConverter.ToLightBgColor(Color),
+			BadgeStyle.Light => ColorConverter.ToLightBgColor(Color) ?? string.Empty,
 			BadgeStyle.Pill => $"badge-pill {ColorConverter.ToBgColor(Color)}",
-			_ => ColorConverter.ToBgColor(Color)
+			_ => ColorConverter.ToBgColor(Color) ?? string.Empty
 		};
 	}
 }

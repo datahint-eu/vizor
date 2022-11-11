@@ -21,7 +21,7 @@
 	<input class="form-check-input @CssClass @validationCssClass" type="checkbox"
 		   @attributes="@AdditionalAttributes"
 		   aria-invalid="@isValid.ToConditionalAttributeInverse()"
-		   @bind-value="@BindableStringValue" @bind-value:event="oninput" checked="@Value" />
+		   @onchange="ToggleValue" checked="@Value.ToConditionalAttribute()" />
 	@if (ChildContent != null || Text != null)
 	{
 		<span class="form-check-label">
@@ -46,6 +46,17 @@
 
 	[Parameter]
 	public string? Description { get; set; }
+
+	protected override string FormatValueAsString(bool value)
+	{
+		return value.ToTrueFalse();
+	}
+
+	private void ToggleValue()
+	{
+		BindableStringValue = (!Value).ToTrueFalse();
+		StateHasChanged();
+	}
 
 	protected override bool TryParseValueFromString(string? value, out bool result, [NotNullWhen(false)] out string validationErrorMessage)
 	{

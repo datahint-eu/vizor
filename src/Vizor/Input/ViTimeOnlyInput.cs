@@ -28,7 +28,7 @@ public class ViTimeOnlyInput : ViInputBase<TimeOnly>
 		}
 		else
 		{
-			validationErrorMessage = $"Failed to parse '{value}' as a TimeOnly value"; //TODO: include the field name
+			validationErrorMessage = $"Failed to parse '{value}' as a TimeOnly value";
 			return false;
 		}
 	}
