@@ -1,0 +1,80 @@
+﻿@*
+//   Copyright 2022 DataHint BV
+//   Copyright 2022 Ben Motmans
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+*@
+
+@code {
+
+	private ViToastRenderer? renderer;
+
+	public async Task Show<TToast>(int delayMs = 7000) where TToast : ViToast
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment? fragment = builder =>
+		{
+			builder.OpenComponent<TToast>(0);
+			builder.AddAttribute(1, "Id", id);
+			builder.AddAttribute(2, "DelayMs", delayMs);
+			builder.CloseComponent();
+		};
+
+		await ShowInternal(fragment, id, delayMs);
+	}
+
+	public Task ShowSuccess(string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+		=> ShowWithColor(ThemeColor.Success, title, message, subTitle, delayMs);
+
+	public Task ShowWarning(string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+		=> ShowWithColor(ThemeColor.Warning, title, message, subTitle, delayMs);
+
+	public Task ShowDanger(string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+		=> ShowWithColor(ThemeColor.Danger, title, message, subTitle, delayMs);
+
+	public Task ShowInfo(string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+		=> ShowWithColor(ThemeColor.Info, title, message, subTitle, delayMs);
+
+	internal async Task ShowWithColor(string color, string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+	{
+		var id = RazorExtensions.RandomId();
+		RenderFragment? fragment = builder =>
+		{
+			builder.OpenComponent<ViToast>(0);
+			builder.AddAttribute(1, "Id", id);
+			builder.AddAttribute(2, "DelayMs", delayMs);
+			builder.AddAttribute(3, "TitleText", title);
+			builder.AddAttribute(4, "SubTitleText", subTitle);
+			builder.AddAttribute(5, "BodyText", message);
+			builder.AddAttribute(6, "Color", color);
+			builder.CloseComponent();
+		};
+
+		await ShowInternal(fragment, id, delayMs);
+	}
+
+	internal void SetRenderer(ViToastRenderer? renderer)
+	{
+		this.renderer = renderer;
+	}
+
+	private async Task ShowInternal(RenderFragment fragment, string id, int delayMs)
+	{
+		if (renderer == null)
+		{
+			throw new InvalidOperationException($"{typeof(ViToastRenderer)} was not initialized in the current layout");
+		}
+
+		await Task.Run(async () => await renderer.AddToastAsync(id, fragment, delayMs));
+	}
+}

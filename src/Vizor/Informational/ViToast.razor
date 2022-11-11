@@ -17,8 +17,63 @@
 
 @inherits ViComponentBase
 
-<span>TODO</span>
+<div id="@Id" class="toast show @ColorConverter.ToTextAndBgColor(Color)" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="@AutoHide.ToTrueFalse()" data-bs-toggle="toast" data-bs-delay="@DelayMs">
+	<div class="toast-header">
+		@Image
+		@if (Title != null || TitleText != null)
+		{
+			<strong class="me-auto">
+				@Title
+				@TitleText
+			</strong>
+		}
+		@if (SubTitle != null || SubTitleText != null)
+		{
+			<small>
+				@SubTitle
+				@SubTitleText
+			</small>
+		}
+		<button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+	</div>
+	<div class="toast-body">
+		@Body
+		@BodyText
+	</div>
+</div>
 
 @code {
 
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public string? Color { get; set; }
+
+	[Parameter]
+	public RenderFragment? Image { get; set; }
+
+	[Parameter]
+	public RenderFragment? Title { get; set; }
+
+	[Parameter]
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? SubTitle { get; set; }
+
+	[Parameter]
+	public string? SubTitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Body { get; set; }
+
+	[Parameter]
+	public string? BodyText { get; set; }
+
+	[Parameter]
+	public bool AutoHide { get; set; } = true;
+
+	[Parameter]
+	public int DelayMs { get; set; } = 7000;
 }

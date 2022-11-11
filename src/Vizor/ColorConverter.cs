@@ -41,4 +41,6 @@ public static class ColorConverter
 	}
 
 	public static string? ToTextColor(string? color) => color == null ? null : $"text-{color}";
+
+	public static string? ToTextAndBgColor(string? color) => color == null ? null : $"text-bg-{color}";
 }

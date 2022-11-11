@@ -40,7 +40,8 @@ var srcPaths = {
 		//TODO: this breaks bootstrap path.resolve(libroot, '@tabler/core/dist/js/tabler.min.js'),
 		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js'),
 		path.resolve(vizorScripts, 'modal.js'),
-		path.resolve(vizorScripts, 'select.js')
+		path.resolve(vizorScripts, 'select.js'),
+		path.resolve(vizorScripts, 'toast.js')
 	]
 };
 

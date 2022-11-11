@@ -41,3 +41,11 @@ themes:
 
  - https://codepen.io/trooperandz/pen/EOgJvg look & feel
  - https://codepen.io/olsiodobashi/pen/BLBdgr dark theme
+
+
+charts:
+ - https://frappe.io/charts/docs/basic/basic_chart
+ - https://plotly.com/javascript/ + https://github.com/LayTec-AG/Plotly.Blazor
+ - https://www.chartjs.org/ + https://github.com/mariusmuntean/ChartJs.Blazor/tree/master/src/ChartJs.Blazor
+ - https://apexcharts.com/ + https://github.com/apexcharts/Blazor-ApexCharts
+ - sparklines

@@ -7,6 +7,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddScoped<ViModalService>();
+builder.Services.AddScoped<ViToastService>();
 
 var app = builder.Build();
 
