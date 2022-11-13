@@ -19,10 +19,12 @@
 
 <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
 	<div class="container-fluid">
-		@Toggler
+		<CascadingValue IsFixed="true" Value="@id" Name="ViNavBarId">
+			@Toggler
+		</CascadingValue>
 		@Brand
 
-		<div class="collapse navbar-collapse" id="sidebar-menu">
+		<div class="collapse navbar-collapse" id="@id">
 			<ul class="navbar-nav pt-lg-3">
 				<CascadingValue IsFixed="true" Value="false" Name="ViAutoClose">
 					@MenuItems
@@ -33,6 +35,8 @@
 </aside>
 
 @code {
+
+	private string id = "sidebar-menu";
 
 	[Parameter]
 	public RenderFragment? Brand { get; set; }

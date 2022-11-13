@@ -23,7 +23,7 @@
 
 @code {
 
-	[Parameter, EditorRequired]
+	[CascadingParameter(Name = "ViNavBarId")]
 	public string NavBarId { get; set; } = default!;
 
 	protected override void OnInitialized()
