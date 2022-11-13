@@ -27,6 +27,8 @@ public static class ThemeColor
 	public const string Dark = "dark";
 	public const string Muted = "muted";
 
+	public const string White = "white";
+
 	public const string Blue = "blue";
 	public const string Azure = "azure";
 	public const string Indigo = "indigo";

@@ -17,12 +17,29 @@
 
 @inherits ViComponentBase
 
-<div class="container-xl mt-3 my-md-4 @CssClass" @attributes="AdditionalAttributes">
+<div class="@CssClass @GetSize()">
 	@ChildContent
 </div>
 
 @code {
 
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public ColumnSize Size { get; set; } = ColumnSize.None;
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	private string? GetSize()
+	{
+		return Size switch
+		{
+			ColumnSize.Col_12 => "col-12",
+			ColumnSize.Col_10 => "col-md-12 col-lg-10",
+			ColumnSize.Col_8 => "col-md-12 col-lg-8",
+			ColumnSize.Col_6 => "col-lg-6",
+			ColumnSize.Col_4 => "col-md-6 col-lg-4",
+			ColumnSize.Col_2 => "col-sm-6 col-md-4 col-lg-2",
+			_ => null,
+		};
+	}
 }

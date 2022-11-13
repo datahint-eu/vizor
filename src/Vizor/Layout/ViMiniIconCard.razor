@@ -1,0 +1,45 @@
+﻿<div class="card card-sm">
+	<div class="card-body">
+		<div class="row align-items-center">
+			<div class="col-auto">
+				<span class="@ColorConverter.ToBgColor(IconBackground) @ColorConverter.ToTextColor(IconForeground) avatar">
+					@Icon
+				</span>
+			</div>
+			<div class="col">
+				<div class="font-weight-medium">
+					@Title
+					@TitleText
+				</div>
+				<div class="text-muted">
+					@Message
+					@MessageText
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+
+	[Parameter, EditorRequired]
+	public RenderFragment Icon { get; set; } = default!;
+
+	[Parameter]
+	public string? IconBackground { get; set; } = ThemeColor.Info;
+
+	[Parameter]
+	public string? IconForeground { get; set; } = ThemeColor.White;
+
+	[Parameter]
+	public RenderFragment? Title { get; set; }
+
+	[Parameter]
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Message { get; set; }
+
+	[Parameter]
+	public string? MessageText { get; set; }
+}

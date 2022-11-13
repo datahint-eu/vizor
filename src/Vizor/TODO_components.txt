@@ -6,16 +6,24 @@
 - select group
 - file dropzone
 - charts
-- error 500
+
+medium prio
+-----------
+
+- text editor
+- payment method selector
+- country selector
+- language selector
+- input group buttons/icons/dropdown
+- easy breadcrumbs
+- auto form builder
+- view to edit upgrading components
+
 
 low prio
 --------
 
 - color picker
-- payment method selector
-- country selector
-- language selector
 - copy content button (in input components)
 - input mask
 - form control 'flush' style
-- input group buttons/icons/dropdown

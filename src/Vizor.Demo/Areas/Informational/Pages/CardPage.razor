@@ -6,6 +6,13 @@
 	<ViPageBody>
 
 		<ViCard>
+			<Header><ViCardTitle>Title</ViCardTitle></Header>
+			<Body>
+				Simple card with header and body.
+			</Body>
+		</ViCard>
+
+		<ViCard CssClass="mt-2">
 			<Stamp>
 				<ViCardStamp Color="@ThemeColor.Primary">
 					<Icon>
@@ -15,12 +22,29 @@
 			</Stamp>
 			<Header><ViCardTitle>Title</ViCardTitle></Header>
 			<Body>
-				Body
+				Card with header, body, footer and stamp.
 			</Body>
 			<Footer>
 				Footer
 			</Footer>
 		</ViCard>
+
+		<ViCardRow CssClass="mt-2">
+			<ViColumn Size="ColumnSize.Col_4">
+				<ViMiniIconCard IconBackground="@ThemeColor.Green">
+					<Icon><TablerSvgIcon Icon="TablerSvgIcon.ShoppingCart" /></Icon>
+					<Title><b>3</b> items in cart</Title>
+					<Message>Totalling <i>€ 55.13</i></Message>
+				</ViMiniIconCard>
+			</ViColumn>
+			<ViColumn Size="ColumnSize.Col_4">
+				<ViMiniIconCard IconBackground="@ThemeColor.Azure">
+					<Icon><TablerSvgIcon Icon="TablerSvgIcon.BrandTwitter" /></Icon>
+					<Title>Twitter</Title>
+					<Message><b>155</b> followers</Message>
+				</ViMiniIconCard>
+			</ViColumn>
+		</ViCardRow>
 	</ViPageBody>
 </ViPage>
 
