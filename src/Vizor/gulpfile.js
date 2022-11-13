@@ -3,7 +3,7 @@
 //
 // in the project dir:
 //   npm init
-//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify
+//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify gulp-postcss
 //   npm install @tabler/core
 //
 // to build:
@@ -14,6 +14,7 @@ var path = require('path'),
 	clean = require('gulp-clean'),
 	gulp = require('gulp'),
 	sass = require('gulp-sass')(require('sass')),
+	postcss = require('gulp-postcss'),
 	cleancss = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	minify = require('gulp-minify');
@@ -26,12 +27,10 @@ var libroot = path.resolve(__dirname, "./node_modules");
 
 var srcPaths = {
 	scss: [
-		path.resolve(vizorStyles, '_blazor.scss'),
-		path.resolve(vizorStyles, 'datagrid.scss')
+		path.resolve(vizorStyles, 'vizor.scss'),
 	],
 
 	css: [
-		path.resolve(libroot, '@tabler/core/dist/css/tabler.min.css'),
 		path.resolve(libroot, 'tom-select/dist/css/tom-select.bootstrap5.min.css')
 	],
 
@@ -58,16 +57,31 @@ gulp.task('clean', () => {
 		.pipe(clean());
 });
 
+// see https://www.npmjs.com/package/gulp-sass
+// see https://github.com/tabler/tabler/blob/dev/gulpfile.js
 gulp.task('compileScss', () => {
 	return gulp.src(srcPaths.scss)
-		.pipe(concat('vizor-custom.css'))
-		.pipe(sass())
+		.pipe(concat('vizor.css'))
+		.pipe(sass({
+			style: 'expanded',
+			precision: 7,
+			importer: (url, prev, done) => {
+				if (url[0] === '~') {
+					url = path.resolve('node_modules', url.substr(1))
+				}
+
+				return { file: url }
+			},
+		}).on('error', sass.logError))
+		.pipe(postcss([
+			require('autoprefixer'),
+		]))
 		.pipe(gulp.dest(destPaths.css));
 });
 
 gulp.task('buildCss', () => {
 	return gulp.src(srcPaths.css)
-		.pipe(concat('vizor-tabler.css'))
+		.pipe(concat('vizor-vendor.css'))
 		.pipe(cleancss())
 		.pipe(gulp.dest(destPaths.css))
 });
