@@ -13,8 +13,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+@import "_variables";
+
 @import "~@tabler/core/src/scss/_core";
 
 @import "_blazor";
 @import "_datagrid";
-@import "_sidebar";
