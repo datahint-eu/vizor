@@ -20,8 +20,6 @@
 @implements IViDataGrid<TItem>
 @inherits ViComponentBase
 
-<!-- TODO: see https://preview.tabler.io/tables.html : table-striped -->
-
 <CascadingValue IsFixed="true" Value="this" Name="IViDataGrid">
 	@ChildContent
 </CascadingValue>
@@ -70,7 +68,7 @@
 				<div class="loaderoverlay"></div>
 			}
 
-			<table class="table card-table table-vcenter text-nowrap datatable">
+			<table class="table card-table table-vcenter text-nowrap datatable @(IsStriped ? "table-striped" : "")">
 				<thead>
 					<tr>
 						@foreach (var col in columns)
@@ -241,6 +239,9 @@
 
 	[Parameter]
 	public string? RowCssClass { get; set; }
+
+	[Parameter]
+	public bool IsStriped { get; set; }
 
 	protected override async Task OnParametersSetAsync()
 	{

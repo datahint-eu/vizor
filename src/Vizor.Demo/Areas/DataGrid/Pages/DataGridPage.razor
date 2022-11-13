@@ -22,6 +22,12 @@
 			<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" IsSortable="true" />
 		</ChildContent>
 	</ViDataGrid>
+
+	<ViDataGrid CssClass="mt-2" TItem="Car" DataSource="@cars" TitleText="Cars" UsePagination="false" IsStriped="true">
+		<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" IsSortable="true" />
+		<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" IsSortable="true" />
+		<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" IsSortable="true" />
+	</ViDataGrid>
 </ViPageBody>
 
 @code {
