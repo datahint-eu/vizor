@@ -1,33 +1,29 @@
 ﻿@page "/doc/vizor/input/select"
 
-<ViPage>
-	<ViPageHeader CategoryText="Input" TitleText="Select"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Input" TitleText="Select"></ViPageHeader>
+<ViPageBody>
 
-		<ViCard>
-			<Header><ViCardTitle>Single Select</ViCardTitle></Header>
-			<Body>
-				<ViSingleSelect TItem="string">
-					<ViSelectAllowEmpty />
-					<ViSelectDataSource TItem="string" Source="@GermanCarBrands" ItemExpr="(item) => item" DisabledExpr="@DisabledExpr" />
-				</ViSingleSelect>
+	<ViCard>
+		<Header><ViCardTitle>Single Select</ViCardTitle></Header>
+		<Body>
+			<ViSingleSelect TItem="string">
+				<ViSelectAllowEmpty />
+				<ViSelectDataSource TItem="string" Source="@GermanCarBrands" ItemExpr="(item) => item" DisabledExpr="@DisabledExpr" />
+			</ViSingleSelect>
 
-				<br />
+			<br />
 
-				<ViSingleSelect TItem="string" @bind-SelectedItem="@selected" @bind-SelectedItem:after="@OnAfterValueChange">
-					<ViSelectDataSource TItem="string" Name="German" Source="@GermanCarBrands" ItemExpr="(item) => item" />
-					<ViSelectDataSource TItem="string" Name="Korean" Source="@KoreanCarBrands" ItemExpr="(item) => item" />
-					<ViSelectDataSource TItem="string" Name="French" Source="@FrenchCarBrands" ItemExpr="(item) => item" IsDisabled="true" />
-				</ViSingleSelect>
-				<br />
-				<label>@selected</label>
-			</Body>
-		</ViCard>
+			<ViSingleSelect TItem="string" @bind-SelectedItem="@selected" @bind-SelectedItem:after="@OnAfterValueChange">
+				<ViSelectDataSource TItem="string" Name="German" Source="@GermanCarBrands" ItemExpr="(item) => item" />
+				<ViSelectDataSource TItem="string" Name="Korean" Source="@KoreanCarBrands" ItemExpr="(item) => item" />
+				<ViSelectDataSource TItem="string" Name="French" Source="@FrenchCarBrands" ItemExpr="(item) => item" IsDisabled="true" />
+			</ViSingleSelect>
+			<br />
+			<label>@selected</label>
+		</Body>
+	</ViCard>
 
-	</ViPageBody>
-</ViPage>
-
-
+</ViPageBody>
 
 @code {
 

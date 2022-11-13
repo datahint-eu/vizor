@@ -1,51 +1,47 @@
 ﻿@page "/doc/vizor/info/spinner"
 
-<ViPage>
-	<ViPageHeader CategoryText="Informational" TitleText="Spinner"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Informational" TitleText="Spinner"></ViPageHeader>
+<ViPageBody>
 
-		<ViCard>
-			<Header><ViCardTitle>Default</ViCardTitle></Header>
-			<Body>
-				<ViSpinner />
-			</Body>
-		</ViCard>
+	<ViCard>
+		<Header><ViCardTitle>Default</ViCardTitle></Header>
+		<Body>
+			<ViSpinner />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Color</ViCardTitle></Header>
-			<Body>
-				<ViSpinner Color="@ThemeColor.Primary" />
-				<ViSpinner Color="@ThemeColor.Secondary" />
-				<ViSpinner Color="@ThemeColor.Success" />
-				<ViSpinner Color="@ThemeColor.Danger" />
-				<ViSpinner Color="@ThemeColor.Warning" />
-				<ViSpinner Color="@ThemeColor.Info" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Color</ViCardTitle></Header>
+		<Body>
+			<ViSpinner Color="@ThemeColor.Primary" />
+			<ViSpinner Color="@ThemeColor.Secondary" />
+			<ViSpinner Color="@ThemeColor.Success" />
+			<ViSpinner Color="@ThemeColor.Danger" />
+			<ViSpinner Color="@ThemeColor.Warning" />
+			<ViSpinner Color="@ThemeColor.Info" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Growing Style</ViCardTitle></Header>
-			<Body>
-				<ViSpinner Color="@ThemeColor.Primary" Style="SpinnerStyle.Grow" />
-				<ViSpinner Color="@ThemeColor.Secondary" Style="SpinnerStyle.Grow" />
-				<ViSpinner Color="@ThemeColor.Success" Style="SpinnerStyle.Grow" />
-				<ViSpinner Color="@ThemeColor.Danger" Style="SpinnerStyle.Grow" />
-				<ViSpinner Color="@ThemeColor.Warning" Style="SpinnerStyle.Grow" />
-				<ViSpinner Color="@ThemeColor.Info" Style="SpinnerStyle.Grow" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Growing Style</ViCardTitle></Header>
+		<Body>
+			<ViSpinner Color="@ThemeColor.Primary" Style="SpinnerStyle.Grow" />
+			<ViSpinner Color="@ThemeColor.Secondary" Style="SpinnerStyle.Grow" />
+			<ViSpinner Color="@ThemeColor.Success" Style="SpinnerStyle.Grow" />
+			<ViSpinner Color="@ThemeColor.Danger" Style="SpinnerStyle.Grow" />
+			<ViSpinner Color="@ThemeColor.Warning" Style="SpinnerStyle.Grow" />
+			<ViSpinner Color="@ThemeColor.Info" Style="SpinnerStyle.Grow" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Size</ViCardTitle></Header>
-			<Body>
-				<ViSpinner Size="ElementSize.Small" />
-				<ViSpinner Size="ElementSize.Small" Style="SpinnerStyle.Grow" />
-			</Body>
-		</ViCard>
-	</ViPageBody>
-</ViPage>
-
-
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Size</ViCardTitle></Header>
+		<Body>
+			<ViSpinner Size="ElementSize.Small" />
+			<ViSpinner Size="ElementSize.Small" Style="SpinnerStyle.Grow" />
+		</Body>
+	</ViCard>
+</ViPageBody>
 
 @code {
 

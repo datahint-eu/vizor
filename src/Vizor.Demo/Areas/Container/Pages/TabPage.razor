@@ -1,33 +1,29 @@
 ﻿@page "/doc/vizor/container/tab"
 @using Vizor.Icons.Tabler
 
-<ViPage>
-	<ViPageHeader CategoryText="Containers" TitleText="TabControl"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Containers" TitleText="TabControl"></ViPageHeader>
+<ViPageBody>
 
-		<ViTabControl>
-			<ViTabPage>
-				<Icon><TablerSvgIcon Icon="TablerSvgIcon.User" CssClass="me-2" /></Icon>
-				<Title><b>User</b></Title>
-				<ChildContent>
-					<b>User</b>
-					<br />
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda ea est, eum exercitationem fugiat illum itaque laboriosam magni necessitatibus, nemo nisi numquam quae reiciendis repellat sit soluta unde. Aut!
-				</ChildContent>
-			</ViTabPage>
-			<ViTabPage TitleText="Settings">
-				<Icon><TablerSvgIcon Icon="TablerSvgIcon.Settings" CssClass="me-2" /></Icon>
-				<ChildContent>
-					<b>Settings</b>
-					<br />
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda ea est, eum exercitationem fugiat illum itaque laboriosam magni necessitatibus, nemo nisi numquam quae reiciendis repellat sit soluta unde. Aut!
-				</ChildContent>
-			</ViTabPage>
-		</ViTabControl>
-	</ViPageBody>
-</ViPage>
-
-
+	<ViTabControl>
+		<ViTabPage>
+			<Icon><TablerSvgIcon Icon="TablerSvgIcon.User" CssClass="me-2" /></Icon>
+			<Title><b>User</b></Title>
+			<ChildContent>
+				<b>User</b>
+				<br />
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda ea est, eum exercitationem fugiat illum itaque laboriosam magni necessitatibus, nemo nisi numquam quae reiciendis repellat sit soluta unde. Aut!
+			</ChildContent>
+		</ViTabPage>
+		<ViTabPage TitleText="Settings">
+			<Icon><TablerSvgIcon Icon="TablerSvgIcon.Settings" CssClass="me-2" /></Icon>
+			<ChildContent>
+				<b>Settings</b>
+				<br />
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda ea est, eum exercitationem fugiat illum itaque laboriosam magni necessitatibus, nemo nisi numquam quae reiciendis repellat sit soluta unde. Aut!
+			</ChildContent>
+		</ViTabPage>
+	</ViTabControl>
+</ViPageBody>
 
 @code {
 

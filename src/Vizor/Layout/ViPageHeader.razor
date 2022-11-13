@@ -17,51 +17,53 @@
 
 @inherits ViComponentBase
 
-<div class="page-header @CssClass" @attributes="@AdditionalAttributes">
-	<div class="row align-items-center mw-100">
-		@if (Avatar != null)
-		{
-			<div class="col-auto">
-				@Avatar
+<div class="page-header d-print-none @CssClass" @attributes="@AdditionalAttributes">
+	<div class="container-xl">
+		<div class="row g-2 align-items-center mw-100">
+			@if (Avatar != null)
+			{
+				<div class="col-auto">
+					@Avatar
+				</div>
+			}
+			<div class="col">
+				@if (Breadcrumb != null)
+				{
+					<div class="mb-1">
+						<Vizor.Navigation.ViBreadcrumb>
+							@Breadcrumb
+						</Vizor.Navigation.ViBreadcrumb>
+					</div>
+				}
+				@if (Category != null && CategoryText != null)
+				{
+					<div class="page-pretitle">
+						@Category
+						@CategoryText
+					</div>
+				}
+				<h2 class="page-title">
+					@Title
+					@TitleText
+				</h2>
+				@if (SubTitle != null)
+				{
+					<div class="page-subtitle">
+						<div class="row">
+							@SubTitle
+						</div>
+					</div>
+				}
 			</div>
-		}
-		<div class="col">
-			@if (Breadcrumb != null)
+			@if (Buttons != null)
 			{
-				<div class="mb-1">
-					<Vizor.Navigation.ViBreadcrumb>
-						@Breadcrumb
-					</Vizor.Navigation.ViBreadcrumb>
-				</div>
-			}
-			@if (Category != null && CategoryText != null)
-			{
-				<div class="page-pretitle">
-					@Category
-					@CategoryText
-				</div>
-			}
-			<h2 class="page-title">
-				@Title
-				@TitleText
-			</h2>
-			@if (SubTitle != null)
-			{
-				<div class="page-subtitle">
-					<div class="row">
-						@SubTitle
+				<div class="col-auto ms-auto d-print-none">
+					<div class="btn-list">
+						@Buttons
 					</div>
 				</div>
 			}
 		</div>
-		@if (Buttons != null)
-		{
-			<div class="col-auto ms-auto d-print-none">
-				<div class="btn-list">
-					@Buttons
-				</div>
-			</div>
-		}
 	</div>
 </div>
 

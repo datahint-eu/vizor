@@ -17,12 +17,28 @@
 
 @inherits ViComponentBase
 
-<div class="container-xl mt-3 my-md-4 @CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
+<div class="page">
+	@SideNav
+	@TopNav
+
+	<div class="page-wrapper">
+		@Content
+	</div>
+
+	@Footer
 </div>
 
 @code {
 
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? TopNav { get; set; }
+
+	[Parameter]
+	public RenderFragment? SideNav { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment Content { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? Footer { get; set; }
 }

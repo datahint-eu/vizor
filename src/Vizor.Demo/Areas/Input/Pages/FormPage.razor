@@ -1,106 +1,105 @@
 ﻿@page "/doc/vizor/input/form"
 @using Vizor.Documentation.Areas.Input.Models;
 
-<ViPage>
-	<ViPageHeader CategoryText="Input" TitleText="Form"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Input" TitleText="Form"></ViPageHeader>
+<ViPageBody>
 
-		<ViForm Model="employee">
-			<ViFluentValidator TValidator="EmployeeValidator" TModel="Employee" />
+	<ViForm Model="employee">
+		<ViFluentValidator TValidator="EmployeeValidator" TModel="Employee" />
 
-			<ViCard>
-				<Header><ViCardTitle>Employee Info</ViCardTitle></Header>
-				<Body>
+		<ViCard>
+			<Header><ViCardTitle>Employee Info</ViCardTitle></Header>
+			<Body>
 
-					<ViFormElement Label="First Name" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.FirstName" ValidationFor="@(() => employee.FirstName)" />
-						<span>@employee.FirstName</span>
-					</ViFormElement>
-					<ViFormElement Label="Last Name" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.LastName" ValidationFor="@(() => employee.LastName)" />
-						<span>@employee.LastName</span>
-					</ViFormElement>
-					<ViFormElement Label="Email" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.Email" ValidationFor="@(() => employee.Email)" />
-						<span>@employee.Email</span>
-					</ViFormElement>
-					<ViFormElement Label="Password" IsRequired="true">
-						<ViPasswordInput @bind-Value="@employee.Password" ValidationFor="@(() => employee.Password)" />
-						<ViFormHint Text="Must be at least 8 characters long" />
-						<span>@employee.Password</span>
-					</ViFormElement>
+				<ViFormElement Label="First Name" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.FirstName" ValidationFor="@(() => employee.FirstName)" />
+					<span>@employee.FirstName</span>
+				</ViFormElement>
+				<ViFormElement Label="Last Name" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.LastName" ValidationFor="@(() => employee.LastName)" />
+					<span>@employee.LastName</span>
+				</ViFormElement>
+				<ViFormElement Label="Email" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.Email" ValidationFor="@(() => employee.Email)" />
+					<span>@employee.Email</span>
+				</ViFormElement>
+				<ViFormElement Label="Password" IsRequired="true">
+					<ViPasswordInput @bind-Value="@employee.Password" ValidationFor="@(() => employee.Password)" />
+					<ViFormHint Text="Must be at least 8 characters long" />
+					<span>@employee.Password</span>
+				</ViFormElement>
 
-					<ViFormElement Label="Administrator">
-						<ViToggleInput @bind-Value="@employee.IsAdmin" />
-						<span>@employee.IsAdmin</span>
-					</ViFormElement>
+				<ViFormElement Label="Administrator">
+					<ViToggleInput @bind-Value="@employee.IsAdmin" />
+					<span>@employee.IsAdmin</span>
+				</ViFormElement>
 
-					<ViFormElement Label="Date Of Birth">
-						<ViDateTimeInput @bind-Value="@employee.DateOfBirth" ValidationFor="@(() => employee.DateOfBirth)" />
-						<span>@employee.DateOfBirth</span>
-					</ViFormElement>
+				<ViFormElement Label="Date Of Birth">
+					<ViDateTimeInput @bind-Value="@employee.DateOfBirth" ValidationFor="@(() => employee.DateOfBirth)" />
+					<span>@employee.DateOfBirth</span>
+				</ViFormElement>
 
-					<ViFormElement Label="Salary">
-						<ViNumberInput @bind-Value="@employee.Salary" ValidationFor="@(() => employee.Salary)" />
-						<span>@employee.Salary</span>
-					</ViFormElement>
+				<ViFormElement Label="Salary">
+					<ViNumberInput @bind-Value="@employee.Salary" ValidationFor="@(() => employee.Salary)" />
+					<span>@employee.Salary</span>
+				</ViFormElement>
 
-					@*
-					public string Role { get; set; }
+				@*
+				public string Role { get; set; }
 
-					public string? PhoneNumber { get; set; }
+				public string? PhoneNumber { get; set; }
 
-					*@
+				*@
 
-					<ViFormElement Label="TravelDistance (nullable)">
-						<ViNumberInput @bind-Value="@employee.TravelDistance" ValidationFor="@(() => employee.TravelDistance)" />
-						<span>
-							@if (@employee.TravelDistance == null) {
-								<i>null</i>
-							} else {
-								<text>@employee.TravelDistance</text>
-							}
-						</span>
-					</ViFormElement>
+				<ViFormElement Label="TravelDistance (nullable)">
+					<ViNumberInput @bind-Value="@employee.TravelDistance" ValidationFor="@(() => employee.TravelDistance)" />
+					<span>
+						@if (@employee.TravelDistance == null)
+						{
+							<i>null</i>
+						}
+						else
+						{
+							<text>@employee.TravelDistance</text>
+						}
+					</span>
+				</ViFormElement>
 
-					<ViFormElement Label="Remarks">
-						<ViTextArea @bind-Value="@employee.Remarks" ValidationFor="@(() => employee.Remarks)" />
-						<span>@employee.Remarks</span>
-					</ViFormElement>
+				<ViFormElement Label="Remarks">
+					<ViTextArea @bind-Value="@employee.Remarks" ValidationFor="@(() => employee.Remarks)" />
+					<span>@employee.Remarks</span>
+				</ViFormElement>
 
-					<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
-				</Body>
-			</ViCard>
+				<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
+			</Body>
+		</ViCard>
 
-			<ViCard CssClass="mt-2">
-				<Header><ViCardTitle>Address</ViCardTitle></Header>
-				<Body>
+		<ViCard CssClass="mt-2">
+			<Header><ViCardTitle>Address</ViCardTitle></Header>
+			<Body>
 
-					<ViFormElement Label="Street And Number" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.Address.StreetAndNumber" ValidationFor="@(() => employee.Address.StreetAndNumber)" />
-						<span>@employee.Address.StreetAndNumber</span>
-					</ViFormElement>
-					<ViFormElement Label="Postal Code" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.Address.PostalCode" ValidationFor="@(() => employee.Address.PostalCode)" />
-						<span>@employee.Address.PostalCode</span>
-					</ViFormElement>
-					<ViFormElement Label="City" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.Address.City" ValidationFor="@(() => employee.Address.City)" />
-						<span>@employee.Address.City</span>
-					</ViFormElement>
-					<ViFormElement Label="Country" IsRequired="true">
-						<ViTextInput @bind-Value="@employee.Address.CountryCode" ValidationFor="@(() => employee.Address.CountryCode)" />
-						<span>@employee.Address.CountryCode</span>
-					</ViFormElement>
+				<ViFormElement Label="Street And Number" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.Address.StreetAndNumber" ValidationFor="@(() => employee.Address.StreetAndNumber)" />
+					<span>@employee.Address.StreetAndNumber</span>
+				</ViFormElement>
+				<ViFormElement Label="Postal Code" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.Address.PostalCode" ValidationFor="@(() => employee.Address.PostalCode)" />
+					<span>@employee.Address.PostalCode</span>
+				</ViFormElement>
+				<ViFormElement Label="City" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.Address.City" ValidationFor="@(() => employee.Address.City)" />
+					<span>@employee.Address.City</span>
+				</ViFormElement>
+				<ViFormElement Label="Country" IsRequired="true">
+					<ViTextInput @bind-Value="@employee.Address.CountryCode" ValidationFor="@(() => employee.Address.CountryCode)" />
+					<span>@employee.Address.CountryCode</span>
+				</ViFormElement>
 
-					<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
-				</Body>
-			</ViCard>
-		</ViForm>
-	</ViPageBody>
-</ViPage>
-
-
+				<ViButton Color="@ThemeColor.Primary" Type="ButtonType.Submit">Save</ViButton>
+			</Body>
+		</ViCard>
+	</ViForm>
+</ViPageBody>
 
 @code {
 

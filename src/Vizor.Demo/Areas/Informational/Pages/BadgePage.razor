@@ -1,102 +1,98 @@
 ﻿@page "/doc/vizor/info/badge"
 @using Vizor.Icons.Tabler
 
-<ViPage>
-	<ViPageHeader CategoryText="Informational" TitleText="Badge"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Informational" TitleText="Badge"></ViPageHeader>
+<ViPageBody>
 
-		<ViCard>
-			<Header><ViCardTitle>Default Style</ViCardTitle></Header>
-			<Body>
-				<ViBadge Color="@ThemeColor.Primary" Text="primary" />
-				<ViBadge Color="@ThemeColor.Secondary" Text="secondary" />
-				<ViBadge Color="@ThemeColor.Success" Text="success" />
-				<ViBadge Color="@ThemeColor.Danger" Text="danger" />
-				<ViBadge Color="@ThemeColor.Warning" Text="warning" />
-				<ViBadge Color="@ThemeColor.Info" Text="info" />
-				<ViBadge Color="@ThemeColor.Light" Text="light" />
-				<ViBadge Color="@ThemeColor.Dark" Text="dark" />
-			</Body>
-		</ViCard>
+	<ViCard>
+		<Header><ViCardTitle>Default Style</ViCardTitle></Header>
+		<Body>
+			<ViBadge Color="@ThemeColor.Primary" Text="primary" />
+			<ViBadge Color="@ThemeColor.Secondary" Text="secondary" />
+			<ViBadge Color="@ThemeColor.Success" Text="success" />
+			<ViBadge Color="@ThemeColor.Danger" Text="danger" />
+			<ViBadge Color="@ThemeColor.Warning" Text="warning" />
+			<ViBadge Color="@ThemeColor.Info" Text="info" />
+			<ViBadge Color="@ThemeColor.Light" Text="light" />
+			<ViBadge Color="@ThemeColor.Dark" Text="dark" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Alternative Colors</ViCardTitle></Header>
-			<Body>
-				<ViBadge Color="@ThemeColor.Blue" Text="blue" />
-				<ViBadge Color="@ThemeColor.Azure" Text="azure" />
-				<ViBadge Color="@ThemeColor.Indigo" Text="indigo" />
-				<ViBadge Color="@ThemeColor.Purple" Text="purple" />
-				<ViBadge Color="@ThemeColor.Pink" Text="pink" />
-				<ViBadge Color="@ThemeColor.Red" Text="red" />
-				<ViBadge Color="@ThemeColor.Orange" Text="orange" />
-				<ViBadge Color="@ThemeColor.Yellow" Text="yellow" />
-				<ViBadge Color="@ThemeColor.Lime" Text="lime" />
-				<ViBadge Color="@ThemeColor.Green" Text="green" />
-				<ViBadge Color="@ThemeColor.Teal" Text="teal" />
-				<ViBadge Color="@ThemeColor.Cyan" Text="cyan" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Alternative Colors</ViCardTitle></Header>
+		<Body>
+			<ViBadge Color="@ThemeColor.Blue" Text="blue" />
+			<ViBadge Color="@ThemeColor.Azure" Text="azure" />
+			<ViBadge Color="@ThemeColor.Indigo" Text="indigo" />
+			<ViBadge Color="@ThemeColor.Purple" Text="purple" />
+			<ViBadge Color="@ThemeColor.Pink" Text="pink" />
+			<ViBadge Color="@ThemeColor.Red" Text="red" />
+			<ViBadge Color="@ThemeColor.Orange" Text="orange" />
+			<ViBadge Color="@ThemeColor.Yellow" Text="yellow" />
+			<ViBadge Color="@ThemeColor.Lime" Text="lime" />
+			<ViBadge Color="@ThemeColor.Green" Text="green" />
+			<ViBadge Color="@ThemeColor.Teal" Text="teal" />
+			<ViBadge Color="@ThemeColor.Cyan" Text="cyan" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Outline Style</ViCardTitle></Header>
-			<Body>
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Blue" Text="blue" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Azure" Text="azure" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Indigo" Text="indigo" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Purple" Text="purple" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Pink" Text="pink" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Red" Text="red" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Orange" Text="orange" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Yellow" Text="yellow" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Lime" Text="lime" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Green" Text="green" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Teal" Text="teal" />
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Cyan" Text="cyan" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Outline Style</ViCardTitle></Header>
+		<Body>
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Blue" Text="blue" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Azure" Text="azure" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Indigo" Text="indigo" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Purple" Text="purple" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Pink" Text="pink" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Red" Text="red" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Orange" Text="orange" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Yellow" Text="yellow" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Lime" Text="lime" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Green" Text="green" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Teal" Text="teal" />
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Cyan" Text="cyan" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Light Style</ViCardTitle></Header>
-			<Body>
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Blue" Text="blue" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Azure" Text="azure" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Indigo" Text="indigo" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Purple" Text="purple" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Pink" Text="pink" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Red" Text="red" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Orange" Text="orange" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Yellow" Text="yellow" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Lime" Text="lime" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Green" Text="green" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Teal" Text="teal" />
-				<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Cyan" Text="cyan" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Light Style</ViCardTitle></Header>
+		<Body>
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Blue" Text="blue" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Azure" Text="azure" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Indigo" Text="indigo" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Purple" Text="purple" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Pink" Text="pink" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Red" Text="red" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Orange" Text="orange" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Yellow" Text="yellow" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Lime" Text="lime" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Green" Text="green" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Teal" Text="teal" />
+			<ViBadge Style="@BadgeStyle.Light" Color="@ThemeColor.Cyan" Text="cyan" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Pill Style</ViCardTitle></Header>
-			<Body>
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Primary" Text="1" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Secondary" Text="2" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Success" Text="3" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Danger" Text="4" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Warning" Text="5" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Info" Text="6" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Light" Text="7" />
-				<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Dark" Text="8" />
-			</Body>
-		</ViCard>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Pill Style</ViCardTitle></Header>
+		<Body>
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Primary" Text="1" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Secondary" Text="2" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Success" Text="3" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Danger" Text="4" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Warning" Text="5" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Info" Text="6" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Light" Text="7" />
+			<ViBadge Style="@BadgeStyle.Pill" Color="@ThemeColor.Dark" Text="8" />
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Link</ViCardTitle></Header>
-			<Body>
-				<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Primary" Link="#"><b>Bold Link Home</b></ViBadge>
-			</Body>
-		</ViCard>
-	</ViPageBody>
-</ViPage>
-
-
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Link</ViCardTitle></Header>
+		<Body>
+			<ViBadge Style="@BadgeStyle.Outline" Color="@ThemeColor.Primary" Link="#"><b>Bold Link Home</b></ViBadge>
+		</Body>
+	</ViCard>
+</ViPageBody>
 
 @code {
 

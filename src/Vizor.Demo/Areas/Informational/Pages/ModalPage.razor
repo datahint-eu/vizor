@@ -4,36 +4,32 @@
 
 @using Vizor.Demo.Areas.Informational.Modals;
 
-<ViPage>
-	<ViPageHeader CategoryText="Informational" TitleText="Modals"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Informational" TitleText="Modals"></ViPageHeader>
+<ViPageBody>
 
-		<ViCard>
-			<Header><ViCardTitle>Simple Modal</ViCardTitle></Header>
-			<Body>
-				<ViButton OnClick="ShowSimpleModal">Show</ViButton>
+	<ViCard>
+		<Header><ViCardTitle>Simple Modal</ViCardTitle></Header>
+		<Body>
+			<ViButton OnClick="ShowSimpleModal">Show</ViButton>
 
-				<br />
-				Result: @simpleModalResult
-			</Body>
-		</ViCard>
+			<br />
+			Result: @simpleModalResult
+		</Body>
+	</ViCard>
 
-		<ViCard CssClass="mt-2">
-			<Header><ViCardTitle>Status Modal</ViCardTitle></Header>
-			<Body>
-				<ViButton Color="@ThemeColor.Primary" OnClick="ShowInfoModal">Info</ViButton>
-				<ViButton Color="@ThemeColor.Success" OnClick="ShowSuccessModal">Success</ViButton>
-				<ViButton Color="@ThemeColor.Warning" OnClick="ShowWarningModal">Warning</ViButton>
-				<ViButton Color="@ThemeColor.Danger" OnClick="ShowDangerModal">Danger</ViButton>
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>Status Modal</ViCardTitle></Header>
+		<Body>
+			<ViButton Color="@ThemeColor.Primary" OnClick="ShowInfoModal">Info</ViButton>
+			<ViButton Color="@ThemeColor.Success" OnClick="ShowSuccessModal">Success</ViButton>
+			<ViButton Color="@ThemeColor.Warning" OnClick="ShowWarningModal">Warning</ViButton>
+			<ViButton Color="@ThemeColor.Danger" OnClick="ShowDangerModal">Danger</ViButton>
 
-				<br />
-				Result: @statusModalResult
-			</Body>
-		</ViCard>
-	</ViPageBody>
-</ViPage>
-
-
+			<br />
+			Result: @statusModalResult
+		</Body>
+	</ViCard>
+</ViPageBody>
 
 @code {
 

@@ -17,8 +17,10 @@
 
 @inherits ViComponentBase
 
-<div class="@CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
+<div class="page-body @CssClass" @attributes="AdditionalAttributes">
+	<div class="container-xl">
+		@ChildContent
+	</div>
 </div>
 
 @code {

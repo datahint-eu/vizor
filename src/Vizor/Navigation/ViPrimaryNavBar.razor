@@ -26,10 +26,14 @@
 		{
 			<div class="collapse navbar-collapse" id="@Id">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					@MenuItems
+					<CascadingValue IsFixed="true" Value="true" Name="ViAutoClose">
+						@MenuItems
+					</CascadingValue>
 				</ul>
 			</div>
 		}
+
+		@Start
 		@if (End != null)
 		{
 			<div class="navbar-nav flex-row order-md-last">
@@ -65,6 +69,9 @@
 
 	[Parameter]
 	public RenderFragment? End { get; set; }
+
+	[Parameter]
+	public RenderFragment? Start { get; set; }
 
 	public static string? ToPlacement(NavbarPlacement placement)
 	{

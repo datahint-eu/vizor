@@ -15,10 +15,15 @@
 //   limitations under the License.
 *@
 
+@using Microsoft.AspNetCore.Components.Routing;
+
 @inherits ViComponentBase
+@implements IDisposable
+
+@inject NavigationManager NavigationManager
 
 <li class="@CssClass" disabled="@IsDisabled.ToConditionalAttribute()">
-	<a class="dropdown-item" href="@Link">
+	<a class="dropdown-item @(IsActive ? "active" : "")" href="@Link" @onclick="HandleClick">
 		@ChildContent
 		@Text
 	</a>
@@ -29,7 +34,7 @@
 
 	//TODO: CssClass, attributes, custom hX
 
-	// see https://getbootstrap.com/docs/5.2/components/dropdowns/
+	private string? absoluteLink;
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
@@ -40,8 +45,46 @@
 	[Parameter]
 	public string? Link { get; set; }
 
-	//TODO: onclick
+	[Parameter]
+	public EventCallback<MouseEventArgs> OnClick { get; set; }
 
 	[Parameter]
 	public bool IsDisabled { get; set; }
+
+	[Parameter]
+	public bool IsActive { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		absoluteLink = Link == null ? null : NavigationManager.ToAbsoluteUri(Link).AbsoluteUri;
+		IsActive = NavigationManager.IsMatch(absoluteLink);
+	}
+
+	protected override void OnInitialized()
+	{
+		NavigationManager.LocationChanged += HandleLocationChanged;
+	}
+
+	private async Task HandleClick(MouseEventArgs e)
+	{
+		if (OnClick.HasDelegate)
+		{
+			await OnClick.InvokeAsync(e);
+		}
+	}
+
+	public void Dispose()
+	{
+		NavigationManager.LocationChanged -= HandleLocationChanged;
+	}
+
+	private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+	{
+		var active = NavigationManager.IsMatch(absoluteLink);
+		if (IsActive != active)
+		{
+			IsActive = active;
+			StateHasChanged();
+		}
+	}
 }

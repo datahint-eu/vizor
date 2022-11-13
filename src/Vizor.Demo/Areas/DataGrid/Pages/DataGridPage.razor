@@ -1,32 +1,28 @@
 ﻿@page "/doc/vizor/datagrid"
 @using Vizor.Documentation.Areas.DataGrid.Models;
 
-<ViPage>
-	<ViPageHeader CategoryText="DataGrid" TitleText="DataGrid"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="DataGrid" TitleText="DataGrid"></ViPageHeader>
+<ViPageBody>
 
-		<ViDataGrid TItem="Car" DataSource="@cars" TitleText="Cars" UsePagination="false">
-			<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" IsSortable="true" />
-			<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" IsSortable="true" />
-			<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" IsSortable="true" />
-		</ViDataGrid>
+	<ViDataGrid TItem="Car" DataSource="@cars" TitleText="Cars" UsePagination="false">
+		<ViSimpleColumn TItem="Car" Name="Brand" ValueExpr="(item) => item.Brand" IsSortable="true" />
+		<ViSimpleColumn TItem="Car" Name="Model" ValueExpr="(item) => item.Model" IsSortable="true" />
+		<ViSimpleColumn TItem="Car" Name="Price" ValueExpr="(item) => item.Price" IsSortable="true" />
+	</ViDataGrid>
 
-		<ViDataGrid CssClass="mt-2" TItem="UserAccount" DataSource="@users" TitleText="Users" UsePagination="true">
-			<Header>
-				<div class="text-muted">1 second delay to simulate loading</div>
-			</Header>
-			<ChildContent>
-				<ViSimpleColumn TItem="UserAccount" Name="Index" ValueExpr="(item) => item.Index" IsSortable="true" />
-				<ViSimpleColumn TItem="UserAccount" Name="First Name" ValueExpr="(item) => item.FirstName" IsSortable="true" />
-				<ViSimpleColumn TItem="UserAccount" Name="Last Name" ValueExpr="(item) => item.LastName" IsSortable="true" />
-				<ViSimpleColumn TItem="UserAccount" Name="Email" ValueExpr="(item) => item.Email" IsSortable="true" />
-				<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" IsSortable="true" />
-			</ChildContent>
-		</ViDataGrid>
-	</ViPageBody>
-</ViPage>
-
-
+	<ViDataGrid CssClass="mt-2" TItem="UserAccount" DataSource="@users" TitleText="Users" UsePagination="true">
+		<Header>
+			<div class="text-muted">1 second delay to simulate loading</div>
+		</Header>
+		<ChildContent>
+			<ViSimpleColumn TItem="UserAccount" Name="Index" ValueExpr="(item) => item.Index" IsSortable="true" />
+			<ViSimpleColumn TItem="UserAccount" Name="First Name" ValueExpr="(item) => item.FirstName" IsSortable="true" />
+			<ViSimpleColumn TItem="UserAccount" Name="Last Name" ValueExpr="(item) => item.LastName" IsSortable="true" />
+			<ViSimpleColumn TItem="UserAccount" Name="Email" ValueExpr="(item) => item.Email" IsSortable="true" />
+			<ViSimpleColumn TItem="UserAccount" Name="Age" ValueExpr="(item) => item.Age" IsSortable="true" />
+		</ChildContent>
+	</ViDataGrid>
+</ViPageBody>
 
 @code {
 

@@ -2,22 +2,19 @@
 
 @inject ViToastService ToastService
 
-<ViPage>
-	<ViPageHeader CategoryText="Informational" TitleText="Toast"></ViPageHeader>
-	<ViPageBody>
+<ViPageHeader CategoryText="Informational" TitleText="Toast"></ViPageHeader>
+<ViPageBody>
 
-		<ViCard>
-			<Header><ViCardTitle>Toast With Title</ViCardTitle></Header>
-			<Body>
-				<ViButton Color="@ThemeColor.Success" OnClick="ShowSuccessToast">Success</ViButton>
-				<ViButton Color="@ThemeColor.Warning" OnClick="ShowWarningToast">Warning</ViButton>
-				<ViButton Color="@ThemeColor.Danger" OnClick="ShowDangerToast">Danger</ViButton>
-				<ViButton Color="@ThemeColor.Info" OnClick="ShowInfoToast">Info</ViButton>
-			</Body>
-		</ViCard>
-	</ViPageBody>
-</ViPage>
-
+	<ViCard>
+		<Header><ViCardTitle>Toast With Title</ViCardTitle></Header>
+		<Body>
+			<ViButton Color="@ThemeColor.Success" OnClick="ShowSuccessToast">Success</ViButton>
+			<ViButton Color="@ThemeColor.Warning" OnClick="ShowWarningToast">Warning</ViButton>
+			<ViButton Color="@ThemeColor.Danger" OnClick="ShowDangerToast">Danger</ViButton>
+			<ViButton Color="@ThemeColor.Info" OnClick="ShowInfoToast">Info</ViButton>
+		</Body>
+	</ViCard>
+</ViPageBody>
 
 
 @code {

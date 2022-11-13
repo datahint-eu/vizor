@@ -5,15 +5,11 @@
 <ViModalRenderer />
 <ViToastRenderer />
 
-<div class="page">
-	<NavMenu />
-
-	<main>
-		<article class="content px-4">
-			@Body
-		</article>
-	</main>
-</div>
+<ViPage>
+	<SideNav><SideNav /></SideNav>
+	<TopNav><TopNav /></TopNav>
+	<Content>@Body</Content>
+</ViPage>
 
 @code {
 

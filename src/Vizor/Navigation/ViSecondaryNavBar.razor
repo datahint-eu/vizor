@@ -22,7 +22,9 @@
 				@if (MenuItems != null)
 				{
 					<ul class="navbar-nav">
-						@MenuItems
+						<CascadingValue IsFixed="true" Value="true" Name="ViAutoClose">
+							@MenuItems
+						</CascadingValue>
 					</ul>
 				}
 				@if (End != null)

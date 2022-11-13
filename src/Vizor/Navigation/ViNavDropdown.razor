@@ -18,7 +18,7 @@
 @inherits ViComponentBase
 
 <li class="nav-item dropdown @CssClass" @attributes="AdditionalAttributes">
-	<a class="nav-link dropdown-toggle" href="#test" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="@AutoClose.ToTrueFalse()" aria-haspopup="true" aria-expanded="false">
 		@if (Icon != null)
 		{
 			<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -51,4 +51,7 @@
 
 	[Parameter, EditorRequired]
 	public RenderFragment ChildContent { get; set; } = default!;
+
+	[CascadingParameter(Name = "ViAutoClose")]
+	public bool AutoClose { get; set; }
 }

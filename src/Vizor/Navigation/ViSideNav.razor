@@ -17,8 +17,29 @@
 
 @inherits ViComponentBase
 
-<span>TODO</span>
+<aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+	<div class="container-fluid">
+		@Toggler
+		@Brand
+
+		<div class="collapse navbar-collapse" id="sidebar-menu">
+			<ul class="navbar-nav pt-lg-3">
+				<CascadingValue IsFixed="true" Value="false" Name="ViAutoClose">
+					@MenuItems
+				</CascadingValue>
+			</ul>
+		</div>
+	</div>
+</aside>
 
 @code {
 
+	[Parameter]
+	public RenderFragment? Brand { get; set; }
+
+	[Parameter]
+	public RenderFragment? Toggler { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment MenuItems { get; set; } = default!;
 }

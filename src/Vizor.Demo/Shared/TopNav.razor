@@ -1,0 +1,21 @@
+﻿<ViPrimaryNavBar Id="mainNav" Color="@ThemeColor.Light" CssClass="">
+	<Start>
+		<ViNavSearch />
+	</Start>
+</ViPrimaryNavBar>
+
+@code {
+	private bool collapseNavMenu = true;
+
+	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	private RenderFragment GetIcon(IconData icon)
+	{
+		return @<TablerSvgIcon Icon="@icon" />;
+	}
+}
