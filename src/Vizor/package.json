@@ -8,6 +8,7 @@
     "license": "Apache 2.0",
     "devDependencies": {
         "bootstrap": "^5.2.0",
+        "child_process": "^1.0.2",
         "gulp": "^4.0.2",
         "gulp-clean": "^0.4.0",
         "gulp-clean-css": "^4.3.0",

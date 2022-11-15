@@ -3,7 +3,7 @@
 //
 // in the project dir:
 //   npm init
-//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify gulp-postcss
+//   npm install --save-dev gulp gulp-rename gulp-clean gulp-sass gulp-clean-css sass gulp-concat gulp-minify gulp-postcss child_process
 //   npm install @tabler/core
 //
 // to build:
@@ -18,6 +18,7 @@ var path = require('path'),
 	cleancss = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	minify = require('gulp-minify');
+var exec = require("child_process").exec;
 
 var vizorStyles = './Styles';
 var vizorScripts = './Scripts';
@@ -91,6 +92,16 @@ gulp.task('buildJs', () => {
 		.pipe(concat('vizor-all.js'))
 		.pipe(minify())
 		.pipe(gulp.dest(destPaths.js))
+});
+
+gulp.task("publishLocal", function (callback) {
+	exec(
+		"Powershell.exe -executionpolicy remotesigned . .\\publish_local.ps1 -Push:1",
+		function (err, stdout, stderr) {
+			console.log(stdout);
+			callback(err);
+		}
+	);
 });
 
 gulp.task('cleanup', gulp.series(['clean']));
