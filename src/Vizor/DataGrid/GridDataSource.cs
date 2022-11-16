@@ -41,21 +41,21 @@ internal class GridDataSource<TItem>
 		{
 			loader = new ArrayGridDataSourceWrapper<TItem>(arr);
 		}
-		else if (dataSource is IDataSource<TItem> source)
+		else if (dataSource is IGridDataSource<TItem> source)
 		{
 			loader = new NonSortableDataSourceWrapper<TItem>(source);
 		}
-		else if (dataSource is ISortableDataSource<TItem> sortableSource)
+		else if (dataSource is ISortableGridDataSource<TItem> sortableSource)
 		{
 			loader = new SortableDataSourceWrapper<TItem>(sortableSource);
 		}
-		else if (dataSource is ISortableExprDataSource<TItem> sortableExprSource)
+		else if (dataSource is ISortableExprGridDataSource<TItem> sortableExprSource)
 		{
 			loader = new SortableExprDataSourceWrapper<TItem>(sortableExprSource);
 		}
 		else
 		{
-			throw new ArgumentException($"DataSource must be of type {typeof(IReadOnlyList<TItem>)} or {typeof(IDataSource<TItem>)} or {typeof(TItem[])} or {typeof(ISortableDataSource<TItem>)} or {typeof(ISortableExprDataSource<TItem>)}");
+			throw new ArgumentException($"DataSource must be of type {typeof(IReadOnlyList<TItem>)} or {typeof(IGridDataSource<TItem>)} or {typeof(TItem[])} or {typeof(ISortableGridDataSource<TItem>)} or {typeof(ISortableExprGridDataSource<TItem>)}");
 		}
 	}
 

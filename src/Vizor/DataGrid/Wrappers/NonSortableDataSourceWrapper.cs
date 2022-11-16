@@ -19,9 +19,9 @@ namespace Vizor.DataGrid.Wrappers;
 
 internal class NonSortableDataSourceWrapper<TItem> : IGridDataSourceWrapper<TItem>
 {
-	private readonly IDataSource<TItem> source;
+	private readonly IGridDataSource<TItem> source;
 
-	public NonSortableDataSourceWrapper(IDataSource<TItem> source)
+	public NonSortableDataSourceWrapper(IGridDataSource<TItem> source)
 	{
 		this.source = source;
 	}

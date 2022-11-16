@@ -18,7 +18,7 @@ public struct UserAccount
     public int Index { get; set; }
 }
 
-public class UserAccountDataSource : ISortableDataSource<UserAccount>
+public class UserAccountDataSource : ISortableGridDataSource<UserAccount>
 {
     private const int TotalCount = 500;
     private List<UserAccount> users = new(TotalCount);

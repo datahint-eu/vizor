@@ -15,7 +15,7 @@
 
 namespace Vizor.Data;
 
-public interface IDataSource<TItem>
+public interface IGridDataSource<TItem>
 {
 	Task<int> Count();
 

@@ -21,9 +21,9 @@ namespace Vizor.DataGrid.Wrappers;
 
 internal class SortableDataSourceWrapper<TItem> : IGridDataSourceWrapper<TItem>
 {
-	private readonly ISortableDataSource<TItem> source;
+	private readonly ISortableGridDataSource<TItem> source;
 
-	public SortableDataSourceWrapper(ISortableDataSource<TItem> source)
+	public SortableDataSourceWrapper(ISortableGridDataSource<TItem> source)
 	{
 		this.source = source;
 	}

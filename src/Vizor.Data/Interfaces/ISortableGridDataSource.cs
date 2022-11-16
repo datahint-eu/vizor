@@ -13,13 +13,11 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using System.Linq.Expressions;
-
 namespace Vizor.Data;
 
-public interface ISortableExprDataSource<TItem>
+public interface ISortableGridDataSource<TItem>
 {
 	Task<int> Count();
 
-	Task<ICollection<TItem>> LoadDataAsync(int offset, int count, Expression<Func<TItem, object?>>? sortExpr, ViSortOrder sortOrder);
+	Task<ICollection<TItem>> LoadDataAsync(int offset, int count, string? propertyName, ViSortOrder sortOrder);
 }
