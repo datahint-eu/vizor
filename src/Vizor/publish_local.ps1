@@ -4,8 +4,7 @@
 
 param (
     [string]$Folder = "D:\\Dev\\NugetLocal",
-    [string]$BuildConfig = "Release",
-    [Boolean]$Push = $false
+    [string]$BuildConfig = "Release"
 )
 
 [xml]$xmlElem = Get-Content -Path Vizor.csproj
@@ -14,8 +13,5 @@ $version = ($xmlElem.Project.PropertyGroup.Version).Trim()
 Write-Host -ForegroundColor Green "Building Vizor version $version"
 &dotnet "pack" "-p:PackageVersion=$version" "Vizor.csproj" "-c:$BuildConfig"
 
-if ($Push) {
-	Write-Host -ForegroundColor Green "Pushing Vizor version $version to $Folder"
-	&nuget "add" "bin/$BuildConfig/Vizor.$version.nupkg" "-Source" "$Folder"
-}
-
+Write-Host -ForegroundColor Green "Pushing Vizor version $version to $Folder"
+&nuget "add" "bin/$BuildConfig/Vizor.$version.nupkg" "-Source" "$Folder"

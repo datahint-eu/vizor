@@ -11,10 +11,16 @@
 
 		<Product>Vizor data interfaces</Product>
 		<ProductName>Vizor.Data</ProductName>
-		<Version>0.3.0</Version>
+		<Version>0.3.2</Version>
 		<ProductVersion>$(Version)</ProductVersion>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="node_modules\**" />
+	  <EmbeddedResource Remove="node_modules\**" />
+	  <None Remove="node_modules\**" />
+	</ItemGroup>
 
 </Project>
