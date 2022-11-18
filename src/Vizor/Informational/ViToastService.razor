@@ -45,7 +45,7 @@
 	public Task ShowInfo(string title, string? message = null, string? subTitle = null, int delayMs = 7000)
 		=> ShowWithColor(ThemeColor.Info, title, message, subTitle, delayMs);
 
-	internal async Task ShowWithColor(string color, string title, string? message = null, string? subTitle = null, int delayMs = 7000)
+	internal async Task ShowWithColor(RgbaColor color, string title, string? message = null, string? subTitle = null, int delayMs = 7000)
 	{
 		var id = RazorExtensions.RandomId();
 		RenderFragment? fragment = builder =>

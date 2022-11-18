@@ -14,33 +14,38 @@
 //   limitations under the License.
 
 using Vizor.Enums;
+using Vizor.Structs;
 
 namespace Vizor;
 
 public static class ColorConverter
 {
-	public static string? ToBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"bg-{color}";
+	public static string? ToBgColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"bg-{color.Value.ColorName}" : null;
 
-	public static string? ToLightBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"bg-{color}-lt";
+	public static string? ToLightBgColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"bg-{color.Value.ColorName}-lt" : null;
 
-	public static string? ToStatusColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"status-{color}";
+	public static string? ToStatusColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"status-{color.Value.ColorName}" : null;
 
-	public static string? ToAlertColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"alert-{color}";
+	public static string? ToAlertColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"alert-{color.Value.ColorName}" : null;
 
-    public static string? ToNavBarColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"navbar-{color}";
+	public static string? ToNavBarColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"navbar-{color.Value.ColorName}" : null;
 
-    public static string? ToBtnColor([NotNullIfNotNull(nameof(color))] string? color, ButtonStyle style)
+	public static string? ToBtnColor([NotNullIfNotNull(nameof(color))] RgbaColor? color, ButtonStyle style)
 	{
 		//TODO: support for pill, ghost
 
-		return style switch
+		if (color.HasValue && color.Value.ColorName != null)
 		{
-			ButtonStyle.Outline => color == null ? "btn-outline" : $"btn-outline-{color}",
-			_ => color == null ? null : $"btn-{color}",
-		};
+			return style switch
+			{
+				ButtonStyle.Outline => color == null ? "btn-outline" : $"btn-outline-{color.Value.ColorName}",
+				_ => color == null ? null : $"btn-{color.Value.ColorName}",
+			};
+		}
+		return null;
 	}
 
-	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"text-{color}";
+	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"text-{color.Value.ColorName}" : null;
 
-	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] string? color) => color == null ? null : $"text-bg-{color}";
+	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] RgbaColor? color) => color.HasValue && color.Value.ColorName != null ? $"text-bg-{color.Value.ColorName}" : null;
 }
