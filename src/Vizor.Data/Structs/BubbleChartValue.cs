@@ -17,15 +17,21 @@ using System.Numerics;
 
 namespace Vizor.Data.Structs;
 
-public struct ChartValue<Tx, Ty> where Ty : INumber<Ty>
+public struct BubbleChartValue<Tx, Ty, Tr>
+	where Tx : INumber<Tx>
+	where Ty : INumber<Ty>
+	where Tr : INumber<Tr>
 {
-	public ChartValue(Tx x, Ty y)
+	public BubbleChartValue(Tx x, Ty y, Tr r)
 	{
 		X = x;
 		Y = y;
+		R = r;
 	}
 
 	public Tx X { get; set; }
 
 	public Ty Y { get; set; }
+
+	public Tr R { get; set; }
 }

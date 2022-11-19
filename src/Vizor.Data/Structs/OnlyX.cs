@@ -17,15 +17,12 @@ using System.Numerics;
 
 namespace Vizor.Data.Structs;
 
-public struct ChartValue<Tx, Ty> where Ty : INumber<Ty>
+public struct OnlyX<Tx, Ty> where Ty : INumber<Ty>
 {
-	public ChartValue(Tx x, Ty y)
+	public OnlyX(IEnumerable<ChartValue<Tx,Ty>> values)
 	{
-		X = x;
-		Y = y;
+		Values = values;
 	}
 
-	public Tx X { get; set; }
-
-	public Ty Y { get; set; }
+	public IEnumerable<ChartValue<Tx, Ty>> Values { get; }
 }
