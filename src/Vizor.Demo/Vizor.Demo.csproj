@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vizor.Documentation\Vizor.Documentation.csproj" />
     <ProjectReference Include="..\Vizor\Vizor.csproj" />
   </ItemGroup>
 
