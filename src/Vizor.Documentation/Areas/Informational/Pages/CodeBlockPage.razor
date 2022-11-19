@@ -1,0 +1,42 @@
+﻿@page "/doc/vizor/info/code"
+@using Vizor.Icons.Tabler
+
+<ViPageHeader CategoryText="Informational" TitleText="Code">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
+<ViPageBody>
+
+	<ViCard>
+		<Header><ViCardTitle>CSharp</ViCardTitle></Header>
+		<Body>
+			<ViCodeBlock Language="csharp">
+private string? GetLanguageClass()
+{
+	return Language switch
+	{
+		ProgrammingLanguage.Csharp => "language-csharp",
+		ProgrammingLanguage.Razor => "language-razor",
+		ProgrammingLanguage.Html => "language-html",
+		ProgrammingLanguage.Css => "language-css",
+		ProgrammingLanguage.Javascript => "language-javascript",
+		ProgrammingLanguage.Typescript => "language-typescript",
+		_ => null
+	};
+}</ViCodeBlock>
+		</Body>
+	</ViCard>
+
+	<ViCard CssClass="mt-2">
+		<Header><ViCardTitle>External File</ViCardTitle></Header>
+		<Body>
+			<ViCodeBlock Language="csharp" ExternalFile="https://raw.githubusercontent.com/datahint-eu/vizor/main/src/Vizor/DataGrid/GridDataSource.cs" />
+		</Body>
+	</ViCard>
+
+</ViPageBody>
+
+@code {
+
+}

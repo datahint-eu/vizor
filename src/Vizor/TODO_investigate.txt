@@ -17,7 +17,9 @@
   - https://codepen.io/typo3-freelancer/pen/poEvyGj (plain BS5 multi level topnav + mega menu)
   - https://themes.getbootstrap.com/preview/?theme_id=1692 (maisonette) !!
 
- 
+code preview:
+ - https://prismjs.com/ with tomorrow night theme
+
 forms & validation:
  - https://colorlib.com/wp/bootstrap-form-validation/
 
@@ -52,3 +54,14 @@ charts:
  - https://www.chartjs.org/ + https://github.com/mariusmuntean/ChartJs.Blazor/tree/master/src/ChartJs.Blazor
  - https://apexcharts.com/ + https://github.com/apexcharts/Blazor-ApexCharts
  - sparklines
+
+
+admin templates:
+ - https://github.com/tabler/tabler
+ - https://github.com/zuramai/mazer: avatars, rating, to-do list, file upload, 403-404-500
+ - https://github.com/themeselection/sneat-html-admin-template-free: (mini) cards (with charts)
+ - https://github.com/coreui/coreui-free-bootstrap-admin-template: widgets, login, dashboard
+ - https://github.com/adminkit/adminkit: mini cards, profile page
+ - https://github.com/codescandy/Dash-UI: pricing, billing, settings
+ - https://github.com/BootstrapDash/PurpleAdmin-Free-Admin-Template: 404, 500, dashboard cards
+ - https://github.com/BootstrapDash/MajesticAdmin-Free-Bootstrap-Admin-Template: tab-card concept

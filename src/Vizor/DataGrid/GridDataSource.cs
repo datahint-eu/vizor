@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
-using Vizor.Data;
-//   Copyright 2022 DataHint BV
+﻿//   Copyright 2022 DataHint BV
 //   Copyright 2022 Ben Motmans
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +14,7 @@ using Vizor.Data;
 //   limitations under the License.
 
 using Vizor.DataGrid.Wrappers;
-using Vizor.Informational;
+using Vizor.Data;
 
 namespace Vizor.DataGrid;
 

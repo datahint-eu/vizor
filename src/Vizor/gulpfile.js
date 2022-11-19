@@ -20,28 +20,36 @@ var path = require('path'),
 	minify = require('gulp-minify');
 var exec = require("child_process").exec;
 
+var vizorScss = './Styles/Scss';
 var vizorStyles = './Styles';
 var vizorScripts = './Scripts';
+var vendorScripts = './Scripts/Vendor';
 var wwwroot = path.resolve(__dirname, "wwwroot");
 var libroot = path.resolve(__dirname, "./node_modules");
 
 
 var srcPaths = {
 	scss: [
-		path.resolve(vizorStyles, 'vizor.scss'),
+		path.resolve(vizorScss, 'vizor.scss'),
 	],
 
 	css: [
-		path.resolve(libroot, 'tom-select/dist/css/tom-select.bootstrap5.min.css')
+		path.resolve(libroot, 'tom-select/dist/css/tom-select.bootstrap5.min.css'),
+		path.resolve(vizorStyles, 'prism.css'), // really small, so simply include ?
 	],
 
 	js: [
 		path.resolve(libroot, 'bootstrap/dist/js/bootstrap.bundle.min.js'),
 		//TODO: this breaks bootstrap: path.resolve(libroot, '@tabler/core/dist/js/tabler.min.js'),
 		path.resolve(libroot, 'tom-select/dist/js/tom-select.complete.min.js'),
+		path.resolve(vizorScripts, 'highlight.js'),
 		path.resolve(vizorScripts, 'modal.js'),
 		path.resolve(vizorScripts, 'select.js'),
-		path.resolve(vizorScripts, 'toast.js')
+		path.resolve(vizorScripts, 'toast.js'),
+	],
+
+	vendorPrism: [
+		path.resolve(vendorScripts, 'prism.js'),
 	]
 };
 
@@ -94,6 +102,13 @@ gulp.task('buildJs', () => {
 		.pipe(gulp.dest(destPaths.js))
 });
 
+gulp.task('buildPrism', () => {
+	return gulp.src(srcPaths.vendorPrism)
+		.pipe(concat('vendor-prism.js'))
+		.pipe(minify())
+		.pipe(gulp.dest(destPaths.js))
+});
+
 gulp.task("publishLocal", function (callback) {
 	exec(
 		"Powershell.exe -executionpolicy remotesigned . .\\publish_local.ps1 -Push:1",
@@ -105,4 +120,4 @@ gulp.task("publishLocal", function (callback) {
 });
 
 gulp.task('cleanup', gulp.series(['clean']));
-gulp.task('default', gulp.series(['compileScss'], ['buildCss'], ['buildJs']));
+gulp.task('default', gulp.series(['compileScss'], ['buildCss'], ['buildJs'], ['buildPrism']));

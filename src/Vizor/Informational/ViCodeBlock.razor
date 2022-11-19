@@ -1,0 +1,80 @@
+﻿@using System.Net;
+@*
+//   Copyright 2022 DataHint BV
+//   Copyright 2022 Ben Motmans
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+*@
+
+@inherits ViComponentBase
+
+@inject IJSRuntime JS
+
+<pre data-src="@ExternalFile" class="language-@Language @CssClass">
+	@if (raw == null)
+	{
+		<ViSpinner Size="ElementSize.Small" />
+	} else {
+		<code class="language-@Language">
+			@highlighted
+		</code>
+	}
+</pre>
+
+@code {
+
+	// see https://liamhunt.blog/2022/prism-js-syntax-highlighting-in-blazor/
+
+	private string? raw;
+	private MarkupString? highlighted;
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	[Parameter]
+	public string? ExternalFile { get; set; }
+
+	[Parameter]
+	public string Language { get; set; } = "none";
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (!firstRender)
+			return;
+
+		if (ExternalFile != null)
+		{
+			try
+			{
+				var client = new HttpClient();
+				raw = await client.GetStringAsync(ExternalFile);
+			}
+			catch (Exception)
+			{
+				raw = $"Failed to retrieve file '{ExternalFile}'";
+			}
+		}
+		else
+		{
+			raw = RazorExtensions.GetCombinedContent(ChildContent, Text);
+		}
+
+		raw = raw == null ? string.Empty : raw.Trim();
+
+		highlighted = new MarkupString(await JS.InvokeAsync<string>("viHighlight", raw, Language));
+		await InvokeAsync(StateHasChanged);
+	}
+}

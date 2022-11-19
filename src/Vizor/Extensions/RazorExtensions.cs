@@ -13,6 +13,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+using static System.Net.Mime.MediaTypeNames;
+using System.Text;
+
 namespace Vizor.Extensions;
 
 public static class RazorExtensions
@@ -36,5 +39,46 @@ public static class RazorExtensions
 		}
 
 		return "id_" + new string(result);
+	}
+
+	public static string GetCombinedContent(RenderFragment? childContent, string? content, string? contentSurround = null)
+	{
+		var sb = new StringBuilder();
+
+		if (childContent != null)
+		{
+#pragma warning disable BL0006 // don't complain about using internal Blazor API, it's the only way I currently know how to achieve this
+			RenderTreeBuilder rb = new RenderTreeBuilder();
+			childContent.Invoke(rb);
+
+			var frames = rb.GetFrames();
+			if (frames.Count != 1 && frames.Array[0].FrameType != Microsoft.AspNetCore.Components.RenderTree.RenderTreeFrameType.Markup)
+				throw new InvalidOperationException("MarkupContent expected");
+
+			sb.AppendLine(frames.Array[0].MarkupContent);
+#pragma warning restore BL0006
+		}
+
+		if (content != null)
+		{
+			if (contentSurround != null)
+			{
+				sb.Append('<');
+				sb.Append(contentSurround);
+				sb.Append('>');
+			}
+
+			sb.Append(content);
+
+			if (contentSurround != null)
+			{
+				sb.Append('<');
+				sb.Append('/');
+				sb.Append(contentSurround);
+				sb.Append('>');
+			}
+		}
+
+		return sb.ToString();
 	}
 }
