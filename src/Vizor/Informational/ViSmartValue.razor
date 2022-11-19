@@ -97,6 +97,7 @@
 	private static RenderFragment Render(object? value, string? formatString)
 	{
 		//TODO: other types ? NodaTime ? JsonX ?
+		//TODO: support for images, font icons
 
 		switch (value)
 		{
@@ -116,6 +117,8 @@
 
 			case float f: return Render((double)f, formatString);
 			case double d: return Render(d, formatString);
+
+			case byte[] ba: return Render(Convert.ToHexString(ba));
 
 			case Guid g: return Render(g);
 			case DateTime dt: return Render(dt, formatString);
