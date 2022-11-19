@@ -13,9 +13,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-using Vizor.Enums;
-using Vizor.Structs;
-
 namespace Vizor;
 
 public static class ColorConverter

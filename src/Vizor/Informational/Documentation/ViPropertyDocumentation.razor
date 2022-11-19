@@ -1,4 +1,5 @@
-﻿//   Copyright 2022 DataHint BV
+﻿@*
+//   Copyright 2022 DataHint BV
 //   Copyright 2022 Ben Motmans
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +13,13 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
+*@
 
-namespace Vizor;
+@using System.Reflection;
 
-public enum Align
-{
-	Left = 0,
-	Center,
-	Right
+@code {
+
+	[Parameter]
+	public PropertyInfo Property { get; set; }
+
 }

@@ -1,6 +1,4 @@
-﻿using Vizor.Structs;
-
-namespace Vizor.Enums;
+﻿namespace Vizor;
 
 public static class RgbColors
 {

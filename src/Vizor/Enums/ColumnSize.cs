@@ -1,4 +1,4 @@
-﻿namespace Vizor.Enums;
+﻿namespace Vizor;
 
 public enum ColumnSize
 {
