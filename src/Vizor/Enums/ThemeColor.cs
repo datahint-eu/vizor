@@ -13,34 +13,83 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+using System.ComponentModel;
+using System.Net.NetworkInformation;
+using System;
 using Vizor.Structs;
 
 namespace Vizor.Enums;
 
-public struct ThemeColor
+public enum ThemeColor
 {
-	public static readonly RgbaColor Primary = new(32, 107, 196, "primary");
-	public static readonly RgbaColor Secondary = new(97, 104, 118, "secondary");
-	public static readonly RgbaColor Success = new(47, 179, 68, "success");
-	public static readonly RgbaColor Danger = new(214, 57, 57, "danger");
-	public static readonly RgbaColor Warning = new(247, 103, 7, "warning");
-	public static readonly RgbaColor Info = new(66, 153, 225, "info");
-	public static readonly RgbaColor Light = new(248, 250, 252, "light");
+	Primary,
+	Secondary,
+	Success,
+	Danger,
+	Warning,
+	Info,
+	Light,
 
-	public static readonly RgbaColor Dark = new(29, 39, 59, "dark");
-	public static readonly RgbaColor Muted = new(97, 104, 118, "muted");
-	public static readonly RgbaColor White = new(255, 255, 255, "white");
+	Dark,
+	Muted,
+	White,
 
-	public static readonly RgbaColor Blue = new(32, 107, 196, "blue");
-	public static readonly RgbaColor Azure = new(66, 153, 225, "azure");
-	public static readonly RgbaColor Indigo = new(66, 99, 235, "indigo");
-	public static readonly RgbaColor Purple = new(174, 62, 201, "purple");
-	public static readonly RgbaColor Pink = new(214, 51, 108, "pink");
-	public static readonly RgbaColor Red = new(214, 57, 57, "red");
-	public static readonly RgbaColor Orange = new(247, 103, 7, "orange");
-	public static readonly RgbaColor Yellow = new(245, 159, 0, "yellow");
-	public static readonly RgbaColor Lime = new(116, 184, 22, "lime");
-	public static readonly RgbaColor Green = new(47, 179, 68, "green");
-	public static readonly RgbaColor Teal = new(12, 166, 120, "teal");
-	public static readonly RgbaColor Cyan = new(23, 162, 184, "cyan");
+	Blue,
+	Azure,
+	Indigo,
+	Purple,
+	Pink,
+	Red,
+	Orange,
+	Yellow,
+	Lime,
+	Green,
+	Teal,
+	Cyan
+}
+
+public static class ThemeColorExtensions
+{
+	public static string ToCss(this ThemeColor color)
+	{
+		return color.ToString().ToLower();
+	}
+
+	public static RgbColor ToRgb(this ThemeColor color)
+	{
+		return color switch
+		{
+			ThemeColor.Primary => RgbColors.Primary,
+			ThemeColor.Secondary => RgbColors.Secondary,
+			ThemeColor.Success => RgbColors.Success,
+			ThemeColor.Danger => RgbColors.Danger,
+			ThemeColor.Warning => RgbColors.Warning,
+			ThemeColor.Info => RgbColors.Info,
+			ThemeColor.Light => RgbColors.Light,
+
+			ThemeColor.Dark => RgbColors.Dark,
+			ThemeColor.Muted => RgbColors.Muted,
+			ThemeColor.White => RgbColors.White,
+
+			ThemeColor.Blue => RgbColors.Blue,
+			ThemeColor.Azure => RgbColors.Azure,
+			ThemeColor.Indigo => RgbColors.Indigo,
+			ThemeColor.Purple => RgbColors.Purple,
+			ThemeColor.Pink => RgbColors.Pink,
+			ThemeColor.Red => RgbColors.Red,
+			ThemeColor.Orange => RgbColors.Orange,
+			ThemeColor.Yellow => RgbColors.Yellow,
+			ThemeColor.Lime => RgbColors.Lime,
+			ThemeColor.Green => RgbColors.Green,
+			ThemeColor.Teal => RgbColors.Teal,
+			ThemeColor.Cyan => RgbColors.Cyan,
+
+			_ => throw new ArgumentException($"ThemeColor {color} not supported")
+		};
+	}
+
+	public static RgbaColor ToRgba(this ThemeColor color, float a = 1.0f)
+	{
+		return color.ToRgb().ToRgba(a);
+	}
 }

@@ -1,0 +1,18 @@
+﻿<CascadingValue IsFixed="true" Name="ViRadioGroupInline" Value="@IsInline">
+	<CascadingValue IsFixed="true" Name="ViRadioGroupName" Value="@Name">
+		@ChildContent
+	</CascadingValue>
+</CascadingValue>
+
+@code {
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
+
+	[Parameter, EditorRequired]
+	public string Name { get; set; } = default!;
+
+	[Parameter]
+	public bool IsInline { get; set; }
+
+}
