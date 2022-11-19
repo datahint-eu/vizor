@@ -41,6 +41,7 @@
 					<ViValueList Style="@ValueListStyle.List" LabelWidth="2">
 						<ViSmartValue ValueExpr="() => sampleClass" Label="Json" FormatString="json" />
 						<ViSmartValue ValueExpr="() => sampleClass" Label="XML" FormatString="xml" />
+						<ViSmartValue ValueExpr="() => ba" Label="Byte Array" />
 					</ViValueList>
 				</Body>
 			</ViCard>
@@ -112,6 +113,7 @@
 	private TimeSpan ts = new TimeSpan(12, 00, 00);
 
 	private object? n = null;
+	private byte[] ba = new byte[] { 0xCA, 0xFE, 0xCA, 0xFE };
 
 	private string Property => "prop";
 
