@@ -2,7 +2,11 @@
 
 @inject ViToastService ToastService
 
-<ViPageHeader CategoryText="Informational" TitleText="Toast"></ViPageHeader>
+<ViPageHeader CategoryText="Informational" TitleText="Toast">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViCard>

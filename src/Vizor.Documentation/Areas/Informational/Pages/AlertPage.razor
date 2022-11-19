@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/info/alert"
 @using Vizor.Icons.Tabler
 
-<ViPageHeader CategoryText="Informational" TitleText="Alert"></ViPageHeader>
+<ViPageHeader CategoryText="Informational" TitleText="Alert">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViCard>

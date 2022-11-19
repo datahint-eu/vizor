@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/container/tab"
 @using Vizor.Icons.Tabler
 
-<ViPageHeader CategoryText="Containers" TitleText="TabControl"></ViPageHeader>
+<ViPageHeader CategoryText="Containers" TitleText="TabControl">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViTabControl>

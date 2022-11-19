@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/info/card"
 @using Vizor.Icons.Tabler
 
-<ViPageHeader CategoryText="Informational" TitleText="Cards"></ViPageHeader>
+<ViPageHeader CategoryText="Informational" TitleText="Cards">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViCard>

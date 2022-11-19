@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/datagrid"
 @using Vizor.Documentation.Areas.DataGrid.Models;
 
-<ViPageHeader CategoryText="DataGrid" TitleText="DataGrid"></ViPageHeader>
+<ViPageHeader CategoryText="DataGrid" TitleText="DataGrid">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViDataGrid TItem="Car" DataSource="@cars" TitleText="Cars" UsePagination="false">

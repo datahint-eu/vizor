@@ -1,6 +1,10 @@
 ﻿@page "/doc/vizor/info/error_code"
 
-<ViPageHeader CategoryText="Informational" TitleText="Error Codes"></ViPageHeader>
+<ViPageHeader CategoryText="Informational" TitleText="Error Codes">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 	<ViErrorCode Code="404" />
 	<ViErrorCode Code="500" />

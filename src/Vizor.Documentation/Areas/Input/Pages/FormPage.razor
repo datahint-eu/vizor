@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/input/form"
 @using Vizor.Documentation.Areas.Input.Models;
 
-<ViPageHeader CategoryText="Input" TitleText="Form"></ViPageHeader>
+<ViPageHeader CategoryText="Input" TitleText="Form">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViForm Model="employee">

@@ -1,7 +1,11 @@
 ﻿@page "/doc/vizor/info/value_list"
 @using Vizor.Icons.Tabler
 
-<ViPageHeader CategoryText="Informational" TitleText="Value List"></ViPageHeader>
+<ViPageHeader CategoryText="Informational" TitleText="Value List">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
 <ViPageBody>
 
 	<ViCardRow>
