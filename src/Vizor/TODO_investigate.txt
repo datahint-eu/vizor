@@ -29,6 +29,16 @@ login forms:
 carousel:
  - https://colorlib.com/wp/bootstrap-slider/
 
+file upload:
+ - https://preview.keenthemes.com/html/metronic/docs/forms/dropzonejs
+
+datetime picker:
+ - https://preview.keenthemes.com/html/metronic/docs/forms/flatpickr
+
+misc:
+ - https://preview.keenthemes.com/html/metronic/docs/forms/google-recaptcha : recaptcha
+ - https://preview.keenthemes.com/html/metronic/docs/forms/bootstrap-maxlength : visual max length indicator
+
 themes:
 - https://preview.keenthemes.com/keen/demo5/pages/user-profile/overview.html (content pages, menu, tables, activity log, ...)
  - https://colorlib.com/wp/free-html5-admin-dashboard-templates/
@@ -65,3 +75,54 @@ admin templates:
  - https://github.com/codescandy/Dash-UI: pricing, billing, settings
  - https://github.com/BootstrapDash/PurpleAdmin-Free-Admin-Template: 404, 500, dashboard cards
  - https://github.com/BootstrapDash/MajesticAdmin-Free-Bootstrap-Admin-Template: tab-card concept
+
+paid admin templates:
+ - metronic
+     - general look & feel
+	 - metronic_v8.1.5/html/demo1/dist/pages/social/activity.html : file icons, timeline
+	 - metronic_v8.1.5/html/demo1/dist/pages/pricing/column.html : pricing monthly/annual
+	 - metronic_v8.1.5/html/demo1/dist/widgets/mixed.html : widgets
+	 - metronic_v8.1.5/html/demo1/dist/widgets/tables.html : table widgets
+	 - metronic_v8.1.5/html/demo1/dist/apps/projects/files.html : file upload
+	 - metronic_v8.1.5/html/demo1/dist/apps/projects/activity.html : activity timeline
+	 - metronic_v8.1.5/html/demo1/dist/apps/chat/private.html : chat
+	 - metronic_v8.1.5/html/demo1/dist/toolbars/reports.html / metronic_v8.1.5/html/demo1/dist/toolbars/saas.html : toolbars
+	 - metronic_v8.1.5/html/demo1/dist/apps/calendar.html : calendar
+	 - metronic_v8.1.5/html/demo1/dist/utilities/wizards/vertical.html : wizard
+	 - metronic_v8.1.5/html/demo1/dist/dashboards/crypto.html + metronic_v8.1.5/html/demo1/dist/dashboards/finance-performance.html + ... : dashboards
+	 - https://preview.keenthemes.com/html/metronic/docs/base/alerts : alerts
+	 - 
+ - http://preview.themeforest.net/item/elite-admin-the-ultimate-dashboard-web-app-kit-material-design/full_screen_preview/16750820?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00Ow2ezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+     - http://eliteadmin.themedesigner.in/demos/bt4/modern/index.html : sidebar
+	 - http://eliteadmin.themedesigner.in/demos/bt4/horizontal-nav-fullwidth/index.html : topnav
+ - https://preview.themeforest.net/item/minia-bootstrap-5-admin-dashboard-template/full_screen_preview/32710967?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00O2PezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+ - https://preview.themeforest.net/item/porto-admin-responsive-html5-template/full_screen_preview/8539472?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00O2-ezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+     - https://www.okler.net/previews/porto-admin/4.0.0/pages-invoice.html: invoice
+	 - https://www.okler.net/previews/porto-admin/4.0.0/layouts-tab-navigation-boxed.html: tabbed layout
+ - https://www.wrappixel.com/templates/ampleadmin/
+     - https://demos.wrappixel.com/premium-admin-templates/bootstrap/ample-bootstrap/package/html/ampleadmin-sidebar/ui-cards.html : cards
+	 - https://demos.wrappixel.com/premium-admin-templates/bootstrap/ample-bootstrap/package/html/ampleadmin-sidebar/ui-card-customs.html : cards
+	 - https://demos.wrappixel.com/premium-admin-templates/bootstrap/ample-bootstrap/package/html/ampleadmin-sidebar/widgets-apps.html : widgets
+	 - https://demos.wrappixel.com/premium-admin-templates/bootstrap/ample-bootstrap/package/html/ampleadmin-sidebar/widgets-data.html : widgets
+	 - https://demos.wrappixel.com/premium-admin-templates/bootstrap/ample-bootstrap/package/html/ampleadmin-sidebar/timeline-center.html : timeline
+ - https://preview.themeforest.net/item/skote-html-django-admin-dashboard-template/full_screen_preview/31582060?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00OzGezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+     - general look & feel
+	 - https://themesbrand.com/skote-django/layouts/layouts-horizontal.html : topnav
+	 - https://themesbrand.com/skote-django/layouts/layouts-colored-sidebar.html : colored sidenav
+	 - https://themesbrand.com/skote-django/layouts/chat.html : chat
+	 - https://themesbrand.com/skote-django/layouts/apps-filemanager.html : file manager
+	 - https://themesbrand.com/skote-django/layouts/projects-grid.html : project grid
+	 - https://themesbrand.com/skote-django/layouts/dashboard-crypto.html : charts / data viz
+	 - https://themesbrand.com/skote-django/layouts/crypto-exchange.html : charts / data viz
+ - https://preview.themeforest.net/item/limitless-responsive-web-application-kit/full_screen_preview/13080328?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00OzvezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+     - https://demo.interface.club/limitless/demo/template/html/layout_2/full/index.html : dropdown in sidenav
+ - https://preview.themeforest.net/item/ubold-responsive-web-app-kit/full_screen_preview/13489470?clickid=QbZRIvwBYxyNULlVgCUkU0pcUkA00OzPezVNV00&iradid=275988&iradtype=ONLINE_TRACKING_LINK&irgwc=1&irmptype=mediapartner&irpid=102006&mp_value1=&utm_campaign=af_impact_radius_102006&utm_medium=affiliate&utm_source=impact_radius
+     - general look & feel
+	 - https://coderthemes.com/ubold/layouts/default/index.html : mega menu
+	 - https://coderthemes.com/ubold/layouts/default/project-list.html projects concept
+	 - https://coderthemes.com/ubold/layouts/default/tickets-detail.html : ticketing
+	 - https://coderthemes.com/ubold/layouts/default/task-list.html : task list
+	 - https://themesbrand.com/skote-django/layouts/tasks-kanban.html : kanban board
+ - https://preview.themeforest.net/item/codebase-bootstrap-4-admin-dashboard-template-ui-framework/full_screen_preview/20289243?_ga=2.147476788.2037932701.1668947164-1802057339.1668369574&_gac=1.221287786.1668947164.Cj0KCQiAveebBhD_ARIsAFaAvrGct-xnm3Wh-DaYFYMnpvRQVw3-nQaJZp7FJsVCbEXoiBCDdqTO6sYaAjMeEALw_wcB
+     - https://demo.pixelcave.com/codebase/be_ui_alerts.html : alerts
+	 - https://demo.pixelcave.com/codebase/be_pages_forum_categories.html : forum

@@ -11,11 +11,14 @@
 	<ViCard>
 		<Header><ViCardTitle>Title</ViCardTitle></Header>
 		<Body>
-			Simple card with header and body.
+			Simple card with header, body and footer.
 		</Body>
+		<Footer>
+			Footer
+		</Footer>
 	</ViCard>
 
-	<ViCard CssClass="mt-2">
+	<ViCard CssClass="mt-2" TransparentFooter="true">
 		<Stamp>
 			<ViCardStamp Color="@ThemeColor.Primary">
 				<Icon>
@@ -25,7 +28,8 @@
 		</Stamp>
 		<Header><ViCardTitle>Title</ViCardTitle></Header>
 		<Body>
-			Card with header, body, footer and stamp.
+			Card with header, body, footer, and stamp.
+			The footer is transparent.
 		</Body>
 		<Footer>
 			Footer
@@ -46,6 +50,52 @@
 				<Title>Twitter</Title>
 				<Message><b>155</b> followers</Message>
 			</ViMiniIconCard>
+		</ViColumn>
+		<ViColumn Size="ColumnSize.Col_4">
+			<ViCard>
+				<Ribbon>
+					<ViCardRibbon Color="@ThemeColor.Green">
+						NEW
+					</ViCardRibbon>
+				</Ribbon>
+				<Body>
+					Card with ribbon.
+				</Body>
+			</ViCard>
+		</ViColumn>
+	</ViCardRow>
+
+	<ViCardRow CssClass="mt-2" EqualHeight="true">
+		<ViColumn Size="ColumnSize.Col_4">
+			<ViCard Color="@ThemeColor.Lime">
+				<Body>
+					<ViCardTitle>Card with color.</ViCardTitle>
+					<ViCardText>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</ViCardText>
+				</Body>
+			</ViCard>
+		</ViColumn>
+		<ViColumn Size="ColumnSize.Col_4">
+			<ViCard Color="@ThemeColor.Lime" ColorStyle="@ColorStyle.Light">
+				<Body>
+					<ViCardTitle>Card with light color.</ViCardTitle>
+					<ViCardText>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</ViCardText>
+				</Body>
+			</ViCard>
+		</ViColumn>
+		<ViColumn Size="ColumnSize.Col_4">
+			<ViCard Color="@ThemeColor.Azure" ColorStyle="@ColorStyle.Light">
+				<Stamp>
+					<ViCardStamp Color="@ThemeColor.Primary">
+						<Icon>
+							<TablerSvgIcon Icon="TablerSvgIcon.Shield" />
+						</Icon>
+					</ViCardStamp>
+				</Stamp>
+				<Body>
+					<ViCardTitle>Card with light color and stamp.</ViCardTitle>
+					<ViCardText>Short text to demonstrate equal height.</ViCardText>
+				</Body>
+			</ViCard>
 		</ViColumn>
 	</ViCardRow>
 </ViPageBody>

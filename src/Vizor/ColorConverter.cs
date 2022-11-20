@@ -13,6 +13,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+using System.Drawing;
+
 namespace Vizor;
 
 public static class ColorConverter
@@ -45,4 +47,20 @@ public static class ColorConverter
 	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"text-{color.Value.ToCss()}" : null;
 
 	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"text-bg-{color.Value.ToCss()}" : null;
+
+	public static string? ToFgAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
+
+	public static string? ToCardColor([NotNullIfNotNull(nameof(color))] ThemeColor? color, ColorStyle style)
+	{
+		if (style == ColorStyle.Regular)
+		{
+			return color != null ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
+		}
+		else if (style == ColorStyle.Light)
+		{
+			return color != null ? $"bg-{color.Value.ToCss()}-lt" : null;
+		}
+
+		throw new ArgumentException($"{nameof(ColorStyle)}.{style} not supported");
+	}
 }

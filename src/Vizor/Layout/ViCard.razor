@@ -17,14 +17,14 @@
 
 @inherits ViComponentBase
 
-<div class="card @CssClass" @attributes="AdditionalAttributes">
+<div class="card @ColorConverter.ToCardColor(Color, ColorStyle) @CssClass" @attributes="AdditionalAttributes">
 	@if (Stamp != null)
 	{
 		<div class="card-stamp @StampCssClass">
 			@Stamp
 		</div>
 	}
-
+	@Ribbon
 	@if (Header != null)
 	{
 		<div class="card-header @HeaderCssClass">
@@ -39,7 +39,7 @@
 	}
 	@if (Footer != null)
 	{
-		<div class="card-footer @FooterCssClass">
+		<div class="card-footer @(TransparentFooter ? "card-footer-transparent" : "")  @FooterCssClass">
 			@Footer
 		</div>
 	}
@@ -48,7 +48,16 @@
 @code {
 
 	[Parameter]
+	public ThemeColor? Color { get; set; }
+
+	[Parameter]
+	public ColorStyle ColorStyle { get; set; } = ColorStyle.Regular;
+
+	[Parameter]
 	public RenderFragment? Stamp { get; set; }
+
+	[Parameter]
+	public RenderFragment? Ribbon { get; set; }
 
 	[Parameter]
 	public string? StampCssClass { get; set; } = "card-stamp-lg";
@@ -70,4 +79,7 @@
 
 	[Parameter]
 	public string? FooterCssClass { get; set; }
+
+	[Parameter]
+	public bool TransparentFooter { get; set; }
 }

@@ -15,10 +15,8 @@
 
 namespace Vizor;
 
-public enum DropdownPlacement
+public enum ColorStyle
 {
-	Dropdown = 0,
-	Dropup,
-	Dropstart,
-	Dropend
+	Regular = 0,
+	Light
 }

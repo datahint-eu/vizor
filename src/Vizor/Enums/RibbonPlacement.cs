@@ -15,10 +15,8 @@
 
 namespace Vizor;
 
-public enum DropdownPlacement
+public enum RibbonPlacement
 {
-	Dropdown = 0,
-	Dropup,
-	Dropstart,
-	Dropend
+	Top,
+	Right
 }
