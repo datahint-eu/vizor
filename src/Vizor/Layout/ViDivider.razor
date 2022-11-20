@@ -15,7 +15,10 @@
 //   limitations under the License.
 *@
 
-<div class="hr-text @ToTextAlign(TextAlign) @ColorConverter.ToTextColor(TextColor)">@Text</div>
+@namespace Vizor
+@inherits ViComponentBase
+
+<div class="hr-text @ToTextAlign(TextAlign) @ColorConverter.ToTextColor(TextColor) @CssClass">@Text</div>
 
 @code {
 

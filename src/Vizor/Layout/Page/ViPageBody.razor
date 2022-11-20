@@ -15,12 +15,17 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<span>TODO</span>
+<div class="page-body @CssClass" @attributes="AdditionalAttributes">
+	<div class="container-xl">
+		@ChildContent
+	</div>
+</div>
 
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/card/
-	// see https://preview.tabler.io/docs/cards.html
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
 }

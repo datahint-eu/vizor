@@ -15,30 +15,34 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<div class="page">
-	@SideNav
-	@TopNav
-
-	<div class="page-wrapper">
-		@Content
-	</div>
-
-	@Footer
+<div class="ribbon @GetPlacement() @ColorConverter.ToBgColor(Color)">
+	@ChildContent
+	@Text
 </div>
 
 @code {
 
 	[Parameter]
-	public RenderFragment? TopNav { get; set; }
+	public RenderFragment? ChildContent { get; set; }
 
 	[Parameter]
-	public RenderFragment? SideNav { get; set; }
-
-	[Parameter, EditorRequired]
-	public RenderFragment Content { get; set; } = default!;
+	public string? Text { get; set; }
 
 	[Parameter]
-	public RenderFragment? Footer { get; set; }
+	public ThemeColor? Color { get; set; } = ThemeColor.Primary;
+
+	[Parameter]
+	public RibbonPlacement Placement { get; set; } = RibbonPlacement.Right;
+
+	private string? GetPlacement()
+	{
+		return Placement switch
+		{
+			RibbonPlacement.Top => "ribbon-top",
+			_ => null
+		};
+	}
 }

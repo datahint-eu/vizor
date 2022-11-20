@@ -15,20 +15,19 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<p class="card-text @CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
-	@Text
-</p>
+<div class="card-stamp-icon @ColorConverter.ToBgColor(Color) @CssClass">
+	@Icon
+</div>
 
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/card/
-
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public ThemeColor? Color { get; set; }
 
-	[Parameter]
-	public string? Text { get; set; }
+	[Parameter, EditorRequired]
+	public RenderFragment Icon { get; set; } = default!;
+
 }

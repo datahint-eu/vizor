@@ -15,17 +15,11 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<div class="row row-cards @(EqualHeight ? "row-deck" : "") @CssClass">
-	@ChildContent
-</div>
+<span>TODO</span>
 
 @code {
 
-	[Parameter, EditorRequired]
-	public RenderFragment ChildContent { get; set; } = default!;
-
-	[Parameter]
-	public bool EqualHeight { get; set; }
 }

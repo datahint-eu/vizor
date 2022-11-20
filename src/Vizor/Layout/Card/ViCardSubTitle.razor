@@ -15,12 +15,15 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<a href="@Link" class="card-link @CssClass" @attributes="AdditionalAttributes">
+<!-- TODO: dynamic hX rendering -->
+
+<h4 class="card-subtitle @CssClass" @attributes="AdditionalAttributes">
 	@ChildContent
 	@Text
-</a>
+</h4>
 
 @code {
 
@@ -31,9 +34,4 @@
 
 	[Parameter]
 	public string? Text { get; set; }
-
-	[Parameter, EditorRequired]
-	public string Link { get; set; } = default!;
-
-	//TODO: support for OnClick, suppress default, ...
 }

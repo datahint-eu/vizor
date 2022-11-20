@@ -15,14 +15,13 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<!-- TODO: dynamic hX rendering -->
-
-<h3 class="card-title @CssClass" @attributes="@AdditionalAttributes">
+<p class="card-text @CssClass" @attributes="AdditionalAttributes">
 	@ChildContent
 	@Text
-</h3>
+</p>
 
 @code {
 

@@ -15,14 +15,17 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<div class="ribbon @GetPlacement() @ColorConverter.ToBgColor(Color)">
+<a href="@Link" class="card-link @CssClass" @attributes="AdditionalAttributes">
 	@ChildContent
 	@Text
-</div>
+</a>
 
 @code {
+
+	// see https://getbootstrap.com/docs/5.2/components/card/
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
@@ -30,18 +33,8 @@
 	[Parameter]
 	public string? Text { get; set; }
 
-	[Parameter]
-	public ThemeColor? Color { get; set; } = ThemeColor.Primary;
+	[Parameter, EditorRequired]
+	public string Link { get; set; } = default!;
 
-	[Parameter]
-	public RibbonPlacement Placement { get; set; } = RibbonPlacement.Right;
-
-	private string? GetPlacement()
-	{
-		return Placement switch
-		{
-			RibbonPlacement.Top => "ribbon-top",
-			_ => null
-		};
-	}
+	//TODO: support for OnClick, suppress default, ...
 }

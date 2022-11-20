@@ -15,7 +15,7 @@
 
 namespace Vizor;
 
-public struct RgbColor
+public readonly struct RgbColor
 {
 
 	public RgbColor(byte r, byte g, byte b)

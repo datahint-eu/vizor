@@ -15,22 +15,31 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<!-- TODO: dynamic hX rendering -->
+<div class="page">
+	@SideNav
+	@TopNav
 
-<h4 class="card-subtitle @CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
-	@Text
-</h4>
+	<div class="page-wrapper">
+		@Content
+	</div>
+
+	@Footer
+</div>
 
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/card/
+	[Parameter]
+	public RenderFragment? TopNav { get; set; }
 
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? SideNav { get; set; }
+
+	[Parameter, EditorRequired]
+	public RenderFragment Content { get; set; } = default!;
 
 	[Parameter]
-	public string? Text { get; set; }
+	public RenderFragment? Footer { get; set; }
 }
