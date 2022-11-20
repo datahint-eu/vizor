@@ -1,4 +1,5 @@
-﻿//   Copyright 2022 DataHint BV
+﻿@*
+//   Copyright 2022 DataHint BV
 //   Copyright 2022 Ben Motmans
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,25 +13,22 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
+*@
 
-using FluentValidation;
+@namespace Vizor
+@inherits ViInputBase
 
-namespace Vizor;
+<div
+	class="btn-toolbar @CssClass" role="toolbar"
+	@attributes="@AdditionalAttributes" disabled="@IsDisabled"
+>
+	@ChildContent
+</div>
 
-public class ViInjectFluentValidator<TValidator, TModel> : ViFluentValidator<TValidator, TModel> where TValidator : IValidator<TModel>
-{
-	[Inject]
-	private IServiceProvider ServiceProvider { get; set; } = default!;
+@code {
 
-	protected override void OnInitialized()
-	{
-		var tmp = ServiceProvider.GetService(typeof(TValidator));
-		if (tmp is TValidator val)
-			validator = val;
+	// see https://getbootstrap.com/docs/5.2/components/button-group/
 
-		if (validator == null)
-			throw new InvalidOperationException($"{typeof(TValidator)} could not be created by {GetType()}");
-
-		Context.Validator = this;
-	}
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
 }

@@ -15,9 +15,10 @@
 //   limitations under the License.
 *@
 
-@inherits ViInputBase<DateOnly>
+@namespace Vizor
+@inherits ViInputBase<DateTime>
 
-<input type="date" class="form-control @CssClass @validationCssClass"
+<input type="datetime-local" class="form-control @CssClass @validationCssClass"
 	   placeholder="@Placeholder" @attributes="@AdditionalAttributes"
 	   disabled="@IsDisabled.ToConditionalAttribute()" readonly="@IsReadOnly.ToConditionalAttribute()"
 	   aria-invalid="@isValid.ToConditionalAttributeInverse()"
@@ -27,23 +28,25 @@
 <!-- TODO:  after bind event, ... -->
 @code {
 
-	public const string DateFormat = "yyyy-MM-dd";
+	//TODO: add support for DateTimeOffset and NodaTime
 
-	protected override string FormatValueAsString(DateOnly value)
+	public const string DateTimeFormatLocal = "yyyy-MM-ddTHH:mm:ss";
+
+	protected override string FormatValueAsString(DateTime value)
 	{
-		return value.ToString(DateFormat);
+		return value.ToString(DateTimeFormatLocal);
 	}
 
-	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out DateOnly result, [NotNullWhen(false)] out string? validationErrorMessage)
+	protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out DateTime result, [NotNullWhen(false)] out string? validationErrorMessage)
 	{
-		if (DateOnly.TryParseExact(value, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+		if (DateTime.TryParseExact(value, DateTimeFormatLocal, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out result))
 		{
 			validationErrorMessage = null;
 			return true;
 		}
 		else
 		{
-			validationErrorMessage = $"Failed to parse '{value}' as a DateOnly value";
+			validationErrorMessage = $"Failed to parse '{value}' as a DateTime value";
 			return false;
 		}
 	}

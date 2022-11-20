@@ -15,20 +15,36 @@
 //   limitations under the License.
 *@
 
-@inherits ViComponentBase
+@namespace Vizor
+@inherits ViInputBase
 
-<small class="form-hint @CssClass">
+<div
+	class="@(IsVertical ? "btn-group-vertical" : "btn-group") @CssClass @ToButtonGroupSize(Size)" role="group"
+	@attributes="@AdditionalAttributes" disabled="@IsDisabled"
+>
 	@ChildContent
-	@Text
-</small>
-
+</div>
 
 @code {
 
-	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	// see https://getbootstrap.com/docs/5.2/components/button-group/
+
+	[Parameter, EditorRequired]
+	public RenderFragment ChildContent { get; set; } = default!;
 
 	[Parameter]
-	public string? Text { get; set; }
+	public ElementSize Size { get; set; } = ElementSize.Regular;
 
+	[Parameter]
+	public bool IsVertical { get; set; }
+
+	public static string? ToButtonGroupSize(ElementSize size)
+	{
+		return size switch
+		{
+			ElementSize.Small => "btn-group-sm",
+			ElementSize.Large => "btn-group-lg",
+			_ => null
+		};
+	}
 }

@@ -15,10 +15,21 @@
 //   limitations under the License.
 *@
 
-@inherits ViInputBase
+@namespace Vizor
+@inherits ViComponentBase
 
-<span>TODO</span>
+<small class="form-hint @CssClass">
+	@ChildContent
+	@Text
+</small>
+
 
 @code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
 
 }
