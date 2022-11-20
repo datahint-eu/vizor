@@ -1,0 +1,54 @@
+﻿@page "/doc/vizor/info/timeline"
+
+<ViPageHeader CategoryText="Informational" TitleText="Timeline">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
+<ViPageBody>
+
+	<ViCard>
+		<Header><ViCardTitle>Timeline</ViCardTitle></Header>
+		<Body>
+			<ViTimeline>
+				<ViTimelineItem IconCssClass="bg-twitter" Timestamp="5 years ago">
+					<Icon>
+						<TablerSvgIcon Icon="@TablerSvgIcon.BrandTwitter" />
+					</Icon>
+					<Title>Subscribed to Twitter</Title>
+				</ViTimelineItem>
+				<ViTimelineItem IconCssClass="bg-facebook" Timestamp="4 years ago">
+					<Icon>
+						<TablerSvgIcon Icon="@TablerSvgIcon.BrandFacebook" />
+					</Icon>
+					<Title>Subscribed to Facebook</Title>
+				</ViTimelineItem>
+				<ViTimelineItem IconColor="@ThemeColor.Green" Timestamp="2 years ago">
+					<Icon>
+						<TablerSvgIcon Icon="@TablerSvgIcon.Award" />
+					</Icon>
+					<Title>10.000 followers</Title>
+					<Description>Congratulations!</Description>
+				</ViTimelineItem>
+				<ViTimelineItem IconColor="@ThemeColor.Yellow" Timestamp="1 years ago">
+					<Icon>
+						<TablerSvgIcon Icon="@TablerSvgIcon.Award" />
+					</Icon>
+					<Title>100.000 followers</Title>
+					<Description>Congratulations!</Description>
+				</ViTimelineItem>
+				<ViTimelineItem IconColor="@ThemeColor.Red" Timestamp="2 weeks ago">
+					<Icon>
+						<TablerSvgIcon Icon="@TablerSvgIcon.MoodSad" />
+					</Icon>
+					<Title>No longer using social media.</Title>
+					<Description>We are sad to see you go.</Description>
+				</ViTimelineItem>
+			</ViTimeline>
+		</Body>
+	</ViCard>
+</ViPageBody>
+
+@code {
+
+}

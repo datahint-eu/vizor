@@ -1,0 +1,73 @@
+﻿@*
+//   Copyright 2022 DataHint BV
+//   Copyright 2022 Ben Motmans
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+*@
+
+@inherits ViComponentBase
+@namespace Vizor.Informational
+
+<li>
+	<div class="list-timeline-icon @ColorConverter.ToBgColor(IconColor) @IconCssClass">
+		@Icon
+	</div>
+	<div class="list-timeline-content">
+		<div class="list-timeline-time">@Timestamp</div>
+		@if (Title != null || TitleText != null)
+		{
+			<p class="list-timeline-title">
+				@Title
+				@TitleText
+			</p>
+		}
+		@if (Description != null || DescriptionText != null)
+		{
+			<p class="text-muted">
+				@Description
+				@DescriptionText
+			</p>
+		}
+		@ExtraContent
+	</div>
+</li>
+
+@code {
+
+	[Parameter, EditorRequired]
+	public RenderFragment Icon { get; set; } = default!;
+
+	[Parameter]
+	public ThemeColor? IconColor { get; set; }
+
+	[Parameter]
+	public string? IconCssClass { get; set; }
+
+	[Parameter]
+	public string? Timestamp { get; set; }
+
+	[Parameter]
+	public RenderFragment? Title { get; set; }
+
+	[Parameter]
+	public string? TitleText { get; set; }
+
+	[Parameter]
+	public RenderFragment? Description { get; set; }
+
+	[Parameter]
+	public string? DescriptionText { get; set; }
+
+	[Parameter]
+	public RenderFragment? ExtraContent { get; set; }
+}
