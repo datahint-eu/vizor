@@ -15,17 +15,24 @@
 //   limitations under the License.
 *@
 
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Components.Web.Virtualization
-@using Microsoft.JSInterop
+@namespace Vizor.Informational
 
-@using System.ComponentModel;
-@using System.Linq.Expressions;
+@using System.Reflection;
 
-@using Vizor.Base
-@using Vizor.Data
-@using Vizor.Navigation
+<tr>
+	<td>@Name</td>
+	<td>@Type</td>
+	<td>@Description</td>
+</tr>
 
-@using Vizor.Icons.Tabler
+@code {
+
+	[Parameter]
+	public RenderFragment? Name { get; set; }
+
+	[Parameter]
+	public RenderFragment? Type { get; set; }
+
+	[Parameter]
+	public RenderFragment? Description { get; set; }
+}

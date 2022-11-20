@@ -1,0 +1,62 @@
+﻿@*
+//   Copyright 2022 DataHint BV
+//   Copyright 2022 Ben Motmans
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+*@
+
+@inherits ViComponentBase
+@typeparam TEnum where TEnum : struct, Enum
+@namespace Vizor.Informational
+
+@if (values != null)
+{
+	<dl class="@CssClass">
+		@foreach (var value in values)
+		{
+			<dt>
+				<code>@value.ToString()</code> <small>= @GetValue(value)</small>
+			</dt>
+			<dd>@value.GetDescription()</dd>
+		}
+	</dl>
+}
+
+@code {
+
+	private TEnum[]? values;
+
+	[Parameter]
+	public bool ShowHexValues { get; set; }
+
+	protected override void OnInitialized()
+	{
+		values = Enum.GetValues<TEnum>();
+	}
+
+	private string GetValue(TEnum value)
+	{
+		//TODO: in the future, extend this with support for the underlying enum type
+
+		var underlying = Enum.GetUnderlyingType(typeof(TEnum));
+
+		var l = Convert.ToInt64(value);
+		if (ShowHexValues)
+		{
+			int size = System.Runtime.InteropServices.Marshal.SizeOf(underlying);
+			return "0x" + l.ToString($"x{size * 2}");
+		}
+
+		return l.ToString();
+	}
+}

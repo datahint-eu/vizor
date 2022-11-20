@@ -19,31 +19,28 @@
 
 @using System.Reflection;
 
-@if (property != null)
+@foreach (var prop in undocumentedProperties)
 {
-	<tr>
-		<td>@property.Name</td>
-		<td>
-			<code>@property.ToReadableTypeName()</code>
-			@if (isRequired)
-			{
-				<sup class="ms-1"><b>required</b></sup>
+	<ViPropertyDocumentation PropertyName="@prop.Name">
+		<Description>
+			@{
+				var desc = prop.GetDescription();
+				if (desc == null)
+				{
+					<span class="text-danger">Not documented</span>
+				}
+				else
+				{
+					@desc
+				}
 			}
-		</td>
-		<td>@Description</td>
-	</tr>
+		</Description>
+	</ViPropertyDocumentation>
 }
 
 @code {
 
-	private PropertyInfo? property;
-	private bool isRequired;
-
-	[Parameter, EditorRequired]
-	public string PropertyName { get; set; } = default!;
-
-	[Parameter]
-	public RenderFragment? Description { get; set; } = default!;
+	private List<PropertyInfo> undocumentedProperties = new();
 
 	[CascadingParameter(Name = "ViClassDocumentation")]
 	public ViClassDocumentation Parent { get; set; } = default!;
@@ -51,20 +48,12 @@
 	protected override void OnInitialized()
 	{
 		if (Parent == null)
-			throw new ArgumentException($"{nameof(ViPropertyDocumentation)} must be a child of {nameof(ViClassDocumentation)}");
+			throw new ArgumentException($"{nameof(ViMissingRazorPropertiesList)} must be a child of {nameof(ViClassDocumentation)}");
 
-		property = Parent.Class.GetProperty(PropertyName);
-
-		if (property != null)
-		{
-			isRequired = property.HasAttribute<EditorRequiredAttribute>();
-
-			if (Description == null)
-			{
-				Description = @<text>@property.GetDescription()</text>;
-			}
-		}
-
-		Parent.documentedProperties.Add(PropertyName);
+		var allProperties = Parent.Class.GetProperties();
+		undocumentedProperties.AddRange(allProperties.Where(p =>
+			p.HasAttribute<ParameterAttribute>()
+			&& !Parent.documentedProperties.Contains(p.Name))
+		);
 	}
 }

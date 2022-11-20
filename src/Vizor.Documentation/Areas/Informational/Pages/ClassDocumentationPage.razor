@@ -1,0 +1,56 @@
+﻿@page "/doc/vizor/info/documentation"
+@using Vizor.Icons.Tabler
+
+<ViPageHeader CategoryText="Informational" TitleText="Documentation">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
+<ViPageBody>
+
+	<ViClassDocumentation Class="@(typeof(ViClassDocumentation))">
+		<Properties>
+			<ViPropertyDocumentation PropertyName="@(nameof(ViClassDocumentation.Class))">
+				<Description>
+
+				</Description>
+			</ViPropertyDocumentation>
+
+			<ViCustomDocumentation>
+				<Name>
+					Custom
+				</Name>
+				<Type>
+					<code>@nameof(SampleEnum)</code>
+				</Type>
+				<Description>
+					The <code>ViAutoEnumDescription</code> automatically lists all enum values.
+					It can show all values in decimal or hex format.
+
+					<ViAutoEnumDescription CssClass="mt-2" TEnum="SampleEnum" ShowHexValues="true" />
+				</Description>
+			</ViCustomDocumentation>
+
+			<ViCustomDocumentation>
+				<Description>
+					The <code>@nameof(ViMissingRazorPropertiesList)</code> component automatically adds all missing properties marked with the [Parameter] attribute.
+				</Description>
+			</ViCustomDocumentation>
+
+			<ViMissingRazorPropertiesList />
+		</Properties>
+	</ViClassDocumentation>
+
+</ViPageBody>
+
+@code {
+
+	private enum SampleEnum : short
+	{
+		[Description("Description of value 1")]
+		Value1 = 1,
+
+		[Description("This description contains some <b>basic</b> markup")]
+		Value2 = 2,
+	}
+}

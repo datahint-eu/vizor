@@ -15,15 +15,60 @@
 //   limitations under the License.
 *@
 
+@attribute [Description("Component describing a class with all it&apos;s properties, events, ... .")]
+
 @namespace Vizor.Informational
 
-<Vizor.Layout.ViCard>
-
-</Vizor.Layout.ViCard>
+<div class="card">
+	<div class="table-responsive">
+		<table class="table table-vcenter table-bordered table-nowrap card-table">
+			<thead>
+				<tr>
+					<td colspan="3">
+						<h2>@Class.Name</h2>
+						<div class="text-muted">Namespace <i>@Class.Namespace</i></div>
+						<p class="mt-2">
+							@if (Description == null)
+							{
+								@Class.GetDescription()
+							}
+							else
+							{
+								@Description
+							}
+						</p>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<CascadingValue IsFixed="true" Value="@this" Name="ViClassDocumentation">
+					@if (Properties != null)
+					{
+						<tr class="bg-light">
+							<th class="subheader">Properties</th>
+							<th class="subheader">Type</th>
+							<th class="subheader w-50">Description</th>
+						</tr>
+						@Properties
+					}
+				</CascadingValue>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 @code {
 
+	internal List<string> documentedProperties = new();
+
+	[Parameter, EditorRequired]
+	public Type Class { get; set; } = default!;
+
 	[Parameter]
-	public Type Class { get; set; }
+	public RenderFragment? Description { get; set; }
+
+	[Parameter]
+	public RenderFragment? Properties { get; set; }
+
 
 }
