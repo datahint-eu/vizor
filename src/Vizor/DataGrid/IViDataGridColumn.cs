@@ -15,7 +15,7 @@
 
 using Vizor.Data;
 
-namespace Vizor.DataGrid;
+namespace Vizor;
 
 public interface IViDataGridColumn
 {

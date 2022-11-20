@@ -15,37 +15,28 @@
 //   limitations under the License.
 *@
 
-<div class="navbar-expand-md">
-	<div class="navbar-collapse collapse" id="@Id">
-		<div class="navbar navbar-light">
-			<div class="container-xl">
-				@if (MenuItems != null)
-				{
-					<ul class="navbar-nav">
-						<CascadingValue IsFixed="true" Value="true" Name="ViAutoClose">
-							@MenuItems
-						</CascadingValue>
-					</ul>
-				}
-				@if (End != null)
-				{
-					<div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-						@End
-					</div>
-				}
-			</div>
-		</div>
-	</div>
-</div>
+@namespace Vizor
+@inherits ViComponentBase
+
+<h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3 @CssClass" @attributes="AdditionalAttributes">
+	<a href="@Link">
+		@ChildContent
+		@Text
+	</a>
+</h1>
+
 @code {
 
-	[Parameter, EditorRequired]
-	public string Id { get; set; } = default!;
+	//TODO: <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+
+	// see https://getbootstrap.com/docs/5.2/components/navbar/
 
 	[Parameter]
-	public RenderFragment? MenuItems { get; set; }
+	public RenderFragment? ChildContent { get; set; }
 
 	[Parameter]
-	public RenderFragment? End { get; set; }
+	public string? Text { get; set; }
 
+	[Parameter]
+	public string Link { get; set; } = "#";
 }

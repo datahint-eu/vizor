@@ -15,10 +15,22 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<span>TODO</span>
+<button class="navbar-toggler @CssClass" type="button" data-bs-toggle="collapse" data-bs-target="@("#" + NavBarId)" aria-controls="@NavBarId" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+</button>
 
 @code {
 
+	[CascadingParameter(Name = "ViNavBarId")]
+	public string NavBarId { get; set; } = default!;
+
+	protected override void OnInitialized()
+	{
+		//TODO: throw exception if NavBarId string.IsNullOrEmpty
+
+		base.OnInitialized();
+	}
 }

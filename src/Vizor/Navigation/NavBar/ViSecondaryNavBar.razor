@@ -15,34 +15,40 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-@if (Link == null)
-{
-	<li class="breadcrumb-item active @CssClass" aria-current="page" @attributes="AdditionalAttributes">
-		@ChildContent
-		@Text
-	</li>
-} else
-{
-	<li href="@Link" class="breadcrumb-item @CssClass" @attributes="AdditionalAttributes">
-		@ChildContent
-		@Text
-	</li>
-}
-
+<div class="navbar-expand-md">
+	<div class="navbar-collapse collapse" id="@Id">
+		<div class="navbar navbar-light">
+			<div class="container-xl">
+				@if (MenuItems != null)
+				{
+					<ul class="navbar-nav">
+						<CascadingValue IsFixed="true" Value="true" Name="ViAutoClose">
+							@MenuItems
+						</CascadingValue>
+					</ul>
+				}
+				@if (End != null)
+				{
+					<div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+						@End
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/breadcrumb/
-
-	//TODO: aria-label="breadcrumb"
-
-	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
-
-	[Parameter]
-	public string? Text { get; set; }
-
 	[Parameter, EditorRequired]
-	public string? Link { get; set; }
+	public string Id { get; set; } = default!;
+
+	[Parameter]
+	public RenderFragment? MenuItems { get; set; }
+
+	[Parameter]
+	public RenderFragment? End { get; set; }
+
 }

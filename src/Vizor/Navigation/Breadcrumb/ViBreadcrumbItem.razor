@@ -15,20 +15,35 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<span class="navbar-text @CssClass" @attributes="AdditionalAttributes">
-	@ChildContent
-	@Text
-</span>
+@if (Link == null)
+{
+	<li class="breadcrumb-item active @CssClass" aria-current="page" @attributes="AdditionalAttributes">
+		@ChildContent
+		@Text
+	</li>
+} else
+{
+	<li href="@Link" class="breadcrumb-item @CssClass" @attributes="AdditionalAttributes">
+		@ChildContent
+		@Text
+	</li>
+}
 
 @code {
 
-	// see https://getbootstrap.com/docs/5.2/components/navbar/
+	// see https://getbootstrap.com/docs/5.2/components/breadcrumb/
+
+	//TODO: aria-label="breadcrumb"
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
 
 	[Parameter]
 	public string? Text { get; set; }
+
+	[Parameter, EditorRequired]
+	public string? Link { get; set; }
 }
