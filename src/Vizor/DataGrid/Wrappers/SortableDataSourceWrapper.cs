@@ -15,7 +15,6 @@
 
 using System.Reflection;
 using Vizor.Data;
-using Vizor.Informational;
 
 namespace Vizor.DataGrid.Wrappers;
 

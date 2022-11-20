@@ -15,19 +15,27 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<div class="avatar-list @(IsStacked ? "avatar-list-stacked" : "") @CssClass" @attributes="@AdditionalAttributes">
+<a href="@Link" class="alert-link @CssClass" @attributes="@AdditionalAttributes">
 	@ChildContent
-</div>
+	@Text
+</a>
+
 
 @code {
 
-	// see https://preview.tabler.io/docs/avatars.html
+	//TODO: onclick support
+
+	// see https://preview.tabler.io/docs/alerts.html
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
 
 	[Parameter]
-	public bool IsStacked { get; set; }
+	public string? Text { get; set; }
+
+	[Parameter, EditorRequired]
+	public string Link { get; set; } = default!;
 }

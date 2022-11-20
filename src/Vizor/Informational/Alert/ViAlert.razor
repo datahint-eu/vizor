@@ -15,26 +15,48 @@
 //   limitations under the License.
 *@
 
+@namespace Vizor
 @inherits ViComponentBase
 
-<a href="@Link" class="alert-link @CssClass" @attributes="@AdditionalAttributes">
-	@ChildContent
-	@Text
-</a>
-
+<div class="alert @(IsImportant ? "alert-important" : "") @ColorConverter.ToAlertColor(Color) @CssClass" role="alert" @attributes="@AdditionalAttributes">
+	@if (Icon != null)
+	{
+		<div class="d-flex">
+			<div>
+				@Icon
+			</div>
+			<div>
+				@Content
+				@Text
+			</div>
+		</div>
+	}
+	else
+	{
+		@Content
+		@Text
+	}
+</div>
 
 @code {
 
-	//TODO: onclick support
-
+	// see https://getbootstrap.com/docs/5.2/components/alerts/
 	// see https://preview.tabler.io/docs/alerts.html
 
+	//TODO: alert-link, btn-close
+
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? Content { get; set; }
+
+	[Parameter]
+	public RenderFragment? Icon { get; set; }
 
 	[Parameter]
 	public string? Text { get; set; }
 
-	[Parameter, EditorRequired]
-	public string Link { get; set; } = default!;
+	[Parameter]
+	public ThemeColor? Color { get; set; }
+
+	[Parameter]
+	public bool IsImportant { get; set; }
 }
