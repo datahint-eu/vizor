@@ -17,6 +17,8 @@ namespace Vizor;
 
 public enum ThemeColor
 {
+	None,
+
 	Primary,
 	Secondary,
 	Success,

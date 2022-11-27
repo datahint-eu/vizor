@@ -1,0 +1,103 @@
+﻿@page "/doc/vizor/info/pricing"
+
+<ViPageHeader CategoryText="Informational" TitleText="Pricing">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
+<ViPageBody>
+
+	<ViCardRow CssClass="g-2">
+		<div class="col-sm-6 col-lg-4">
+			<ViPriceCard Price="€ 0" Plan="Free">
+				<ViPriceCardItem Type="PriceItemType.Info"><b>3</b> Users</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option A</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option B</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option C</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option D</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option E</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option F</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option G</ViPriceCardItem>
+			</ViPriceCard>
+		</div>
+
+		<div class="col-sm-6 col-lg-4">
+			<ViPriceCard Price="€ 19" Plan="Standard" IsHighlighted="true" HighlightText="Best Pick">
+				<ViPriceCardItem Type="PriceItemType.Info"><b>100</b> Users</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option A</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option B</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option C</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option D</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option E</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option F</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.NotIncluded">Option G</ViPriceCardItem>
+			</ViPriceCard>
+		</div>
+
+		<div class="col-sm-6 col-lg-4">
+			<ViPriceCard Price="€ 49" Plan="Premium">
+				<ViPriceCardItem Type="PriceItemType.Info"><b>500</b> Users</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option A</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option B</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option C</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option D</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option E</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option F</ViPriceCardItem>
+				<ViPriceCardItem Type="PriceItemType.Included">Option G</ViPriceCardItem>
+			</ViPriceCard>
+		</div>
+	</ViCardRow>
+
+	<ViPriceTable CssClass="mt-2">
+		<Info>
+			<h2>Pricing plans for teams of all sizes</h2>
+			<div class="text-muted text-wrap">
+				Choose an affordable plan that comes with the best features to engage your audience, create customer loyalty and increase sales.
+			</div>
+		</Info>
+		<Plans>
+			<ViPriceTablePlan Price="€ 0" Name="Free" />
+			<ViPriceTablePlan Price="€ 19" Name="Standard" IsHighlighted="true" />
+			<ViPriceTablePlan Price="€ 49" Name="Premium" />
+		</Plans>
+		<Features>
+			<ViPriceTableGroup Text="Features" />
+			<ViPriceTableRow>
+				<Description>Feature A</Description>
+				<Plan1><b>3</b> Users</Plan1>
+				<Plan2><b>100</b> Users</Plan2>
+				<Plan3><b>500</b> Users</Plan3>
+			</ViPriceTableRow>
+			<ViPriceTableRow>
+				<Description>Feature B</Description>
+				<Plan1><ViX /></Plan1>
+				<Plan2><ViCheck /></Plan2>
+				<Plan3><ViCheck /></Plan3>
+			</ViPriceTableRow>
+
+			<ViPriceTableGroup Text="Support" />
+			<ViPriceTableRow>
+				<Description>Hours</Description>
+				<Plan1><ViX /></Plan1>
+				<Plan2><b>2</b> Hours</Plan2>
+				<Plan3><b>8</b> Hours</Plan3>
+			</ViPriceTableRow>
+			<ViPriceTableRow>
+				<Description>Email</Description>
+				<Plan1><ViCheck /></Plan1>
+				<Plan2><ViCheck /></Plan2>
+				<Plan3><ViCheck /></Plan3>
+			</ViPriceTableRow>
+			<ViPriceTableRow>
+				<Description>Phone</Description>
+				<Plan1><ViX /></Plan1>
+				<Plan2><ViCheck /></Plan2>
+				<Plan3><ViCheck /></Plan3>
+			</ViPriceTableRow>
+		</Features>
+	</ViPriceTable>
+</ViPageBody>
+
+@code {
+
+}

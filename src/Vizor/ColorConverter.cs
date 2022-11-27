@@ -19,46 +19,46 @@ namespace Vizor;
 
 public static class ColorConverter
 {
-	public static string? ToBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"bg-{color.Value.ToCss()}" : null;
+	public static string? ToBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"bg-{color.Value.ToCss()}" : null;
 
-	public static string? ToLightBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"bg-{color.Value.ToCss()}-lt" : null;
+	public static string? ToLightBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"bg-{color.Value.ToCss()}-lt" : null;
 
-	public static string? ToStatusColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"status-{color.Value.ToCss()}" : null;
+	public static string? ToStatusColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"status-{color.Value.ToCss()}" : null;
 
-	public static string? ToAlertColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"alert-{color.Value.ToCss()}" : null;
+	public static string? ToAlertColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"alert-{color.Value.ToCss()}" : null;
 
-	public static string? ToNavBarColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"navbar-{color.Value.ToCss()}" : null;
+	public static string? ToNavBarColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None  ? $"navbar-{color.Value.ToCss()}" : null;
 
 	public static string? ToBtnColor([NotNullIfNotNull(nameof(color))] ThemeColor? color, ButtonStyle style)
 	{
 		//TODO: support for pill, ghost
 
-		if (color != null)
+		if (color != null && color != ThemeColor.None)
 		{
 			return style switch
 			{
-				ButtonStyle.Outline => color == null ? "btn-outline" : $"btn-outline-{color.Value.ToCss()}",
-				_ => color == null ? null : $"btn-{color.Value.ToCss()}",
+				ButtonStyle.Outline => color == null || color == ThemeColor.None ? "btn-outline" : $"btn-outline-{color.Value.ToCss()}",
+				_ => color == null || color == ThemeColor.None ? null : $"btn-{color.Value.ToCss()}",
 			};
 		}
 		return null;
 	}
 
-	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"text-{color.Value.ToCss()}" : null;
+	public static string? ToTextColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"text-{color.Value.ToCss()}" : null;
 
-	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"text-bg-{color.Value.ToCss()}" : null;
+	public static string? ToTextAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"text-bg-{color.Value.ToCss()}" : null;
 
-	public static string? ToFgAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
+	public static string? ToFgAndBgColor([NotNullIfNotNull(nameof(color))] ThemeColor? color) => color != null && color != ThemeColor.None ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
 
 	public static string? ToCardColor([NotNullIfNotNull(nameof(color))] ThemeColor? color, ColorStyle style)
 	{
 		if (style == ColorStyle.Regular)
 		{
-			return color != null ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
+			return color != null && color != ThemeColor.None ? $"bg-{color.Value.ToCss()} text-{color.Value.ToCss()}-fg" : null;
 		}
 		else if (style == ColorStyle.Light)
 		{
-			return color != null ? $"bg-{color.Value.ToCss()}-lt" : null;
+			return color != null && color != ThemeColor.None ? $"bg-{color.Value.ToCss()}-lt" : null;
 		}
 
 		throw new ArgumentException($"{nameof(ColorStyle)}.{style} not supported");
