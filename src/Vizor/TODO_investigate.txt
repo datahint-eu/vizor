@@ -66,6 +66,13 @@ charts:
  - sparklines
 
 
+- uptime / status:
+ - https://status.wistia.com/ / https://status.wistia.com/uptime
+ - https://status.stripe.com/
+ - uptime kuma
+ - uptime robot
+
+
 admin templates:
  - https://github.com/tabler/tabler
  - https://github.com/zuramai/mazer: avatars, rating, to-do list, file upload, 403-404-500

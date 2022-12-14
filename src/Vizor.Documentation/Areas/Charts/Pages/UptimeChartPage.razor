@@ -10,18 +10,24 @@
 	<ViCard>
 		<Header><ViCardTitle>Uptime</ViCardTitle></Header>
 		<Body>
-			<ViUptimeChart Items="@items" />
+			<ViUptimeChart Items="@itemsSome" />
+
+			<ViUptimeChart CssClass="mt-4" Items="@itemsAll" />
+
+			<ViUptimeLegend CssClass="mt-4"></ViUptimeLegend>
 		</Body>
 	</ViCard>
 </ViPageBody>
 
 @code {
 
-	private List<UptimeType> items = new()
+	private List<UptimeType> itemsSome = new()
 	{
 		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok,
 		UptimeType.Degraded, UptimeType.Error,
 		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok,
 		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok
 	};
+
+	private List<UptimeType> itemsAll = new List<UptimeType>(Enumerable.Repeat(UptimeType.Ok, 90));
 }
