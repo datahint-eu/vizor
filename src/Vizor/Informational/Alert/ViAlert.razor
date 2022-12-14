@@ -18,7 +18,7 @@
 @namespace Vizor
 @inherits ViComponentBase
 
-<div class="alert @(IsImportant ? "alert-important" : "") @ColorConverter.ToAlertColor(Color) @CssClass" role="alert" @attributes="@AdditionalAttributes">
+<div class="alert alert-important @ColorConverter.ToAlertColor(Color) @CssClass" role="alert" @attributes="@AdditionalAttributes">
 	@if (Icon != null)
 	{
 		<div class="d-flex">
@@ -56,7 +56,4 @@
 
 	[Parameter]
 	public ThemeColor? Color { get; set; }
-
-	[Parameter]
-	public bool IsImportant { get; set; }
 }
