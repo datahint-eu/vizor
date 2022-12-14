@@ -15,23 +15,10 @@
 
 namespace Vizor;
 
-public readonly struct RgbColor
+public enum UptimeType
 {
-
-	public RgbColor(byte r, byte g, byte b)
-	{
-		R = r;
-		G = g;
-		B = b;
-	}
-
-	public byte R { get; }
-	public byte G { get; }
-	public byte B { get; }
-
-	public RgbaColor ToRgba(float a = 1.0f) => new(R, G, B, a);
-
-	public string ToCss() => $"rgb({R}, {G}, {B})";
-
-	public string ToHex() => $"#{R:x2}{G:x2}{B:x2}";
+	None = 0,
+	Ok,
+	Degraded,
+	Error
 }

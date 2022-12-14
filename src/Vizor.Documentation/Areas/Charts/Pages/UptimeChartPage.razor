@@ -1,0 +1,27 @@
+﻿@page "/doc/vizor/chart/uptime"
+
+<ViPageHeader CategoryText="Informational" TitleText="Uptime Chart">
+	<Buttons>
+		<PageSourceOnGithub PageType="@this.GetType()" />
+	</Buttons>
+</ViPageHeader>
+<ViPageBody>
+
+	<ViCard>
+		<Header><ViCardTitle>Uptime</ViCardTitle></Header>
+		<Body>
+			<ViUptimeChart Items="@items" />
+		</Body>
+	</ViCard>
+</ViPageBody>
+
+@code {
+
+	private List<UptimeType> items = new()
+	{
+		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok,
+		UptimeType.Degraded, UptimeType.Error,
+		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok,
+		UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok, UptimeType.Ok
+	};
+}
